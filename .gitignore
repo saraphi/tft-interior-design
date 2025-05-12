@@ -20,3 +20,4 @@ MemoryCaptures/
 *.mdb
 *.opendb
 *.VC.db
+*_DoNotShip/
