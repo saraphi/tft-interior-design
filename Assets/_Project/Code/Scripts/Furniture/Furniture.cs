@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Furniture : MonoBehaviour
 {
+    [Header("Furniture Info")]
+    [SerializeField] private string furnitureName;
     [SerializeField] private MeshRenderer modelRenderer;
 
     [Header("Modules")]
@@ -18,7 +20,6 @@ public class Furniture : MonoBehaviour
     [Header("Room Labels")]
     [SerializeField] private MRUKAnchor.SceneLabels sceneLabels;
 
-    public MeshRenderer GetModelRenderer() => modelRenderer;
 
     void Start()
     {
@@ -30,6 +31,10 @@ public class Furniture : MonoBehaviour
         if (!placement.isPlaced) placement.HandlePlacementInput();
         else if (interaction.isMoving) interaction.HandleInteractionInput();
     }
+
+    public string GetFurnitureName() => furnitureName;
+    
+    public MeshRenderer GetModelRenderer() => modelRenderer;
 
     public MRUKAnchor.SceneLabels GetSceneLabels() => sceneLabels;
 
