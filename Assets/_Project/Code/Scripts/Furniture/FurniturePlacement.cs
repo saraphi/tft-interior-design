@@ -16,17 +16,17 @@ public class FurniturePlacement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         furniture = GetComponent<Furniture>();
 
-        if (furniture.GetModelRenderer() != null)
-        {
-            modelMaterial = new Material(furniture.GetModelRenderer().material);
-            furniture.GetModelRenderer().material = modelMaterial;
-        }
+        // if (furniture.GetModelRenderer() != null)
+        // {
+        //     modelMaterial = new Material(furniture.GetModelRenderer().material);
+        //     furniture.GetModelRenderer().material = modelMaterial;
+        // }
     }
 
     public void BeginPlacement(FurnitureRayInteractor interactor)
     {
         rayInteractor = interactor;
-        PlacementManager.Instance.RegisterPlacingFurniture(furniture);
+        // PlacementManager.Instance.RegisterPlacingFurniture(furniture);
         SoundManager.Instance.PlayPressSound();
         rb.isKinematic = false;
         rb.useGravity = false;
@@ -36,7 +36,7 @@ public class FurniturePlacement : MonoBehaviour
     {
         SetAlpha(hasValidSurface ? 1f : 0.2f);
 
-        hasValidSurface = rayInteractor.Move(furniture.GetSceneLabels());
+        // hasValidSurface = rayInteractor.Move(furniture.GetSceneLabels());
 
         if (ControllerManager.Instance.OnConfirm()) TryPlace();
         else if (ControllerManager.Instance.OnCancel()) CancelPlacement();
@@ -55,12 +55,12 @@ public class FurniturePlacement : MonoBehaviour
         rb.isKinematic = true;
         
         SoundManager.Instance.PlayReleaseSound();
-        PlacementManager.Instance.ClearFurniture();
+        // PlacementManager.Instance.ClearFurniture();
     }
 
     private void CancelPlacement()
     {
-        PlacementManager.Instance.ClearFurniture();
+        // PlacementManager.Instance.ClearFurniture();
         SoundManager.Instance.PlayDeleteSound();
         Destroy(gameObject);
     }

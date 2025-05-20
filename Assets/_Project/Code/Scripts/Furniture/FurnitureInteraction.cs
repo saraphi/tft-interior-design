@@ -21,7 +21,7 @@ public class FurnitureInteraction : MonoBehaviour
     {
         if (!isMoving || continuousInteractor == null) return;
 
-        bool hasValidPosition = continuousInteractor.Move(furniture.GetSceneLabels());
+        // bool hasValidPosition = continuousInteractor.Move(furniture.GetSceneLabels());
 
         if (ControllerManager.Instance.OnConfirm()) ConfirmMove();
         else if (ControllerManager.Instance.OnCancel()) CancelMove();
@@ -39,7 +39,7 @@ public class FurnitureInteraction : MonoBehaviour
         rb.useGravity = false;
 
         SoundManager.Instance.PlayPressSound();
-        PlacementManager.Instance.RegisterPlacingFurniture(furniture);
+        // PlacementManager.Instance.RegisterPlacingFurniture(furniture);
     }
 
     private void ConfirmMove()
@@ -50,7 +50,7 @@ public class FurnitureInteraction : MonoBehaviour
         rb.isKinematic = true;
 
         SoundManager.Instance.PlayReleaseSound();
-        PlacementManager.Instance.ClearFurniture();
+        // PlacementManager.Instance.ClearFurniture();
     }
 
     private void CancelMove()
@@ -64,7 +64,7 @@ public class FurnitureInteraction : MonoBehaviour
         rb.isKinematic = true;
         
         SoundManager.Instance.PlayDeleteSound();
-        PlacementManager.Instance.ClearFurniture();
+        // PlacementManager.Instance.ClearFurniture();
     }
 
     public void Duplicate()
@@ -75,7 +75,7 @@ public class FurnitureInteraction : MonoBehaviour
     public void Delete()
     {
         SoundManager.Instance.PlayDeleteSound();
-        PlacementManager.Instance.ClearFurniture();
+        // PlacementManager.Instance.ClearFurniture();
         Destroy(gameObject);
     }
 }
