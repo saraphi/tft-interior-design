@@ -21,4 +21,4 @@ MemoryCaptures/
 *.opendb
 *.VC.db
 *_DoNotShip/
-build.apk
+*.apk
