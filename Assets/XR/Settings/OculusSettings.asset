@@ -30,6 +30,6 @@ MonoBehaviour:
   TargetQuest2: 0
   TargetQuestPro: 0
   TargetQuest3: 1
-  TargetQuest3S: 1
+  TargetQuest3S: 0
   SystemSplashScreen: {fileID: 0}
   UseStickControlThumbsticks: 0

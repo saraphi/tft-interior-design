@@ -33,7 +33,6 @@ public class FurnitureUIHandler : MonoBehaviour
             Vector3 targetPosition =
                 furnitureTransform.position
                 + toCamera * (size * sizeMultiplier)
-                // + furnitureTransform.up * verticalOffset
                 + furnitureTransform.right * localRightOffset;
 
             optionsCanvas.transform.position = targetPosition;
