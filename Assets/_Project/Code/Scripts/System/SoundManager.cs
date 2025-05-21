@@ -23,32 +23,32 @@ public class SoundManager : MonoBehaviour
         else Instance = this;
     }
 
-    public void PlayPressSound()
+    public void PlayPressClip()
     {
         if (pressClip != null) soundSource.PlayOneShot(pressClip);
     }
 
-    public void PlayReleaseSound()
+    public void PlayReleaseClip()
     {
         if (releaseClip != null) soundSource.PlayOneShot(releaseClip);
     }
 
-    public void PlayEnterSound()
+    public void PlayEnterClip()
     {
         if (enterClip != null) soundSource.PlayOneShot(enterClip);
     }
 
-    public void PlayExitSound()
+    public void PlayExitClip()
     {
         if (exitClip != null) soundSource.PlayOneShot(exitClip);
     }
 
-    public void PlayErrorSound()
+    public void PlayErrorClip()
     {
         if (errorClip != null) soundSource.PlayOneShot(errorClip);
     }
 
-    public void PlayDeleteSound()
+    public void PlayDeleteClip()
     {
         if (deleteClip != null) soundSource.PlayOneShot(deleteClip);
     }

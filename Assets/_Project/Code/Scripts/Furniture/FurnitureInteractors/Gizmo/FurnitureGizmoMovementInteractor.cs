@@ -23,16 +23,16 @@ public class FurnitureGizmoMovementInteractor : FurnitureGizmoInteractor
 
     private void UpdateAvailableDirections()
     {
-        MRUKAnchor.SceneLabels sceneLabels = furniture.GetSceneLabels();
+        MRUKAnchor.SceneLabels sceneLabel = furniture.GetSceneLabel();
 
         SetAllArrowsActive(true);
 
-        if (sceneLabels == MRUKAnchor.SceneLabels.FLOOR || sceneLabels == MRUKAnchor.SceneLabels.CEILING)
+        if (sceneLabel == MRUKAnchor.SceneLabels.FLOOR || sceneLabel == MRUKAnchor.SceneLabels.CEILING)
         {
             arrowY?.SetActive(false);      
             arrowNegY?.SetActive(false);   
         }
-        else if (sceneLabels == MRUKAnchor.SceneLabels.WALL_FACE)
+        else if (sceneLabel == MRUKAnchor.SceneLabels.WALL_FACE)
         {
             arrowZ?.SetActive(false);
             arrowNegZ?.SetActive(false);
@@ -51,7 +51,7 @@ public class FurnitureGizmoMovementInteractor : FurnitureGizmoInteractor
 
     public void MoveInDirection(string direction)
     {
-        SoundManager.Instance.PlayPressSound();
+        SoundManager.Instance.PlayPressClip();
 
         Vector3 localDirection = GetDirection(direction);
         Vector3 worldDirection = furniture.transform.TransformDirection(localDirection);
@@ -59,7 +59,7 @@ public class FurnitureGizmoMovementInteractor : FurnitureGizmoInteractor
 
         if (WouldCollideAtPosition(targetPosition))
         {
-            SoundManager.Instance.PlayErrorSound();
+            SoundManager.Instance.PlayErrorClip();
             ControllerManager.Instance.OnControllerVibration();
             return;
         }

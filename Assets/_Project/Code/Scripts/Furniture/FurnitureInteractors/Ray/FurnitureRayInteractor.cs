@@ -1,7 +1,7 @@
 using UnityEngine;
 using Meta.XR.MRUtilityKit;
 
-public class FurnitureRayInteractor : MonoBehaviour, IContinuousFurnitureInteractor
+public class FurnitureRayInteractor : MonoBehaviour
 {
     [SerializeField] public float maxRayLength = 2f;
     [SerializeField] private float smoothTime = 0.1f;

@@ -18,16 +18,16 @@ public class FurnitureGizmoRotationInteractor : FurnitureGizmoInteractor
 
     private void UpdateAvailableRotations()
     {
-        MRUKAnchor.SceneLabels sceneLabels = furniture.GetSceneLabels();
+        MRUKAnchor.SceneLabels sceneLabel = furniture.GetSceneLabel();
 
         SetAllArcsActive(true);
 
-        if (sceneLabels == MRUKAnchor.SceneLabels.FLOOR || sceneLabels == MRUKAnchor.SceneLabels.CEILING)
+        if (sceneLabel == MRUKAnchor.SceneLabels.FLOOR || sceneLabel == MRUKAnchor.SceneLabels.CEILING)
         {
             arcX?.SetActive(false);      
             arcZ?.SetActive(false);   
         }
-        else if (sceneLabels == MRUKAnchor.SceneLabels.WALL_FACE)
+        else if (sceneLabel == MRUKAnchor.SceneLabels.WALL_FACE)
         {
             arcX?.SetActive(false);
             arcY?.SetActive(false);
@@ -43,7 +43,7 @@ public class FurnitureGizmoRotationInteractor : FurnitureGizmoInteractor
 
     public void Rotate(string axis)
     {
-        SoundManager.Instance.PlayPressSound();
+        SoundManager.Instance.PlayPressClip();
 
         Vector3 localAxis = GetDirection(axis);
         Vector3 worldAxis = furniture.transform.TransformDirection(localAxis);
@@ -51,7 +51,7 @@ public class FurnitureGizmoRotationInteractor : FurnitureGizmoInteractor
 
         if (WouldCollideAfterRotation(proposedRotation))
         {
-            SoundManager.Instance.PlayErrorSound();
+            SoundManager.Instance.PlayErrorClip();
             ControllerManager.Instance.OnControllerVibration();
             return;
         }

@@ -1,3 +1,4 @@
+using Meta.XR.ImmersiveDebugger.UserInterface.Generic;
 using UnityEngine;
 
 public class FurnitureManager : MonoBehaviour
@@ -27,7 +28,7 @@ public class FurnitureManager : MonoBehaviour
 
     public bool IsUsingFurniture()
     {
-        return currentFurniture != null; // && currentFurniture.IsPlacingOrMoving();
+        return currentFurniture != null && !currentFurniture.IsIdling();
     }
 
     public void AddFurniture(string type)
@@ -35,25 +36,26 @@ public class FurnitureManager : MonoBehaviour
         if (!IsUsingFurniture())
         {
             string[] data = type.Split(",");
-            GameObject[] furniture = GetFurnitureByAnchor(data[0]);
-            string name = data[1];
+            GameObject[] furnitureList = GetFurnitureByAnchor(data[0]);
+            string furnitureName = data[1];
 
-            if (furniture != null)
+            if (furnitureList != null)
             {
-                foreach (var furniturePiece in furniture)
+                foreach (var furniture in furnitureList)
                 {
-                    Furniture furnitureComponent = furniturePiece.GetComponent<Furniture>();
-                    // if (furnitureComponent.GetFurnitureName() == name)
-                    // {
-                    //     Instantiate(furniturePiece, Vector3.zero, Quaternion.identity);
-                    //     SoundManager.Instance.PlayPressSound();
-                    //     return;
-                    // }
+                    Furniture furnitureComponent = furniture.GetComponent<Furniture>();
+                    if (furnitureComponent.GetFurnitureName() == furnitureName)
+                    {
+                        Instantiate(furniture, Vector3.zero, Quaternion.identity);
+                        SoundManager.Instance.PlayPressClip();
+                        return;
+                    }
                 }
             }
         }
 
-        // SoundManager.Instance.PlayErrorSound();
+        SoundManager.Instance.PlayErrorClip();
+        ControllerManager.Instance.OnControllerVibration();
     }
 
     private GameObject[] GetFurnitureByAnchor(string anchor)
