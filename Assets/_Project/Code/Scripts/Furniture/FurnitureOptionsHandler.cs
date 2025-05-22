@@ -9,10 +9,13 @@ public class FurnitureOptionsHandler : MonoBehaviour
     [SerializeField] private FurnitureGizmoInteractor gizmoRotationInteractor;
 
     private Furniture furniture;
+    private FurnitureOptionsFollower follower;
 
     void Awake()
     {
         furniture = GetComponent<Furniture>();
+        if (optionsCanvas != null)
+            follower = optionsCanvas.GetComponent<FurnitureOptionsFollower>();
     }
 
     public void ToggleOptionsCanvas()
@@ -24,17 +27,10 @@ public class FurnitureOptionsHandler : MonoBehaviour
         {
             SoundManager.Instance.PlayExitClip();
             optionsCanvas.SetActive(false);
-            optionsCanvas.transform.position = transform.position;
-            optionsCanvas.transform.rotation = transform.rotation;
         }
         else
         {
-            Vector3 toCamera = (Camera.main.transform.position - transform.position).normalized;
-            float offset = furniture.GetModelRenderer().bounds.extents.magnitude * 1.2f;
-
-            optionsCanvas.transform.position = transform.position + toCamera * offset + transform.right * 0.5f;
-            optionsCanvas.transform.rotation = Quaternion.LookRotation(-toCamera);
-
+            follower.SetTarget(furniture);
             SoundManager.Instance.PlayEnterClip();
             optionsCanvas.SetActive(true);
         }

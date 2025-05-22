@@ -12369,7 +12369,7 @@ PrefabInstance:
     - target: {fileID: 3775365973686292068, guid: beb866e4f824e074b85f21a4338d6a2e,
         type: 3}
       propertyPath: floorFurniture.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3775365973686292068, guid: beb866e4f824e074b85f21a4338d6a2e,
         type: 3}
@@ -12387,6 +12387,12 @@ PrefabInstance:
       propertyPath: floorFurniture.Array.data[0]
       value: 
       objectReference: {fileID: 3820976375969793635, guid: 6c724f53d583281449393022fe725ef2,
+        type: 3}
+    - target: {fileID: 3775365973686292068, guid: beb866e4f824e074b85f21a4338d6a2e,
+        type: 3}
+      propertyPath: floorFurniture.Array.data[1]
+      value: 
+      objectReference: {fileID: 3820976375969793635, guid: 362fcad19b070cb4f9527c98cfcfd332,
         type: 3}
     - target: {fileID: 3775365973686292068, guid: beb866e4f824e074b85f21a4338d6a2e,
         type: 3}

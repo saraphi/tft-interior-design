@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 725226528762612057}
   - component: {fileID: 81580132008249946}
   - component: {fileID: 5470507025623401196}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: MoveArrow_X
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 957435669109388252}
   - component: {fileID: 466175023402234079}
   - component: {fileID: 5526723936917108841}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: MoveArrow_NegZ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 8248212694178984009}
   - component: {fileID: 4933186715648903721}
   - component: {fileID: 7973225076736716426}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: RotateArrowZ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,7 +654,7 @@ GameObject:
   - component: {fileID: 349277972812805052}
   - component: {fileID: 7450508284749114113}
   - component: {fileID: 9170495029298684343}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: "B\xE9zierCircle.001"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,7 +742,7 @@ GameObject:
   - component: {fileID: 2988466784963235795}
   - component: {fileID: 2470360360541523152}
   - component: {fileID: 7530733523860423782}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: MoveArrow_Z
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -973,7 +973,7 @@ GameObject:
   - component: {fileID: 2930977098314699822}
   - component: {fileID: 2566415417536632621}
   - component: {fileID: 7590620001975951259}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: MoveArrow_NegX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1202,7 +1202,7 @@ GameObject:
   - component: {fileID: 6288431229596099847}
   - component: {fileID: 7009083651791413095}
   - component: {fileID: 5446508547565910980}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: RotateArrowX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1379,7 +1379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7804314689333653056}
   - component: {fileID: 6981287905437720604}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: FurnitureGizmoMovement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1438,7 +1438,7 @@ GameObject:
   - component: {fileID: 6670092242529493954}
   - component: {fileID: 8737643739723998782}
   - component: {fileID: 6347997843041979187}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1520,7 +1520,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1380095773968673322}
   - component: {fileID: 2406970316502413608}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: FurnitureRayInteractor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1573,8 +1573,8 @@ GameObject:
   - component: {fileID: 9090899303541064101}
   - component: {fileID: 6207575125932634609}
   - component: {fileID: 1319976283642636802}
-  m_Layer: 0
-  m_Name: DefaultFurniture
+  m_Layer: 5
+  m_Name: FloorCubeFurniture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1764,7 +1764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3010407560326926225}
   - component: {fileID: 4683460841368601708}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: FurnitureGizmoRotation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1820,7 +1820,7 @@ GameObject:
   - component: {fileID: 4518184730384665196}
   - component: {fileID: 626681505265365004}
   - component: {fileID: 2477768535286944943}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: RotateArrowY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2003,7 +2003,7 @@ GameObject:
   - component: {fileID: 4778009768371031264}
   - component: {fileID: 5296153499147112419}
   - component: {fileID: 267196827663599445}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: MoveArrow_NegY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2230,7 +2230,7 @@ GameObject:
   - component: {fileID: 877184040379315554}
   - component: {fileID: 8210546094217231728}
   - component: {fileID: 338594732388276104}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CubeModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2335,7 +2335,7 @@ GameObject:
   - component: {fileID: 5196233520932702617}
   - component: {fileID: 3144037432234119460}
   - component: {fileID: 3711102467620903826}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: "B\xE9zierCircle.001"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2418,7 +2418,7 @@ GameObject:
   - component: {fileID: 3848258253598182569}
   - component: {fileID: 1203999729030678869}
   - component: {fileID: 3598289892005045336}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2501,7 +2501,7 @@ GameObject:
   - component: {fileID: 7867733054142307543}
   - component: {fileID: 1050088852069483626}
   - component: {fileID: 1635663546772950748}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: "B\xE9zierCircle.001"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2589,7 +2589,7 @@ GameObject:
   - component: {fileID: 8621712510116103239}
   - component: {fileID: 8977689208634345284}
   - component: {fileID: 3917526195987091442}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: MoveArrow_Y
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2815,7 +2815,7 @@ GameObject:
   - component: {fileID: 1176764562285058535}
   - component: {fileID: 3856770146062425115}
   - component: {fileID: 1503294954258919702}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2895,6 +2895,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4191567096581377356}
     m_Modifications:
+    - target: {fileID: 460543909014286457, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6207575125932634609}
+    - target: {fileID: 460543909014286457, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnOptionSelected
+      objectReference: {fileID: 0}
+    - target: {fileID: 460543909014286457, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FurnitureOptionsHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 801531175673026077, guid: 4cec1db3ed0db5f498955c78fc36e820,
         type: 3}
       propertyPath: m_Layer
@@ -2955,6 +2970,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1941087046363838291, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6207575125932634609}
+    - target: {fileID: 1941087046363838291, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnOptionSelected
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941087046363838291, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FurnitureOptionsHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2027760987458524421, guid: 4cec1db3ed0db5f498955c78fc36e820,
         type: 3}
       propertyPath: m_Layer
@@ -2969,6 +2999,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846900147876089636, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6207575125932634609}
+    - target: {fileID: 3846900147876089636, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnOptionSelected
+      objectReference: {fileID: 0}
+    - target: {fileID: 3846900147876089636, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FurnitureOptionsHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4029195495458011124, guid: 4cec1db3ed0db5f498955c78fc36e820,
         type: 3}
@@ -3015,6 +3060,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7173716006101378823, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6207575125932634609}
+    - target: {fileID: 7173716006101378823, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnOptionSelected
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173716006101378823, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FurnitureOptionsHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7255440963271031726, guid: 4cec1db3ed0db5f498955c78fc36e820,
         type: 3}
       propertyPath: m_Layer
@@ -3030,10 +3090,29 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8820111391734791025, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6207575125932634609}
+    - target: {fileID: 8820111391734791025, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnOptionSelected
+      objectReference: {fileID: 0}
+    - target: {fileID: 8820111391734791025, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FurnitureOptionsHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4981872562847437844, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8909857683500916420}
   m_SourcePrefab: {fileID: 100100000, guid: 4cec1db3ed0db5f498955c78fc36e820, type: 3}
 --- !u!1 &2972623005144864036 stripped
 GameObject:
@@ -3041,6 +3120,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7810308747352932656}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8909857683500916420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2972623005144864036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab42a55e1f249b4fa24a6868d5e6625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 8503365331205474349}
 --- !u!4 &9204505787720973392 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1431919641763757408, guid: 4cec1db3ed0db5f498955c78fc36e820,
