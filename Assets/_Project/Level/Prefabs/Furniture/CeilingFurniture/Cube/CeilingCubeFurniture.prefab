@@ -1554,6 +1554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8f3894e02bd2f14688c653eaba3d2ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  furniture: {fileID: 8503365331205474349}
   maxRayLength: 2
   smoothTime: 0.1
 --- !u!1 &3820976375969793635

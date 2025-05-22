@@ -3,20 +3,19 @@ using Meta.XR.MRUtilityKit;
 
 public class FurnitureRayInteractor : MonoBehaviour
 {
+    [SerializeField] private Furniture furniture;
     [SerializeField] public float maxRayLength = 2f;
     [SerializeField] private float smoothTime = 0.1f;
 
     private Vector3 velocity = Vector3.zero;
-
     private Rigidbody rb;
-    
     private Vector3 lastValidPosition;
     private Quaternion lastValidRotation;
     private bool hasValidPosition = false;
 
-    void Start()
+    void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = furniture.GetComponent<Rigidbody>();
     }
 
     public bool Move(MRUKAnchor.SceneLabels sceneLabels)

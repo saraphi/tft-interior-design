@@ -15,7 +15,7 @@ public class Furniture : MonoBehaviour
     [SerializeField] private FurnitureRayInteractor rayInteractor;
 
     public enum State { Placing, Moving, Idle };
-    private State currentState;
+    private State currentState = State.Idle;
 
     private Rigidbody rb;
     private Vector3 backupPosition;
