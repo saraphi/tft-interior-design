@@ -36,7 +36,7 @@ public class Furniture : MonoBehaviour
     {
         if (!IsIdling())
         {
-            hasValidSurface = rayInteractor.Move(sceneLabel);
+            hasValidSurface = rayInteractor.Move();
             visualHandler.SetAlpha(hasValidSurface ? 1f : 0.2f);
 
             if (ControllerManager.Instance.OnConfirm()) ConfirmMovement();

@@ -12,13 +12,15 @@ public class FurnitureRayInteractor : MonoBehaviour
     private Vector3 lastValidPosition;
     private Quaternion lastValidRotation;
     private bool hasValidPosition = false;
+    private MRUKAnchor.SceneLabels sceneLabels;
 
     void Awake()
     {
         rb = furniture.GetComponent<Rigidbody>();
+        sceneLabels = furniture.GetSceneLabel();
     }
 
-    public bool Move(MRUKAnchor.SceneLabels sceneLabels)
+    public bool Move()
     {
         Vector3 controllerPosition = ControllerManager.Instance.GetRayControllerLocalPosition();
         Quaternion controllerRotation = ControllerManager.Instance.GetRayControllerLocalRotation();
@@ -33,7 +35,8 @@ public class FurnitureRayInteractor : MonoBehaviour
         if (room.Raycast(ray, Mathf.Infinity, new LabelFilter(sceneLabels), out RaycastHit hit))
         {
             targetPosition = hit.point;
-            if (sceneLabels == MRUKAnchor.SceneLabels.WALL_FACE) targetRotation = Quaternion.LookRotation(-hit.normal);
+            if (sceneLabels == MRUKAnchor.SceneLabels.WALL_FACE)
+                targetRotation = Quaternion.LookRotation(-hit.normal);
 
             lastValidPosition = targetPosition;
             lastValidRotation = targetRotation;
