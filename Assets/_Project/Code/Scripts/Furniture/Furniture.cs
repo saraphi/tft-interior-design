@@ -14,6 +14,10 @@ public class Furniture : MonoBehaviour
     [Header("Interactors")]
     [SerializeField] private FurnitureRayInteractor rayInteractor;
 
+    private const string DefaultFurnitureLayer = "Furniture";
+    private const string GhostFurnitureLayer = "FurnitureGhost";
+    private int originalLayer;
+
     public enum State { Placing, Moving, Idle };
     private State currentState = State.Idle;
 
@@ -51,6 +55,9 @@ public class Furniture : MonoBehaviour
         backupPosition = transform.position;
         backupRotation = transform.rotation;
 
+        originalLayer = gameObject.layer;
+        gameObject.layer = LayerMask.NameToLayer(GhostFurnitureLayer);
+
         rb.isKinematic = false;
         rb.useGravity = false;
 
@@ -64,6 +71,9 @@ public class Furniture : MonoBehaviour
         {
             rb.isKinematic = true;
             currentState = State.Idle;
+
+            gameObject.layer = originalLayer;
+
             SoundManager.Instance.PlayReleaseClip();
             FurnitureManager.Instance.ClearFurniture();
             return;
@@ -86,8 +96,11 @@ public class Furniture : MonoBehaviour
 
             transform.position = backupPosition;
             transform.rotation = backupRotation;
+
             rb.isKinematic = true;
             currentState = State.Idle;
+
+            gameObject.layer = originalLayer;
 
             FurnitureManager.Instance.ClearFurniture();
             SoundManager.Instance.PlayDeleteClip();
@@ -108,6 +121,7 @@ public class Furniture : MonoBehaviour
     }
 
     public MeshRenderer GetModelRenderer() => model.GetComponent<MeshRenderer>();
+    public Collider GetModelCollider() => model.GetComponent<Collider>();
     public string GetFurnitureName() => furnitureName;
     public MRUKAnchor.SceneLabels GetSceneLabel() => sceneLabel;
     public bool IsIdling() => currentState == State.Idle;

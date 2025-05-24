@@ -1520,7 +1520,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1380095773968673322}
   - component: {fileID: 2406970316502413608}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FurnitureRayInteractor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1573,7 +1573,7 @@ GameObject:
   - component: {fileID: 9090899303541064101}
   - component: {fileID: 6207575125932634609}
   - component: {fileID: 1319976283642636802}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CeilingCubeFurniture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2230,7 +2230,7 @@ GameObject:
   - component: {fileID: 877184040379315554}
   - component: {fileID: 8210546094217231728}
   - component: {fileID: 338594732388276104}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CubeModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2915,6 +2915,16 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 8503365331205474349}
+    - target: {fileID: 801531175673026077, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1286202953441623007, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1431919641763757408, guid: 4cec1db3ed0db5f498955c78fc36e820,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2980,6 +2990,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: FurnitureOptionsHandler, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 2027760987458524421, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2064754033329623599, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2924560568595883402, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3846900147876089636, guid: 4cec1db3ed0db5f498955c78fc36e820,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2994,6 +3019,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: FurnitureOptionsHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4029195495458011124, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4949220852697587578, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4981872562847437844, guid: 4cec1db3ed0db5f498955c78fc36e820,
         type: 3}
@@ -3003,12 +3038,32 @@ PrefabInstance:
     - target: {fileID: 4981872562847437844, guid: 4cec1db3ed0db5f498955c78fc36e820,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4981872562847437844, guid: 4cec1db3ed0db5f498955c78fc36e820,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563365297827443976, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5723708239810253710, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6006687263469708778, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475226105401480302, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7173716006101378823, guid: 4cec1db3ed0db5f498955c78fc36e820,
         type: 3}
@@ -3024,6 +3079,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: FurnitureOptionsHandler, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7255440963271031726, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7531957015262242771, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8812975841563392520, guid: 4cec1db3ed0db5f498955c78fc36e820,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8820111391734791025, guid: 4cec1db3ed0db5f498955c78fc36e820,
         type: 3}

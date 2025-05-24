@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 725226528762612057}
   - component: {fileID: 81580132008249946}
   - component: {fileID: 5470507025623401196}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: MoveArrow_X
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 957435669109388252}
   - component: {fileID: 466175023402234079}
   - component: {fileID: 5526723936917108841}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: MoveArrow_NegZ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 8248212694178984009}
   - component: {fileID: 4933186715648903721}
   - component: {fileID: 7973225076736716426}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: RotateArrowZ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -654,7 +654,7 @@ GameObject:
   - component: {fileID: 349277972812805052}
   - component: {fileID: 7450508284749114113}
   - component: {fileID: 9170495029298684343}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: "B\xE9zierCircle.001"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,7 +742,7 @@ GameObject:
   - component: {fileID: 2988466784963235795}
   - component: {fileID: 2470360360541523152}
   - component: {fileID: 7530733523860423782}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: MoveArrow_Z
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -973,7 +973,7 @@ GameObject:
   - component: {fileID: 2930977098314699822}
   - component: {fileID: 2566415417536632621}
   - component: {fileID: 7590620001975951259}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: MoveArrow_NegX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1202,7 +1202,7 @@ GameObject:
   - component: {fileID: 6288431229596099847}
   - component: {fileID: 7009083651791413095}
   - component: {fileID: 5446508547565910980}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: RotateArrowX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1379,7 +1379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7804314689333653056}
   - component: {fileID: 6981287905437720604}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: FurnitureGizmoMovement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1438,7 +1438,7 @@ GameObject:
   - component: {fileID: 6670092242529493954}
   - component: {fileID: 8737643739723998782}
   - component: {fileID: 6347997843041979187}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1520,7 +1520,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1380095773968673322}
   - component: {fileID: 2406970316502413608}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: FurnitureRayInteractor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1573,7 +1573,7 @@ GameObject:
   - component: {fileID: 9090899303541064101}
   - component: {fileID: 6207575125932634609}
   - component: {fileID: 1319976283642636802}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: SofaKoltukFurniture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1764,7 +1764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3010407560326926225}
   - component: {fileID: 4683460841368601708}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: FurnitureGizmoRotation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1820,7 +1820,7 @@ GameObject:
   - component: {fileID: 4518184730384665196}
   - component: {fileID: 626681505265365004}
   - component: {fileID: 2477768535286944943}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: RotateArrowY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2003,7 +2003,7 @@ GameObject:
   - component: {fileID: 4778009768371031264}
   - component: {fileID: 5296153499147112419}
   - component: {fileID: 267196827663599445}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: MoveArrow_NegY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2229,7 +2229,7 @@ GameObject:
   - component: {fileID: 5196233520932702617}
   - component: {fileID: 3144037432234119460}
   - component: {fileID: 3711102467620903826}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: "B\xE9zierCircle.001"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2312,7 +2312,7 @@ GameObject:
   - component: {fileID: 3848258253598182569}
   - component: {fileID: 1203999729030678869}
   - component: {fileID: 3598289892005045336}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2395,7 +2395,7 @@ GameObject:
   - component: {fileID: 7867733054142307543}
   - component: {fileID: 1050088852069483626}
   - component: {fileID: 1635663546772950748}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: "B\xE9zierCircle.001"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2483,7 +2483,7 @@ GameObject:
   - component: {fileID: 8621712510116103239}
   - component: {fileID: 8977689208634345284}
   - component: {fileID: 3917526195987091442}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: MoveArrow_Y
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2709,7 +2709,7 @@ GameObject:
   - component: {fileID: 1176764562285058535}
   - component: {fileID: 3856770146062425115}
   - component: {fileID: 1503294954258919702}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2797,7 +2797,7 @@ PrefabInstance:
     - target: {fileID: 294842650374068298, guid: 53ca3aa06905f2e46aa5ea22d87ac05a,
         type: 3}
       propertyPath: m_Layer
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1106950341659591408, guid: 53ca3aa06905f2e46aa5ea22d87ac05a,
         type: 3}

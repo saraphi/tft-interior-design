@@ -12,12 +12,16 @@ public class FurnitureRayInteractor : MonoBehaviour
     private Vector3 lastValidPosition;
     private Quaternion lastValidRotation;
     private bool hasValidPosition = false;
+    private bool wouldCollide = false;
+
     private MRUKAnchor.SceneLabels sceneLabels;
+    private Collider furnitureCollider;
 
     void Awake()
     {
         rb = furniture.GetComponent<Rigidbody>();
         sceneLabels = furniture.GetSceneLabel();
+        furnitureCollider = furniture.GetModelCollider();
     }
 
     public bool Move()
@@ -35,6 +39,7 @@ public class FurnitureRayInteractor : MonoBehaviour
         if (room.Raycast(ray, Mathf.Infinity, new LabelFilter(sceneLabels), out RaycastHit hit))
         {
             targetPosition = hit.point;
+
             if (sceneLabels == MRUKAnchor.SceneLabels.WALL_FACE)
                 targetRotation = Quaternion.LookRotation(-hit.normal);
 
@@ -51,6 +56,35 @@ public class FurnitureRayInteractor : MonoBehaviour
         rb.MovePosition(Vector3.SmoothDamp(rb.position, targetPosition, ref velocity, smoothTime));
         rb.rotation = targetRotation;
 
-        return hasValidPosition;
+        wouldCollide = WouldCollideAtPosition(targetPosition);
+
+        return hasValidPosition && !wouldCollide;
     }
+
+    private bool WouldCollideAtPosition(Vector3 targetPosition)
+    {
+        if (furnitureCollider == null) return false;
+
+        Bounds bounds = furnitureCollider.bounds;
+        Vector3 halfExtents = bounds.extents;
+        Vector3 center = targetPosition + (bounds.center - furniture.transform.position);
+
+        int collisionMask = ~LayerMask.GetMask("UI", "Gizmo");
+
+        Collider[] overlaps = Physics.OverlapBox(center, halfExtents, furniture.transform.rotation, collisionMask);
+
+        foreach (var hit in overlaps)
+        {
+            if (hit == null || hit.transform.IsChildOf(furniture.transform)) continue;
+
+            var anchor = hit.GetComponentInParent<MRUKAnchor>();
+            if (anchor != null && anchor.Label.HasFlag(sceneLabels))
+                continue;
+
+            return true;
+        }
+
+        return false;
+    }
+
 }
