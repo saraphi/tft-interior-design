@@ -1,4 +1,5 @@
-using Meta.XR.ImmersiveDebugger.UserInterface.Generic;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FurnitureManager : MonoBehaviour
@@ -11,10 +12,12 @@ public class FurnitureManager : MonoBehaviour
         else Instance = this;
     }
 
-    [SerializeField] private GameObject[] floorFurniture;
-    [SerializeField] private GameObject[] wallFurniture;
-    [SerializeField] private GameObject[] ceilingFurniture;
+    [SerializeField] private List<GameObject> floorFurniture;
+    [SerializeField] private List<GameObject> wallFurniture;
+    [SerializeField] private List<GameObject> ceilingFurniture;
     private Furniture currentFurniture;
+    private Dictionary<int, GameObject> allFurnitures = new Dictionary<int, GameObject>();
+    private int lastId = -1;
 
     public void RegisterFurniture(Furniture furniture)
     {
@@ -36,7 +39,7 @@ public class FurnitureManager : MonoBehaviour
         if (!IsUsingFurniture())
         {
             string[] data = type.Split(",");
-            GameObject[] furnitureList = GetFurnitureByAnchor(data[0]);
+            List<GameObject> furnitureList = GetFurnitureByAnchor(data[0]);
             string furnitureName = data[1];
 
             if (furnitureList != null)
@@ -46,7 +49,12 @@ public class FurnitureManager : MonoBehaviour
                     Furniture furnitureComponent = furniture.GetComponent<Furniture>();
                     if (furnitureComponent.GetFurnitureName() == furnitureName)
                     {
-                        Instantiate(furniture, Vector3.zero, Quaternion.identity);
+                        GameObject newObject = Instantiate(furniture, Vector3.zero, Quaternion.identity);
+                        Furniture newFurniture = newObject.GetComponent<Furniture>();
+                        int newId = lastId + 1;
+                        lastId = newId;
+                        newFurniture.SetID(newId);
+                        allFurnitures.Add(newId, newObject);
                         SoundManager.Instance.PlayPressClip();
                         return;
                     }
@@ -58,7 +66,17 @@ public class FurnitureManager : MonoBehaviour
         ControllerManager.Instance.OnControllerVibration();
     }
 
-    private GameObject[] GetFurnitureByAnchor(string anchor)
+    public bool DeleteFurniture(int id)
+    {
+        if (allFurnitures.ContainsKey(id))
+        {
+            allFurnitures.Remove(id);
+            return true;
+        }
+        return false;
+    }
+
+    private List<GameObject> GetFurnitureByAnchor(string anchor)
     {
         return anchor switch
         {

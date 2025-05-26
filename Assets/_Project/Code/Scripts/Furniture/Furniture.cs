@@ -1,8 +1,11 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using Meta.XR.MRUtilityKit;
 using UnityEngine;
 
 public class Furniture : MonoBehaviour
 {
+    private int id;
+
     [Header("Configuration")]
     [SerializeField] private string furnitureName;
     [SerializeField] private GameObject model;
@@ -16,7 +19,6 @@ public class Furniture : MonoBehaviour
 
     private const string DefaultFurnitureLayer = "Furniture";
     private const string GhostFurnitureLayer = "FurnitureGhost";
-    private int originalLayer;
 
     public enum State { Placing, Moving, Idle };
     private State currentState = State.Idle;
@@ -55,7 +57,6 @@ public class Furniture : MonoBehaviour
         backupPosition = transform.position;
         backupRotation = transform.rotation;
 
-        originalLayer = gameObject.layer;
         gameObject.layer = LayerMask.NameToLayer(GhostFurnitureLayer);
 
         rb.isKinematic = false;
@@ -72,7 +73,7 @@ public class Furniture : MonoBehaviour
             rb.isKinematic = true;
             currentState = State.Idle;
 
-            gameObject.layer = originalLayer;
+            gameObject.layer = LayerMask.NameToLayer(DefaultFurnitureLayer);
 
             SoundManager.Instance.PlayReleaseClip();
             FurnitureManager.Instance.ClearFurniture();
@@ -100,7 +101,7 @@ public class Furniture : MonoBehaviour
             rb.isKinematic = true;
             currentState = State.Idle;
 
-            gameObject.layer = originalLayer;
+            gameObject.layer = LayerMask.NameToLayer(DefaultFurnitureLayer); ;
 
             FurnitureManager.Instance.ClearFurniture();
             SoundManager.Instance.PlayDeleteClip();
@@ -115,9 +116,18 @@ public class Furniture : MonoBehaviour
 
     public void Delete()
     {
-        SoundManager.Instance.PlayDeleteClip();
-        FurnitureManager.Instance.ClearFurniture();
-        Destroy(gameObject);
+        if (FurnitureManager.Instance.DeleteFurniture(id))
+        {
+            SoundManager.Instance.PlayDeleteClip();
+            FurnitureManager.Instance.ClearFurniture();
+            Destroy(gameObject);
+        }
+        else
+        {
+            SoundManager.Instance.PlayErrorClip();
+            ControllerManager.Instance.OnControllerVibration();
+        }
+        
     }
 
     public MeshRenderer GetModelRenderer() => model.GetComponent<MeshRenderer>();
@@ -125,4 +135,6 @@ public class Furniture : MonoBehaviour
     public string GetFurnitureName() => furnitureName;
     public MRUKAnchor.SceneLabels GetSceneLabel() => sceneLabel;
     public bool IsIdling() => currentState == State.Idle;
+    public void SetID(int newId) => id = newId;
+    public int GetID() => id;
 }
