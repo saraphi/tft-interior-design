@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.WindowsRuntime;
 using Meta.XR.MRUtilityKit;
 using UnityEngine;
 
@@ -16,11 +15,13 @@ public class Furniture : MonoBehaviour
 
     [Header("Interactors")]
     [SerializeField] private FurnitureRayInteractor rayInteractor;
+    [SerializeField] private FurnitureStickMovementInteractor stickMovementInteractor;
+    [SerializeField] private FurnitureStickRotationInteractor stickRotationInteractor;
 
     private const string DefaultFurnitureLayer = "Furniture";
     private const string GhostFurnitureLayer = "FurnitureGhost";
 
-    public enum State { Placing, Moving, Idle };
+    public enum State { Placing, Moving, StickMoving, StickRotating, Idle };
     private State currentState = State.Idle;
 
     private Rigidbody rb;
@@ -42,7 +43,10 @@ public class Furniture : MonoBehaviour
     {
         if (!IsIdling())
         {
-            hasValidSurface = rayInteractor.Move();
+            if (currentState == State.Moving || currentState == State.Placing) hasValidSurface = rayInteractor.Move();
+            else if (currentState == State.StickMoving) hasValidSurface = stickMovementInteractor.Move();
+            else if (currentState == State.StickRotating) hasValidSurface = stickRotationInteractor.Rotate();
+
             visualHandler.SetAlpha(hasValidSurface ? 1f : 0.2f);
 
             if (ControllerManager.Instance.OnConfirm()) ConfirmMovement();
@@ -59,8 +63,8 @@ public class Furniture : MonoBehaviour
 
         gameObject.layer = LayerMask.NameToLayer(GhostFurnitureLayer);
 
-        rb.isKinematic = false;
-        rb.useGravity = false;
+        if (!IsUsingStick()) rb.isKinematic = false;
+        rb.useGravity = false;        
 
         SoundManager.Instance.PlayPressClip();
         FurnitureManager.Instance.RegisterFurniture(this);
@@ -135,6 +139,7 @@ public class Furniture : MonoBehaviour
     public string GetFurnitureName() => furnitureName;
     public MRUKAnchor.SceneLabels GetSceneLabel() => sceneLabel;
     public bool IsIdling() => currentState == State.Idle;
+    public bool IsUsingStick() => currentState == State.StickMoving || currentState == State.StickRotating;
     public void SetID(int newId) => id = newId;
     public int GetID() => id;
 }

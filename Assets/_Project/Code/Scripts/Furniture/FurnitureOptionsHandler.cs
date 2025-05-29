@@ -4,10 +4,6 @@ public class FurnitureOptionsHandler : MonoBehaviour
 {
     [SerializeField] private GameObject optionsCanvas;
 
-    [Header("Gizmos")]
-    [SerializeField] private FurnitureGizmoInteractor gizmoMovementInteractor;
-    [SerializeField] private FurnitureGizmoInteractor gizmoRotationInteractor;
-
     private Furniture furniture;
     private FurnitureOptionsFollower follower;
 
@@ -20,8 +16,12 @@ public class FurnitureOptionsHandler : MonoBehaviour
 
     public void ToggleOptionsCanvas()
     {
-        gizmoMovementInteractor.DeactivateGizmo();
-        gizmoRotationInteractor.DeactivateGizmo();
+        if (!furniture.IsIdling())
+        {
+            SoundManager.Instance.PlayErrorClip();
+            ControllerManager.Instance.OnControllerVibration();
+            return;
+        }
 
         if (optionsCanvas.activeInHierarchy)
         {
@@ -47,11 +47,11 @@ public class FurnitureOptionsHandler : MonoBehaviour
             case "ray":
                 furniture.StartMovement(Furniture.State.Moving);
                 break;
-            case "gizmo_movement":
-                gizmoMovementInteractor.ActivateGizmo();
+            case "stick_movement":
+                furniture.StartMovement(Furniture.State.StickMoving);
                 break;
-            case "gizmo_rotation":
-                gizmoRotationInteractor.ActivateGizmo();
+            case "stick_rotation":
+                furniture.StartMovement(Furniture.State.StickRotating);
                 break;
             case "duplicate":
                 furniture.Duplicate();

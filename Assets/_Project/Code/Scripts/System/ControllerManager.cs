@@ -12,7 +12,7 @@ public class ControllerManager : MonoBehaviour
     }
 
     [Header("Controller Ray Configuration")]
-    [SerializeField] private RayControllerType rayController = RayControllerType.RTouch;
+    [SerializeField] private RayControllerType primaryController = RayControllerType.RTouch;
 
     [Header("Controller Input Configuration")]
     [SerializeField] private OVRInput.RawButton confirmButton = OVRInput.RawButton.A;
@@ -28,12 +28,12 @@ public class ControllerManager : MonoBehaviour
 
     public Vector3 GetRayControllerLocalPosition()
     {
-        return OVRInput.GetLocalControllerPosition((OVRInput.Controller)rayController);
+        return OVRInput.GetLocalControllerPosition((OVRInput.Controller)primaryController);
     }
 
     public Quaternion GetRayControllerLocalRotation()
     {
-        return OVRInput.GetLocalControllerRotation((OVRInput.Controller)rayController);
+        return OVRInput.GetLocalControllerRotation((OVRInput.Controller)primaryController);
     }
 
     public bool OnConfirm()
@@ -49,14 +49,19 @@ public class ControllerManager : MonoBehaviour
     public void OnControllerVibration(float duration = 0.1f, float frequency = 1f, float amplitude = 0.5f)
     {
         if (vibrationCoroutine != null) StopCoroutine(vibrationCoroutine);
-        OVRInput.SetControllerVibration(frequency, amplitude, (OVRInput.Controller)rayController);
+        OVRInput.SetControllerVibration(frequency, amplitude, (OVRInput.Controller)primaryController);
         vibrationCoroutine = StartCoroutine(StopHapticsAfterDelay(duration));
+    }
+
+    public Vector2 GetMovementStickInput()
+    {
+        return OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, (OVRInput.Controller)primaryController);
     }
 
     private IEnumerator StopHapticsAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        OVRInput.SetControllerVibration(0f, 0f, (OVRInput.Controller)rayController);
+        OVRInput.SetControllerVibration(0f, 0f, (OVRInput.Controller)primaryController);
         vibrationCoroutine = null;
     }
 }
