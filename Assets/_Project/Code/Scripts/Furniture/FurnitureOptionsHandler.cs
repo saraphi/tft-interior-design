@@ -19,7 +19,7 @@ public class FurnitureOptionsHandler : MonoBehaviour
         if (!furniture.IsIdling())
         {
             SoundManager.Instance.PlayErrorClip();
-            ControllerManager.Instance.OnControllerVibration();
+            ControllerManager.Instance.OnPrimaryControllerVibration();
             return;
         }
 
@@ -60,7 +60,7 @@ public class FurnitureOptionsHandler : MonoBehaviour
                 break;
             default:
                 SoundManager.Instance.PlayErrorClip();
-                ControllerManager.Instance.OnControllerVibration();
+                ControllerManager.Instance.OnPrimaryControllerVibration();
                 break;
         }
     }

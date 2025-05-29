@@ -63,7 +63,7 @@ public class FurnitureManager : MonoBehaviour
         }
 
         SoundManager.Instance.PlayErrorClip();
-        ControllerManager.Instance.OnControllerVibration();
+        ControllerManager.Instance.OnPrimaryControllerVibration();
     }
 
     public bool DeleteFurniture(int id)

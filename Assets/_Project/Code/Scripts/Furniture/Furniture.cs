@@ -85,7 +85,7 @@ public class Furniture : MonoBehaviour
         }
 
         SoundManager.Instance.PlayErrorClip();
-        ControllerManager.Instance.OnControllerVibration();
+        ControllerManager.Instance.OnPrimaryControllerVibration();
     }
 
     private void CancelMovement()
@@ -94,7 +94,7 @@ public class Furniture : MonoBehaviour
         {
             if (transform.position == backupPosition && transform.rotation == backupRotation)
             {
-                ControllerManager.Instance.OnControllerVibration();
+                ControllerManager.Instance.OnPrimaryControllerVibration();
                 SoundManager.Instance.PlayErrorClip();
                 return;
             }
@@ -129,7 +129,7 @@ public class Furniture : MonoBehaviour
         else
         {
             SoundManager.Instance.PlayErrorClip();
-            ControllerManager.Instance.OnControllerVibration();
+            ControllerManager.Instance.OnPrimaryControllerVibration();
         }
         
     }

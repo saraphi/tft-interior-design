@@ -5,14 +5,15 @@ public class ControllerManager : MonoBehaviour
 {
     public static ControllerManager Instance { get; private set; }
 
-    public enum RayControllerType
+    public enum ControllerType
     {
         RTouch = OVRInput.Controller.RTouch,
         LTouch = OVRInput.Controller.LTouch
     }
 
     [Header("Controller Ray Configuration")]
-    [SerializeField] private RayControllerType primaryController = RayControllerType.RTouch;
+    [SerializeField] private ControllerType primaryController = ControllerType.RTouch;
+    [SerializeField] private ControllerType secondaryController = ControllerType.LTouch;
 
     [Header("Controller Input Configuration")]
     [SerializeField] private OVRInput.RawButton confirmButton = OVRInput.RawButton.A;
@@ -46,16 +47,28 @@ public class ControllerManager : MonoBehaviour
         return OVRInput.GetDown(cancelButton);
     }
 
-    public void OnControllerVibration(float duration = 0.1f, float frequency = 1f, float amplitude = 0.5f)
+    public void OnPrimaryControllerVibration(float duration = 0.1f, float frequency = 1f, float amplitude = 0.5f)
     {
         if (vibrationCoroutine != null) StopCoroutine(vibrationCoroutine);
         OVRInput.SetControllerVibration(frequency, amplitude, (OVRInput.Controller)primaryController);
         vibrationCoroutine = StartCoroutine(StopHapticsAfterDelay(duration));
     }
 
-    public Vector2 GetMovementStickInput()
+    public void OnSecondaryControllerVibration(float duration = 0.1f, float frequency = 1f, float amplitude = 0.5f)
+    {
+        if (vibrationCoroutine != null) StopCoroutine(vibrationCoroutine);
+        OVRInput.SetControllerVibration(frequency, amplitude, (OVRInput.Controller)secondaryController);
+        vibrationCoroutine = StartCoroutine(StopHapticsAfterDelay(duration));
+    }
+
+    public Vector2 GetPrimaryControllerStickInput()
     {
         return OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, (OVRInput.Controller)primaryController);
+    }
+
+    public Vector2 GetSecondaryControllerStickInput()
+    {
+        return OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, (OVRInput.Controller)secondaryController);
     }
 
     private IEnumerator StopHapticsAfterDelay(float delay)

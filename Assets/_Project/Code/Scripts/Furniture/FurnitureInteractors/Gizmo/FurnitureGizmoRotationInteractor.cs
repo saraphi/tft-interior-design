@@ -52,7 +52,7 @@ public class FurnitureGizmoRotationInteractor : FurnitureGizmoInteractor
         if (WouldCollideAfterRotation(proposedRotation))
         {
             SoundManager.Instance.PlayErrorClip();
-            ControllerManager.Instance.OnControllerVibration();
+            ControllerManager.Instance.OnPrimaryControllerVibration();
             return;
         }
 

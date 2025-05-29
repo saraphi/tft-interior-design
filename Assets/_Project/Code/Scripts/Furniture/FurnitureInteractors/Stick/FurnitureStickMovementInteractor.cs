@@ -19,7 +19,7 @@ public class FurnitureStickMovementInteractor : MonoBehaviour
     {
         if (Time.time - lastMoveTime < movementCooldown) return true;
 
-        Vector2 input = ControllerManager.Instance.GetMovementStickInput();
+        Vector2 input = ControllerManager.Instance.GetPrimaryControllerStickInput();
 
         if (input == Vector2.zero) return true;
 

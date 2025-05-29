@@ -19,7 +19,7 @@ public class FurnitureStickRotationInteractor : MonoBehaviour
     {
         if (Time.time - lastRotationTime < rotationCooldown) return true;
 
-        Vector2 input = ControllerManager.Instance.GetMovementStickInput();
+        Vector2 input = ControllerManager.Instance.GetPrimaryControllerStickInput();
         if (input == Vector2.zero) return true;
 
         Vector2 direction = GetDirection(input);

@@ -60,7 +60,7 @@ public class FurnitureGizmoMovementInteractor : FurnitureGizmoInteractor
         if (WouldCollideAtPosition(targetPosition))
         {
             SoundManager.Instance.PlayErrorClip();
-            ControllerManager.Instance.OnControllerVibration();
+            ControllerManager.Instance.OnPrimaryControllerVibration();
             return;
         }
 
