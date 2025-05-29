@@ -3214,7 +3214,7 @@ PrefabInstance:
     - target: {fileID: 8820111391734791025, guid: 4cec1db3ed0db5f498955c78fc36e820,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: stick_movement
+      value: joystick
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
