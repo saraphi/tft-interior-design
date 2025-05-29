@@ -1385,7 +1385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7804314689333653056
 Transform:
   m_ObjectHideFlags: 0
@@ -1420,7 +1420,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   furniture: {fileID: 8503365331205474349}
-  movementOffset: 0.1
   arrowX: {fileID: 104269786100302133}
   arrowY: {fileID: 8990465405911190571}
   arrowZ: {fileID: 2457804084649707455}
@@ -1678,6 +1677,7 @@ MonoBehaviour:
   sceneLabel: 1
   visualHandler: {fileID: 9090899303541064101}
   rayInteractor: {fileID: 2406970316502413608}
+  joystickInteractor: {fileID: 0}
 --- !u!114 &9090899303541064101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1703,8 +1703,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionsCanvas: {fileID: 2972623005144864036}
-  gizmoMovementInteractor: {fileID: 6981287905437720604}
-  gizmoRotationInteractor: {fileID: 4683460841368601708}
 --- !u!114 &1319976283642636802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1770,7 +1768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3010407560326926225
 Transform:
   m_ObjectHideFlags: 0
@@ -1802,7 +1800,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   furniture: {fileID: 8503365331205474349}
-  rotationDegrees: 15
   arcX: {fileID: 3147414556993574424}
   arcY: {fileID: 4781401329155094899}
   arcZ: {fileID: 1053467935279235926}

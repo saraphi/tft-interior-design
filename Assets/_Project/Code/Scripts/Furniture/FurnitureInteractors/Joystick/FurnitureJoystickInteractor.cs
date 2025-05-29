@@ -4,9 +4,15 @@ using UnityEngine;
 public class FurnitureJoystickInteractor : MonoBehaviour
 {
     [SerializeField] private Furniture furniture;
-    [SerializeField] private float movementStep = 0.05f;
-    [SerializeField] private float rotationStep = 5f;
     [SerializeField] private float cooldown = 0.25f;
+
+    [Header("Movement")]
+    [SerializeField] private FurnitureGizmo movementGizmo;
+    [SerializeField] private float movementStep = 0.05f;
+
+    [Header("Rotation")]
+    [SerializeField] private FurnitureGizmo rotationGizmo;
+    [SerializeField] private float rotationStep = 5f;
 
     private MRUKAnchor.SceneLabels sceneLabel;
     private Collider furnitureCollider;
@@ -25,6 +31,9 @@ public class FurnitureJoystickInteractor : MonoBehaviour
     public bool Move()
     {
         if (Time.time - lastMoveTime < cooldown) return true;
+
+        movementGizmo.DeactiveAllDirections();
+        rotationGizmo.DeactiveAllDirections();
 
         Vector2 movementInput = ControllerManager.Instance.GetPrimaryControllerJoystickInput();
         Vector2 rotationInput = ControllerManager.Instance.GetSecondaryControllerJoystickInput();
@@ -46,6 +55,8 @@ public class FurnitureJoystickInteractor : MonoBehaviour
         Vector2 direction = GetDirection(input);
         Vector3 localDirection = GetLocalDirection(direction);
 
+        movementGizmo.UseDirection(GetGizmoDirection(localDirection));
+
         Vector3 worldDirection = furniture.transform.TransformDirection(localDirection);
         Vector3 targetPosition = furniture.transform.position + worldDirection * movementStep;
 
@@ -64,8 +75,10 @@ public class FurnitureJoystickInteractor : MonoBehaviour
         float angle = direction.x != 0 ? rotationStep * Mathf.Sign(direction.x) : rotationStep * Mathf.Sign(direction.y);
         Quaternion targetRotation = Quaternion.AngleAxis(angle, furniture.transform.TransformDirection(localAxis)) * furniture.transform.rotation;
 
+        rotationGizmo.UseDirection(GetGizmoDirection(localAxis * Mathf.Sign(angle)));
+
         if (WouldCollide(furniture.transform.position, targetRotation)) return false;
-        
+
         furniture.transform.rotation = targetRotation;
 
         return true;
@@ -122,5 +135,22 @@ public class FurnitureJoystickInteractor : MonoBehaviour
             MRUKAnchor.SceneLabels.WALL_FACE => Vector3.forward,
             _ => Vector3.up
         };
+    }
+    
+    private FurnitureGizmo.GizmoDirection GetGizmoDirection(Vector3 dir)
+    {
+        if (dir == Vector3.right || Vector3.Dot(dir.normalized, Vector3.right) > threshold)
+            return FurnitureGizmo.GizmoDirection.X;
+        else if (dir == Vector3.left || Vector3.Dot(dir.normalized, Vector3.left) > threshold)
+            return FurnitureGizmo.GizmoDirection.NegX;
+        else if (dir == Vector3.up || Vector3.Dot(dir.normalized, Vector3.up) > threshold)
+            return FurnitureGizmo.GizmoDirection.Y;
+        else if (dir == Vector3.down || Vector3.Dot(dir.normalized, Vector3.down) > threshold)
+            return FurnitureGizmo.GizmoDirection.NegY;
+        else if (dir == Vector3.forward || Vector3.Dot(dir.normalized, Vector3.forward) > threshold)
+            return FurnitureGizmo.GizmoDirection.Z;
+        else if (dir == Vector3.back || Vector3.Dot(dir.normalized, Vector3.back) > threshold)
+            return FurnitureGizmo.GizmoDirection.NegZ;
+        else return FurnitureGizmo.GizmoDirection.X;
     }
 }
