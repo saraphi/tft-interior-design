@@ -61,12 +61,12 @@ public class ControllerManager : MonoBehaviour
         vibrationCoroutine = StartCoroutine(StopHapticsAfterDelay(duration));
     }
 
-    public Vector2 GetPrimaryControllerStickInput()
+    public Vector2 GetPrimaryControllerJoystickInput()
     {
         return OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, (OVRInput.Controller)primaryController);
     }
 
-    public Vector2 GetSecondaryControllerStickInput()
+    public Vector2 GetSecondaryControllerJoystickInput()
     {
         return OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, (OVRInput.Controller)secondaryController);
     }

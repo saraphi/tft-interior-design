@@ -47,16 +47,14 @@ public class FurnitureOptionsHandler : MonoBehaviour
             case "ray":
                 furniture.StartMovement(Furniture.State.Moving);
                 break;
-            case "stick_movement":
-                furniture.StartMovement(Furniture.State.StickMoving);
-                break;
-            case "stick_rotation":
-                furniture.StartMovement(Furniture.State.StickRotating);
+            case "joystick":
+                furniture.StartMovement(Furniture.State.JoystickMoving);
                 break;
             case "duplicate":
                 furniture.Duplicate();
                 break;
-            case "delete": furniture.Delete();
+            case "delete":
+                furniture.Delete();
                 break;
             default:
                 SoundManager.Instance.PlayErrorClip();

@@ -15,13 +15,12 @@ public class Furniture : MonoBehaviour
 
     [Header("Interactors")]
     [SerializeField] private FurnitureRayInteractor rayInteractor;
-    [SerializeField] private FurnitureStickMovementInteractor stickMovementInteractor;
-    [SerializeField] private FurnitureStickRotationInteractor stickRotationInteractor;
+    [SerializeField] private FurnitureJoystickInteractor joystickInteractor;
 
     private const string DefaultFurnitureLayer = "Furniture";
     private const string GhostFurnitureLayer = "FurnitureGhost";
 
-    public enum State { Placing, Moving, StickMoving, StickRotating, Idle };
+    public enum State { Placing, Moving, JoystickMoving, Idle };
     private State currentState = State.Idle;
 
     private Rigidbody rb;
@@ -44,8 +43,9 @@ public class Furniture : MonoBehaviour
         if (!IsIdling())
         {
             if (currentState == State.Moving || currentState == State.Placing) hasValidSurface = rayInteractor.Move();
-            else if (currentState == State.StickMoving) hasValidSurface = stickMovementInteractor.Move();
-            else if (currentState == State.StickRotating) hasValidSurface = stickRotationInteractor.Rotate();
+            // else if (currentState == State.JoystickMoving) hasValidSurface = stickMovementInteractor.Move();
+            // else if (currentState == State.StickRotating) hasValidSurface = stickRotationInteractor.Rotate();
+            else if (currentState == State.JoystickMoving) hasValidSurface = joystickInteractor.Move();
 
             visualHandler.SetAlpha(hasValidSurface ? 1f : 0.2f);
 
@@ -63,7 +63,7 @@ public class Furniture : MonoBehaviour
 
         gameObject.layer = LayerMask.NameToLayer(GhostFurnitureLayer);
 
-        if (!IsUsingStick()) rb.isKinematic = false;
+        if (currentState != State.JoystickMoving) rb.isKinematic = false;
         rb.useGravity = false;        
 
         SoundManager.Instance.PlayPressClip();
@@ -131,7 +131,6 @@ public class Furniture : MonoBehaviour
             SoundManager.Instance.PlayErrorClip();
             ControllerManager.Instance.OnPrimaryControllerVibration();
         }
-        
     }
 
     public MeshRenderer GetModelRenderer() => model.GetComponent<MeshRenderer>();
@@ -139,7 +138,6 @@ public class Furniture : MonoBehaviour
     public string GetFurnitureName() => furnitureName;
     public MRUKAnchor.SceneLabels GetSceneLabel() => sceneLabel;
     public bool IsIdling() => currentState == State.Idle;
-    public bool IsUsingStick() => currentState == State.StickMoving || currentState == State.StickRotating;
     public void SetID(int newId) => id = newId;
     public int GetID() => id;
 }
