@@ -55,7 +55,7 @@ public class FurnitureJoystickInteractor : MonoBehaviour
         Vector2 direction = GetDirection(input);
         Vector3 localDirection = GetLocalDirection(direction);
 
-        movementGizmo.UseDirection(GetGizmoDirection(localDirection));
+        movementGizmo.UseDirection(GetGizmoDirection(localDirection), localDirection);
 
         Vector3 worldDirection = furniture.transform.TransformDirection(localDirection);
         Vector3 targetPosition = furniture.transform.position + worldDirection * movementStep;
@@ -75,7 +75,7 @@ public class FurnitureJoystickInteractor : MonoBehaviour
         float angle = direction.x != 0 ? rotationStep * Mathf.Sign(direction.x) : rotationStep * Mathf.Sign(direction.y);
         Quaternion targetRotation = Quaternion.AngleAxis(angle, furniture.transform.TransformDirection(localAxis)) * furniture.transform.rotation;
 
-        rotationGizmo.UseDirection(GetGizmoDirection(localAxis * Mathf.Sign(angle)));
+        rotationGizmo.UseDirection(GetGizmoDirection(localAxis * Mathf.Sign(angle)), GetRotationArrowDirection(localAxis, Mathf.Sign(angle)));
 
         if (WouldCollide(furniture.transform.position, targetRotation)) return false;
 
@@ -136,21 +136,33 @@ public class FurnitureJoystickInteractor : MonoBehaviour
             _ => Vector3.up
         };
     }
-    
+
     private FurnitureGizmo.GizmoDirection GetGizmoDirection(Vector3 dir)
     {
-        if (dir == Vector3.right || Vector3.Dot(dir.normalized, Vector3.right) > threshold)
+        if (dir == Vector3.right || Vector3.Dot(dir.normalized, Vector3.right) >= threshold)
             return FurnitureGizmo.GizmoDirection.X;
-        else if (dir == Vector3.left || Vector3.Dot(dir.normalized, Vector3.left) > threshold)
+        else if (dir == Vector3.left || Vector3.Dot(dir.normalized, Vector3.left) >= threshold)
             return FurnitureGizmo.GizmoDirection.NegX;
-        else if (dir == Vector3.up || Vector3.Dot(dir.normalized, Vector3.up) > threshold)
+        else if (dir == Vector3.up || Vector3.Dot(dir.normalized, Vector3.up) >= threshold)
             return FurnitureGizmo.GizmoDirection.Y;
-        else if (dir == Vector3.down || Vector3.Dot(dir.normalized, Vector3.down) > threshold)
+        else if (dir == Vector3.down || Vector3.Dot(dir.normalized, Vector3.down) >= threshold)
             return FurnitureGizmo.GizmoDirection.NegY;
-        else if (dir == Vector3.forward || Vector3.Dot(dir.normalized, Vector3.forward) > threshold)
+        else if (dir == Vector3.forward || Vector3.Dot(dir.normalized, Vector3.forward) >= threshold)
             return FurnitureGizmo.GizmoDirection.Z;
-        else if (dir == Vector3.back || Vector3.Dot(dir.normalized, Vector3.back) > threshold)
+        else if (dir == Vector3.back || Vector3.Dot(dir.normalized, Vector3.back) >= threshold)
             return FurnitureGizmo.GizmoDirection.NegZ;
         else return FurnitureGizmo.GizmoDirection.X;
+    }
+
+    private Vector3 GetRotationArrowDirection(Vector3 axis, float angle)
+    {
+        Vector3 rotation = axis * angle;
+        if (Vector3.Dot(rotation.normalized, Vector3.up) >= threshold) return Vector3.back;
+        else if (Vector3.Dot(rotation.normalized, Vector3.down) >= threshold) return Vector3.forward;
+        else if (Vector3.Dot(rotation.normalized, Vector3.right) >= threshold) return Vector3.down;
+        else if (Vector3.Dot(rotation.normalized, Vector3.left) >= threshold) return Vector3.up;
+        else if (Vector3.Dot(rotation.normalized, Vector3.forward) >= threshold) return Vector3.down;
+        else if (Vector3.Dot(rotation.normalized, Vector3.back) >= threshold) return Vector3.up;
+        return Vector3.up;
     }
 }

@@ -10975,13 +10975,13 @@ PrefabInstance:
         type: 3}
       propertyPath: wallFurniture.Array.data[0]
       value: 
-      objectReference: {fileID: 3820976375969793635, guid: 94fc17bdd86e5e742abaa6f95c27fc80,
+      objectReference: {fileID: 3820976375969793635, guid: 9a594a0de4fe88c45b5c4c884c46c64b,
         type: 3}
     - target: {fileID: 3775365973686292068, guid: beb866e4f824e074b85f21a4338d6a2e,
         type: 3}
       propertyPath: floorFurniture.Array.data[0]
       value: 
-      objectReference: {fileID: 3820976375969793635, guid: 6c724f53d583281449393022fe725ef2,
+      objectReference: {fileID: 3820976375969793635, guid: d9fee7281a2fc15439bd0c4e468384e7,
         type: 3}
     - target: {fileID: 3775365973686292068, guid: beb866e4f824e074b85f21a4338d6a2e,
         type: 3}
@@ -10993,7 +10993,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ceilingFurniture.Array.data[0]
       value: 
-      objectReference: {fileID: 3820976375969793635, guid: b5236f865351a3344ac20d90d84f03f0,
+      objectReference: {fileID: 3820976375969793635, guid: 237052a8743ed5b4e8fb7b44286e7966,
         type: 3}
     - target: {fileID: 8317358649912036660, guid: beb866e4f824e074b85f21a4338d6a2e,
         type: 3}

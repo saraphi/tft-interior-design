@@ -7,7 +7,7 @@ public class Furniture : MonoBehaviour
 
     [Header("Configuration")]
     [SerializeField] private string furnitureName;
-    [SerializeField] private GameObject model;
+    [SerializeField] private FurnitureModel model;
     [SerializeField] private MRUKAnchor.SceneLabels sceneLabel;
 
     [Header("Handlers")]
@@ -43,8 +43,6 @@ public class Furniture : MonoBehaviour
         if (!IsIdling())
         {
             if (currentState == State.Moving || currentState == State.Placing) hasValidSurface = rayInteractor.Move();
-            // else if (currentState == State.JoystickMoving) hasValidSurface = stickMovementInteractor.Move();
-            // else if (currentState == State.StickRotating) hasValidSurface = stickRotationInteractor.Rotate();
             else if (currentState == State.JoystickMoving) hasValidSurface = joystickInteractor.Move();
 
             visualHandler.SetAlpha(hasValidSurface ? 1f : 0.2f);
@@ -133,8 +131,8 @@ public class Furniture : MonoBehaviour
         }
     }
 
-    public MeshRenderer GetModelRenderer() => model.GetComponent<MeshRenderer>();
-    public Collider GetModelCollider() => model.GetComponent<Collider>();
+    public MeshRenderer GetModelRenderer() => model.GetMeshRenderer();
+    public Collider GetModelCollider() => model.GetCollider();
     public string GetFurnitureName() => furnitureName;
     public MRUKAnchor.SceneLabels GetSceneLabel() => sceneLabel;
     public bool IsIdling() => currentState == State.Idle;
