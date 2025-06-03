@@ -23,7 +23,7 @@ public class FurnitureOptionsFollower : MonoBehaviour
         float extentInCameraDir = Mathf.Abs(Vector3.Dot(bounds.extents, toCameraFlat));
         float totalOffset = extentInCameraDir + canvasHeightInWorld / 2f + offsetExtra;
 
-        Vector3 candidatePos = objectCenter + toCameraFlat * totalOffset;
+        Vector3 candidatePos = objectCenter + toCameraFlat * totalOffset + Vector3.right * (canvasHeightInWorld / 2 + offsetExtra);
         candidatePos.y = Camera.main.transform.position.y;
 
         transform.localPosition = furniture.transform.InverseTransformPoint(candidatePos);
