@@ -15,7 +15,7 @@ public class FurnitureJoystickInteractor : MonoBehaviour
     [SerializeField] private float rotationStep = 5f;
 
     private MRUKAnchor.SceneLabels sceneLabel;
-    private Collider furnitureCollider;
+    private Collider furnitureModelCollider;
     private bool hasValidPosition = false;
     private float lastMoveTime = -Mathf.Infinity;
     private float threshold = 0.9f;
@@ -24,7 +24,8 @@ public class FurnitureJoystickInteractor : MonoBehaviour
     void Start()
     {
         sceneLabel = furniture.GetSceneLabel();
-        furnitureCollider = furniture.GetModelCollider();
+        FurnitureModel furnitureModel = furniture.GetFurnitureModel();
+        furnitureModelCollider = furnitureModel.GetCollider();
         mask = ~LayerMask.GetMask("UI", "Gizmo");
     }
 
@@ -86,9 +87,9 @@ public class FurnitureJoystickInteractor : MonoBehaviour
 
     private bool WouldCollide(Vector3 targetPosition, Quaternion targetRotation)
     {
-        if (furnitureCollider == null) return false;
+        if (furnitureModelCollider == null) return false;
 
-        Bounds bounds = furnitureCollider.bounds;
+        Bounds bounds = furnitureModelCollider.bounds;
         Vector3 center = targetPosition + (bounds.center - furniture.transform.position);
         Vector3 halfExtents = bounds.extents;
 

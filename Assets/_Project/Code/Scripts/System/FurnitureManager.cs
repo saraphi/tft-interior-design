@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class FurnitureManager : MonoBehaviour
@@ -74,6 +73,11 @@ public class FurnitureManager : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public int GetCurrentFurnitureID()
+    {
+        return currentFurniture.GetID();
     }
 
     private List<GameObject> GetFurnitureByAnchor(string anchor)

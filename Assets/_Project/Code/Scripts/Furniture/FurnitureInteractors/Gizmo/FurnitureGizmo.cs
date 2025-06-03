@@ -48,7 +48,8 @@ public class FurnitureGizmo : MonoBehaviour
     {
         if (furniture == null) return;
 
-        Collider collider = furniture.GetModelCollider();
+        FurnitureModel furnitureModel = furniture.GetFurnitureModel();
+        BoxCollider collider = furnitureModel.GetCollider();
         if (collider == null) return;
 
         Bounds bounds = collider.bounds;

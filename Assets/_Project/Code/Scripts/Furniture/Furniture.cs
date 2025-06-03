@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Meta.XR.MRUtilityKit;
 using UnityEngine;
 
@@ -9,9 +10,6 @@ public class Furniture : MonoBehaviour
     [SerializeField] private string furnitureName;
     [SerializeField] private FurnitureModel model;
     [SerializeField] private MRUKAnchor.SceneLabels sceneLabel;
-
-    [Header("Handlers")]
-    [SerializeField] private FurnitureVisualHandler visualHandler;
 
     [Header("Interactors")]
     [SerializeField] private FurnitureRayInteractor rayInteractor;
@@ -45,7 +43,7 @@ public class Furniture : MonoBehaviour
             if (currentState == State.Moving || currentState == State.Placing) hasValidSurface = rayInteractor.Move();
             else if (currentState == State.JoystickMoving) hasValidSurface = joystickInteractor.Move();
 
-            visualHandler.SetAlpha(hasValidSurface ? 1f : 0.2f);
+            model.SetModelMaterialsTransparency(!hasValidSurface);
 
             if (ControllerManager.Instance.OnConfirm()) ConfirmMovement();
             else if (ControllerManager.Instance.OnCancel()) CancelMovement();
@@ -60,6 +58,7 @@ public class Furniture : MonoBehaviour
         backupRotation = transform.rotation;
 
         gameObject.layer = LayerMask.NameToLayer(GhostFurnitureLayer);
+        SetModelLayerRecursively(model.gameObject, LayerMask.NameToLayer(GhostFurnitureLayer));
 
         if (currentState != State.JoystickMoving) rb.isKinematic = false;
         rb.useGravity = false;        
@@ -76,6 +75,7 @@ public class Furniture : MonoBehaviour
             currentState = State.Idle;
 
             gameObject.layer = LayerMask.NameToLayer(DefaultFurnitureLayer);
+            SetModelLayerRecursively(model.gameObject, LayerMask.NameToLayer(DefaultFurnitureLayer));
 
             SoundManager.Instance.PlayReleaseClip();
             FurnitureManager.Instance.ClearFurniture();
@@ -103,7 +103,8 @@ public class Furniture : MonoBehaviour
             rb.isKinematic = true;
             currentState = State.Idle;
 
-            gameObject.layer = LayerMask.NameToLayer(DefaultFurnitureLayer); ;
+            gameObject.layer = LayerMask.NameToLayer(DefaultFurnitureLayer);
+            SetModelLayerRecursively(model.gameObject, LayerMask.NameToLayer(DefaultFurnitureLayer));
 
             FurnitureManager.Instance.ClearFurniture();
             SoundManager.Instance.PlayDeleteClip();
@@ -131,8 +132,16 @@ public class Furniture : MonoBehaviour
         }
     }
 
-    public MeshRenderer GetModelRenderer() => model.GetMeshRenderer();
-    public Collider GetModelCollider() => model.GetCollider();
+    private void SetModelLayerRecursively(GameObject obj, int newLayer)
+    {
+        gameObject.layer = newLayer;
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+            SetModelLayerRecursively(child.gameObject, newLayer);
+    }
+
+    public FurnitureModel GetFurnitureModel() => model;
     public string GetFurnitureName() => furnitureName;
     public MRUKAnchor.SceneLabels GetSceneLabel() => sceneLabel;
     public bool IsIdling() => currentState == State.Idle;

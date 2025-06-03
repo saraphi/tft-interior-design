@@ -15,13 +15,14 @@ public class FurnitureRayInteractor : MonoBehaviour
     private bool wouldCollide = false;
 
     private MRUKAnchor.SceneLabels sceneLabels;
-    private Collider furnitureCollider;
+    private BoxCollider furnitureCollider;
 
     void Awake()
     {
         rb = furniture.GetComponent<Rigidbody>();
         sceneLabels = furniture.GetSceneLabel();
-        furnitureCollider = furniture.GetModelCollider();
+        FurnitureModel furnitureModel = furniture.GetFurnitureModel();
+        furnitureCollider = furnitureModel.GetCollider();
     }
 
     public bool Move()
@@ -64,10 +65,10 @@ public class FurnitureRayInteractor : MonoBehaviour
     private bool WouldCollideAtPosition(Vector3 targetPosition)
     {
         if (furnitureCollider == null) return false;
-
         Bounds bounds = furnitureCollider.bounds;
-        Vector3 halfExtents = bounds.extents;
+
         Vector3 center = targetPosition + (bounds.center - furniture.transform.position);
+        Vector3 halfExtents = bounds.extents;
 
         int collisionMask = ~LayerMask.GetMask("UI", "Gizmo");
 
@@ -78,8 +79,7 @@ public class FurnitureRayInteractor : MonoBehaviour
             if (hit == null || hit.transform.IsChildOf(furniture.transform)) continue;
 
             var anchor = hit.GetComponentInParent<MRUKAnchor>();
-            if (anchor != null && anchor.Label.HasFlag(sceneLabels))
-                continue;
+            if (anchor != null && anchor.Label.HasFlag(sceneLabels)) continue;
 
             return true;
         }

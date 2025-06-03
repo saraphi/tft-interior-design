@@ -27,12 +27,15 @@ public class FurnitureOptionsHandler : MonoBehaviour
         {
             SoundManager.Instance.PlayExitClip();
             optionsCanvas.SetActive(false);
+            if (FurnitureManager.Instance.GetCurrentFurnitureID() == furniture.GetID())
+                FurnitureManager.Instance.ClearFurniture();
         }
         else
         {
-            follower.SetTarget(furniture);
             SoundManager.Instance.PlayEnterClip();
+            follower.PositionCanvas();
             optionsCanvas.SetActive(true);
+            FurnitureManager.Instance.RegisterFurniture(furniture);
         }
     }
 
