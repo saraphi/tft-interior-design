@@ -16,13 +16,7 @@ public class FurnitureOptionsHandler : MonoBehaviour
 
     public void ToggleOptionsCanvas()
     {
-        if (!furniture.IsIdling())
-        {
-            SoundManager.Instance.PlayErrorClip();
-            ControllerManager.Instance.OnPrimaryControllerVibration();
-            return;
-        }
-
+        furniture.ToggleSelected();
         if (optionsCanvas.activeInHierarchy)
         {
             SoundManager.Instance.PlayExitClip();

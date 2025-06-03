@@ -9,6 +9,7 @@ public class FurnitureModel : MonoBehaviour
 
     [SerializeField] private Material opaqueMaterial;
     [SerializeField] private Material transparentMaterial;
+    [SerializeField] private Material fresnelMaterial;
 
     private List<MeshRenderer> meshRenderers = new();
 
@@ -33,6 +34,18 @@ public class FurnitureModel : MonoBehaviour
 
         foreach (var renderer in meshRenderers)
             renderer.material = targetMaterial;
+    }
+
+    public void EnableFresnelHighlight()
+    {
+        foreach (var renderer in meshRenderers)
+            renderer.material = fresnelMaterial;
+    }
+
+    public void DisableFresnelHighlight()
+    {
+        foreach (var renderer in meshRenderers)
+            renderer.material = opaqueMaterial;
     }
 
     public void SetColliderEnabled(bool enabled)

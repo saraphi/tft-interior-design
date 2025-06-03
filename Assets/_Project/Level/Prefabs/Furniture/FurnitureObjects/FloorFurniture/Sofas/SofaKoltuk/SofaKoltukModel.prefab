@@ -436,6 +436,7 @@ MonoBehaviour:
   boxCollider: {fileID: 5877480540866822669}
   opaqueMaterial: {fileID: 2100000, guid: c3c838c6d3ae07d4e808b4840a1e6c3e, type: 2}
   transparentMaterial: {fileID: 2100000, guid: 9486a028bafe58f4eae75c21b82cea04, type: 2}
+  fresnelMaterial: {fileID: 2100000, guid: 96869d6fff4d1e541852a58fdc65a7ba, type: 2}
 --- !u!1 &6871351555834735228 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 95075ea123cdd4d4ea4d2e6a63cd653e,

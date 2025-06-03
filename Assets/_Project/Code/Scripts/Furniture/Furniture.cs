@@ -25,6 +25,7 @@ public class Furniture : MonoBehaviour
     private Vector3 backupPosition;
     private Quaternion backupRotation;
     private bool hasValidSurface = false;
+    private bool selected = false;
 
     void Awake()
     {
@@ -43,7 +44,7 @@ public class Furniture : MonoBehaviour
             if (currentState == State.Moving || currentState == State.Placing) hasValidSurface = rayInteractor.Move();
             else if (currentState == State.JoystickMoving) hasValidSurface = joystickInteractor.Move();
 
-            model.SetModelMaterialsTransparency(!hasValidSurface);
+            if (!selected) model.SetModelMaterialsTransparency(!hasValidSurface);
 
             if (ControllerManager.Instance.OnConfirm()) ConfirmMovement();
             else if (ControllerManager.Instance.OnCancel()) CancelMovement();
@@ -140,6 +141,13 @@ public class Furniture : MonoBehaviour
         foreach (Transform child in obj.transform)
             SetModelLayerRecursively(child.gameObject, newLayer);
     }
+
+    public void ToggleSelected()
+    {
+        selected = !selected;
+        if (selected) model.EnableFresnelHighlight();
+        else model.DisableFresnelHighlight();
+    } 
 
     public FurnitureModel GetFurnitureModel() => model;
     public string GetFurnitureName() => furnitureName;
