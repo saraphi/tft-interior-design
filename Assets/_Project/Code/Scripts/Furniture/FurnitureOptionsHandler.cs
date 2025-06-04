@@ -14,22 +14,31 @@ public class FurnitureOptionsHandler : MonoBehaviour
             follower = optionsCanvas.GetComponent<FurnitureOptionsFollower>();
     }
 
+    public void HideOptionsCanvas()
+    {
+        optionsCanvas.SetActive(false);
+    }
+
+    public void ShowOptionsCanvas()
+    {
+        SoundManager.Instance.PlayEnterClip();
+        follower.PositionCanvas();
+        optionsCanvas.SetActive(true);
+    }
+
     public void ToggleOptionsCanvas()
     {
-        furniture.ToggleSelected();
-        if (optionsCanvas.activeInHierarchy)
+        int id = furniture.GetID();
+
+        if (FurnitureManager.Instance.IsFurnitureSelected(id))
         {
+            FurnitureManager.Instance.DeselectFurniture();
             SoundManager.Instance.PlayExitClip();
-            optionsCanvas.SetActive(false);
-            if (FurnitureManager.Instance.GetCurrentFurnitureID() == furniture.GetID())
-                FurnitureManager.Instance.ClearFurniture();
         }
         else
         {
-            SoundManager.Instance.PlayEnterClip();
-            follower.PositionCanvas();
-            optionsCanvas.SetActive(true);
-            FurnitureManager.Instance.RegisterFurniture(furniture);
+            ShowOptionsCanvas();
+            FurnitureManager.Instance.SelectFurniture(id);
         }
     }
 

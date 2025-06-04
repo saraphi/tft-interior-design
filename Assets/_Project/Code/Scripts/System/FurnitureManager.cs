@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Meta.XR.MRUtilityKit;
+using Oculus.Interaction.Body.Input;
 using UnityEngine;
 
 public class FurnitureManager : MonoBehaviour
@@ -15,6 +17,7 @@ public class FurnitureManager : MonoBehaviour
     [SerializeField] private List<GameObject> wallFurniture;
     [SerializeField] private List<GameObject> ceilingFurniture;
     private Furniture currentFurniture;
+    private int selectedFurniture = -1;
     private Dictionary<int, GameObject> allFurnitures = new Dictionary<int, GameObject>();
     private int lastId = -1;
 
@@ -33,6 +36,35 @@ public class FurnitureManager : MonoBehaviour
         return currentFurniture != null && !currentFurniture.IsIdling();
     }
 
+    public void DeselectFurniture()
+    {
+        if (selectedFurniture != -1) DeselectPreviousFurniture();
+        selectedFurniture = -1;
+    }
+
+    public void SelectFurniture(int id)
+    {
+        if (selectedFurniture != -1 && selectedFurniture != id) DeselectPreviousFurniture();
+        selectedFurniture = id;
+    }
+
+    private void DeselectPreviousFurniture()
+    {
+        GameObject previous = allFurnitures[selectedFurniture];
+        if (previous == null)
+        {
+            SoundManager.Instance.PlayErrorClip();
+            ControllerManager.Instance.OnPrimaryControllerVibration();
+            return;
+        }
+
+        FurnitureOptionsHandler previousOptionsHandler = previous.GetComponent<FurnitureOptionsHandler>();
+        if (previousOptionsHandler != null) previousOptionsHandler.HideOptionsCanvas();
+        else ControllerManager.Instance.OnPrimaryControllerVibration();
+    }
+
+    public bool IsFurnitureSelected(int id) => selectedFurniture == id;
+
     public void AddFurniture(string type)
     {
         if (!IsUsingFurniture())
@@ -48,12 +80,7 @@ public class FurnitureManager : MonoBehaviour
                     Furniture furnitureComponent = furniture.GetComponent<Furniture>();
                     if (furnitureComponent.GetFurnitureName() == furnitureName)
                     {
-                        GameObject newObject = Instantiate(furniture, Vector3.zero, Quaternion.identity);
-                        Furniture newFurniture = newObject.GetComponent<Furniture>();
-                        int newId = lastId + 1;
-                        lastId = newId;
-                        newFurniture.SetID(newId);
-                        allFurnitures.Add(newId, newObject);
+                        InstantiateFurniture(furniture, Vector3.zero, Quaternion.identity);
                         SoundManager.Instance.PlayPressClip();
                         return;
                     }
@@ -63,6 +90,16 @@ public class FurnitureManager : MonoBehaviour
 
         SoundManager.Instance.PlayErrorClip();
         ControllerManager.Instance.OnPrimaryControllerVibration();
+    }
+
+    public void InstantiateFurniture(GameObject furniture, Vector3 position, Quaternion rotation)
+    {
+        GameObject newObject = Instantiate(furniture, position, rotation);
+        Furniture newFurniture = newObject.GetComponent<Furniture>();
+        int newId = lastId + 1;
+        lastId = newId;
+        newFurniture.SetID(newId);
+        if (!allFurnitures.ContainsKey(newId)) allFurnitures.Add(newId, newObject);
     }
 
     public bool DeleteFurniture(int id)

@@ -917,6 +917,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SofaKoltukModel
       objectReference: {fileID: 0}
+    - target: {fileID: 8343801151732513313, guid: de5f1359267170149abad186a92c7529,
+        type: 3}
+      propertyPath: fresnelMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 96869d6fff4d1e541852a58fdc65a7ba, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

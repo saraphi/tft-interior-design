@@ -36,16 +36,10 @@ public class FurnitureModel : MonoBehaviour
             renderer.material = targetMaterial;
     }
 
-    public void EnableFresnelHighlight()
+    public void SetFresnelHighlight()
     {
         foreach (var renderer in meshRenderers)
             renderer.material = fresnelMaterial;
-    }
-
-    public void DisableFresnelHighlight()
-    {
-        foreach (var renderer in meshRenderers)
-            renderer.material = opaqueMaterial;
     }
 
     public void SetColliderEnabled(bool enabled)
