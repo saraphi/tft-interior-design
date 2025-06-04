@@ -62,8 +62,8 @@ public class Furniture : MonoBehaviour
         backupPosition = transform.position;
         backupRotation = transform.rotation;
 
-        gameObject.layer = LayerMask.NameToLayer(GhostFurnitureLayer);
-        SetModelLayerRecursively(model.gameObject, LayerMask.NameToLayer(GhostFurnitureLayer));
+        SetFurnitureLayer(LayerMask.NameToLayer(GhostFurnitureLayer));
+        model.SetChildrenCollidersEnabled(false);
 
         if (currentState != State.JoystickMoving) rb.isKinematic = false;
         rb.useGravity = false;        
@@ -79,8 +79,8 @@ public class Furniture : MonoBehaviour
             rb.isKinematic = true;
             currentState = State.Idle;
 
-            gameObject.layer = LayerMask.NameToLayer(DefaultFurnitureLayer);
-            SetModelLayerRecursively(model.gameObject, LayerMask.NameToLayer(DefaultFurnitureLayer));
+            SetFurnitureLayer(LayerMask.NameToLayer(DefaultFurnitureLayer));
+            model.SetChildrenCollidersEnabled(true);
 
             SoundManager.Instance.PlayReleaseClip();
             FurnitureManager.Instance.ClearFurniture();
@@ -108,8 +108,8 @@ public class Furniture : MonoBehaviour
             rb.isKinematic = true;
             currentState = State.Idle;
 
-            gameObject.layer = LayerMask.NameToLayer(DefaultFurnitureLayer);
-            SetModelLayerRecursively(model.gameObject, LayerMask.NameToLayer(DefaultFurnitureLayer));
+            SetFurnitureLayer(LayerMask.NameToLayer(DefaultFurnitureLayer));
+            model.SetChildrenCollidersEnabled(true);
 
             FurnitureManager.Instance.ClearFurniture();
             SoundManager.Instance.PlayDeleteClip();
@@ -137,9 +137,17 @@ public class Furniture : MonoBehaviour
         }
     }
 
-    private void SetModelLayerRecursively(GameObject obj, int newLayer)
+    private void SetFurnitureLayer(int newLayer)
     {
         gameObject.layer = newLayer;
+
+        SetModelLayerRecursively(model.gameObject, newLayer);
+
+        model.gameObject.layer = LayerMask.NameToLayer(GhostFurnitureLayer);
+    }
+
+    private void SetModelLayerRecursively(GameObject obj, int newLayer)
+    {
         obj.layer = newLayer;
 
         foreach (Transform child in obj.transform)

@@ -42,9 +42,13 @@ public class FurnitureModel : MonoBehaviour
             renderer.material = fresnelMaterial;
     }
 
-    public void SetColliderEnabled(bool enabled)
+    public void SetChildrenCollidersEnabled(bool enabled)
     {
-        boxCollider.enabled = enabled;
+        foreach (var child in children)
+        {
+            Collider childCollider = child.GetComponent<Collider>();
+            if (childCollider != null) childCollider.enabled = enabled;
+        }
     }
 
     public List<MeshRenderer> GetMeshRenderers() => meshRenderers;

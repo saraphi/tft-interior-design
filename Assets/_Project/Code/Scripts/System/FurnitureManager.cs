@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Meta.XR.MRUtilityKit;
 using Oculus.Interaction.Body.Input;
 using UnityEngine;
@@ -18,8 +19,16 @@ public class FurnitureManager : MonoBehaviour
     [SerializeField] private List<GameObject> ceilingFurniture;
     private Furniture currentFurniture;
     private int selectedFurniture = -1;
-    private Dictionary<int, GameObject> allFurnitures = new Dictionary<int, GameObject>();
+    private Dictionary<int, GameObject> allAddedFurnitures = new Dictionary<int, GameObject>();
     private int lastId = -1;
+
+    private Dictionary<string, GameObject> allFurnitures = new Dictionary<string, GameObject>();
+
+    void Start()
+    {
+        List<GameObject> allFurnitureList = floorFurniture.Concat(wallFurniture).Concat(ceilingFurniture).ToList();
+        allFurnitures = allFurnitureList.Distinct().ToDictionary(x => x.GetComponent<Furniture>().GetFurnitureName(), x => x);
+    }
 
     public void RegisterFurniture(Furniture furniture)
     {
@@ -50,7 +59,7 @@ public class FurnitureManager : MonoBehaviour
 
     private void DeselectPreviousFurniture()
     {
-        GameObject previous = allFurnitures[selectedFurniture];
+        GameObject previous = allAddedFurnitures[selectedFurniture];
         if (previous == null)
         {
             SoundManager.Instance.PlayErrorClip();
@@ -65,20 +74,17 @@ public class FurnitureManager : MonoBehaviour
 
     public bool IsFurnitureSelected(int id) => selectedFurniture == id;
 
-    public void AddFurniture(string type)
+    public void AddFurniture(string name)
     {
         if (!IsUsingFurniture())
         {
-            string[] data = type.Split(",");
-            List<GameObject> furnitureList = GetFurnitureByAnchor(data[0]);
-            string furnitureName = data[1];
-
-            if (furnitureList != null)
+            if (allFurnitures.ContainsKey(name))
             {
-                foreach (var furniture in furnitureList)
+                GameObject furniture = allFurnitures[name];
+                if (furniture != null)
                 {
                     Furniture furnitureComponent = furniture.GetComponent<Furniture>();
-                    if (furnitureComponent.GetFurnitureName() == furnitureName)
+                    if (furnitureComponent != null)
                     {
                         InstantiateFurniture(furniture, Vector3.zero, Quaternion.identity);
                         SoundManager.Instance.PlayPressClip();
@@ -99,14 +105,14 @@ public class FurnitureManager : MonoBehaviour
         int newId = lastId + 1;
         lastId = newId;
         newFurniture.SetID(newId);
-        if (!allFurnitures.ContainsKey(newId)) allFurnitures.Add(newId, newObject);
+        if (!allAddedFurnitures.ContainsKey(newId)) allAddedFurnitures.Add(newId, newObject);
     }
 
     public bool DeleteFurniture(int id)
     {
-        if (allFurnitures.ContainsKey(id))
+        if (allAddedFurnitures.ContainsKey(id))
         {
-            allFurnitures.Remove(id);
+            allAddedFurnitures.Remove(id);
             return true;
         }
         return false;
@@ -115,16 +121,5 @@ public class FurnitureManager : MonoBehaviour
     public int GetCurrentFurnitureID()
     {
         return currentFurniture.GetID();
-    }
-
-    private List<GameObject> GetFurnitureByAnchor(string anchor)
-    {
-        return anchor switch
-        {
-            "floor" => floorFurniture,
-            "wall" => wallFurniture,
-            "ceiling" => ceilingFurniture,
-            _ => null
-        };
     }
 }

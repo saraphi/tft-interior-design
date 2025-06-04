@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b6813e47a08cb4c879b0bc35b7fac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  furnitureName: cube
+  furnitureName: floor_cube
   model: {fileID: 4929193460745965544}
   sceneLabel: 1
   rayInteractor: {fileID: 8927333973904383255}
