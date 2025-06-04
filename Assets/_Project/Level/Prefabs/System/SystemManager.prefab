@@ -183,6 +183,7 @@ MonoBehaviour:
   - {fileID: 6937891662241529622, guid: 75a4840bc6e908a4eb550b48370cb269, type: 3}
   - {fileID: 4252836840311350627, guid: 6701dbff828fb1c4499e53f67fd2d3e4, type: 3}
   - {fileID: 4762967878558628178, guid: 15d5c4906891b2844ab78d331874feab, type: 3}
+  - {fileID: 3055218276635196921, guid: 31fe22804f13b67449e6370828e9a78b, type: 3}
   wallFurniture:
   - {fileID: 2016488920216958512, guid: 4b586afc5b9944541bebafadc6e121b2, type: 3}
   ceilingFurniture:
