@@ -166,4 +166,10 @@ public class FurnitureJoystickInteractor : MonoBehaviour
         else if (Vector3.Dot(rotation.normalized, Vector3.back) >= threshold) return Vector3.up;
         return Vector3.up;
     }
+
+    public void DeactivateAllFurnitureGizmos()
+    {
+        movementGizmo.DeactiveAllDirections();
+        rotationGizmo.DeactiveAllDirections();
+    }
 }

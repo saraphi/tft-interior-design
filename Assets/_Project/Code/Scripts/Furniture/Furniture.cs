@@ -76,6 +76,8 @@ public class Furniture : MonoBehaviour
     {
         if (hasValidSurface)
         {
+            if (currentState == State.JoystickMoving) joystickInteractor.DeactivateAllFurnitureGizmos();
+
             rb.isKinematic = true;
             currentState = State.Idle;
 
@@ -104,6 +106,8 @@ public class Furniture : MonoBehaviour
 
             transform.position = backupPosition;
             transform.rotation = backupRotation;
+
+            if (currentState == State.JoystickMoving) joystickInteractor.DeactivateAllFurnitureGizmos();
 
             rb.isKinematic = true;
             currentState = State.Idle;

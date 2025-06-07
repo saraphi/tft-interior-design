@@ -28,6 +28,13 @@ public class FurnitureOptionsHandler : MonoBehaviour
 
     public void ToggleOptionsCanvas()
     {
+        if (FurnitureManager.Instance.IsUsingFurniture())
+        {
+            SoundManager.Instance.PlayErrorClip();
+            ControllerManager.Instance.OnPrimaryControllerVibration();
+            return;
+        }
+        
         int id = furniture.GetID();
 
         if (FurnitureManager.Instance.IsFurnitureSelected(id))
