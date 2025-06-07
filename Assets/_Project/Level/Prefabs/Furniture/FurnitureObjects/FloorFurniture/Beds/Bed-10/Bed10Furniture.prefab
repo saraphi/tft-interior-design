@@ -248,6 +248,16 @@ PrefabInstance:
       propertyPath: furniture
       value: 
       objectReference: {fileID: 645698877485853600}
+    - target: {fileID: 5372782928561081528, guid: eeaee65ac3a5f8e4cb17d8c165c21590,
+        type: 3}
+      propertyPath: furniture
+      value: 
+      objectReference: {fileID: 645698877485853600}
+    - target: {fileID: 5925329741036526986, guid: eeaee65ac3a5f8e4cb17d8c165c21590,
+        type: 3}
+      propertyPath: furniture
+      value: 
+      objectReference: {fileID: 645698877485853600}
     - target: {fileID: 8636108929848599294, guid: eeaee65ac3a5f8e4cb17d8c165c21590,
         type: 3}
       propertyPath: furniture
