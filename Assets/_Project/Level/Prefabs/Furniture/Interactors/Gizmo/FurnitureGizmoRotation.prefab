@@ -333,6 +333,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   furniture: {fileID: 0}
+  gizmoType: 1
+  margin: 0.05
+  threshold: 0.9
   directionX: {fileID: 6799220964754068435}
   directionY: {fileID: 8973168429956080087}
   directionZ: {fileID: 1442404559410373468}

@@ -19,14 +19,12 @@ public class FurnitureJoystickInteractor : MonoBehaviour
     private bool hasValidPosition = false;
     private float lastMoveTime = -Mathf.Infinity;
     private float threshold = 0.9f;
-    private int mask;
 
     void Start()
     {
         sceneLabel = furniture.GetSceneLabel();
         FurnitureModel furnitureModel = furniture.GetFurnitureModel();
         furnitureModelCollider = furnitureModel.GetCollider();
-        mask = ~LayerMask.GetMask("UI", "Gizmo");
     }
 
     public bool Move()
@@ -56,7 +54,7 @@ public class FurnitureJoystickInteractor : MonoBehaviour
         Vector2 direction = GetDirection(input);
         Vector3 localDirection = GetLocalDirection(direction);
 
-        movementGizmo.UseDirection(GetGizmoDirection(localDirection), localDirection);
+        movementGizmo.UseDirection(localDirection);
 
         Vector3 worldDirection = furniture.transform.TransformDirection(localDirection);
         Vector3 targetPosition = furniture.transform.position + worldDirection * movementStep;
@@ -76,7 +74,7 @@ public class FurnitureJoystickInteractor : MonoBehaviour
         float angle = direction.x != 0 ? rotationStep * Mathf.Sign(direction.x) : rotationStep * Mathf.Sign(direction.y);
         Quaternion targetRotation = Quaternion.AngleAxis(angle, furniture.transform.TransformDirection(localAxis)) * furniture.transform.rotation;
 
-        rotationGizmo.UseDirection(GetGizmoDirection(localAxis * Mathf.Sign(angle)), GetRotationArrowDirection(localAxis, Mathf.Sign(angle)));
+        rotationGizmo.UseDirection(localAxis * Mathf.Sign(angle));
 
         if (WouldCollide(furniture.transform.position, targetRotation)) return false;
 
@@ -93,7 +91,7 @@ public class FurnitureJoystickInteractor : MonoBehaviour
         Vector3 center = targetPosition + (bounds.center - furniture.transform.position);
         Vector3 halfExtents = bounds.extents;
 
-        Collider[] hits = Physics.OverlapBox(center, halfExtents, targetRotation, mask);
+        Collider[] hits = Physics.OverlapBox(center, halfExtents, targetRotation, ~LayerMask.GetMask("UI", "Gizmo"));
 
         foreach (var hit in hits)
         {
@@ -136,35 +134,6 @@ public class FurnitureJoystickInteractor : MonoBehaviour
             MRUKAnchor.SceneLabels.WALL_FACE => Vector3.forward,
             _ => Vector3.up
         };
-    }
-
-    private FurnitureGizmo.GizmoDirection GetGizmoDirection(Vector3 dir)
-    {
-        if (dir == Vector3.right || Vector3.Dot(dir.normalized, Vector3.right) >= threshold)
-            return FurnitureGizmo.GizmoDirection.X;
-        else if (dir == Vector3.left || Vector3.Dot(dir.normalized, Vector3.left) >= threshold)
-            return FurnitureGizmo.GizmoDirection.NegX;
-        else if (dir == Vector3.up || Vector3.Dot(dir.normalized, Vector3.up) >= threshold)
-            return FurnitureGizmo.GizmoDirection.Y;
-        else if (dir == Vector3.down || Vector3.Dot(dir.normalized, Vector3.down) >= threshold)
-            return FurnitureGizmo.GizmoDirection.NegY;
-        else if (dir == Vector3.forward || Vector3.Dot(dir.normalized, Vector3.forward) >= threshold)
-            return FurnitureGizmo.GizmoDirection.Z;
-        else if (dir == Vector3.back || Vector3.Dot(dir.normalized, Vector3.back) >= threshold)
-            return FurnitureGizmo.GizmoDirection.NegZ;
-        else return FurnitureGizmo.GizmoDirection.X;
-    }
-
-    private Vector3 GetRotationArrowDirection(Vector3 axis, float angle)
-    {
-        Vector3 rotation = axis * angle;
-        if (Vector3.Dot(rotation.normalized, Vector3.up) >= threshold) return Vector3.back;
-        else if (Vector3.Dot(rotation.normalized, Vector3.down) >= threshold) return Vector3.forward;
-        else if (Vector3.Dot(rotation.normalized, Vector3.right) >= threshold) return Vector3.down;
-        else if (Vector3.Dot(rotation.normalized, Vector3.left) >= threshold) return Vector3.up;
-        else if (Vector3.Dot(rotation.normalized, Vector3.forward) >= threshold) return Vector3.down;
-        else if (Vector3.Dot(rotation.normalized, Vector3.back) >= threshold) return Vector3.up;
-        return Vector3.up;
     }
 
     public void DeactivateAllFurnitureGizmos()

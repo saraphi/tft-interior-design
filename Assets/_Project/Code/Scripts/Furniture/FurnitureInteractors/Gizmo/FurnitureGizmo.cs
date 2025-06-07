@@ -1,8 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FurnitureGizmo : MonoBehaviour
 {
     [SerializeField] private Furniture furniture;
+    [SerializeField] private GizmoType gizmoType;
+    [SerializeField] private float margin = 0.05f;
 
     [Header("Gizmo Arrows")]
     [SerializeField] private GameObject directionX;
@@ -13,6 +16,38 @@ public class FurnitureGizmo : MonoBehaviour
     [SerializeField] private GameObject directionNegZ;
 
     public enum GizmoDirection { X, Y, Z, NegX, NegY, NegZ };
+    public enum GizmoType { Movement, Rotation };
+    private float threshold = 0.9f;
+
+    private Dictionary<GizmoDirection, GameObject> arrows = new Dictionary<GizmoDirection, GameObject>();
+    private Dictionary<GizmoDirection, Vector3> arrowsDirections = new Dictionary<GizmoDirection, Vector3>();
+
+    void Start()
+    {
+        arrows.Add(GizmoDirection.X, directionX);
+        arrows.Add(GizmoDirection.Y, directionY);
+        arrows.Add(GizmoDirection.Z, directionZ);
+        arrows.Add(GizmoDirection.NegX, directionNegX);
+        arrows.Add(GizmoDirection.NegY, directionNegY);
+        arrows.Add(GizmoDirection.NegZ, directionNegZ);
+
+        FurnitureModel furnitureModel = furniture.GetFurnitureModel();
+        BoxCollider collider = furnitureModel.GetCollider();
+        if (collider == null) return;
+
+        Bounds bounds = collider.bounds;
+
+        if (gizmoType == GizmoType.Rotation) SetRotationArrowsDirections();
+        else SetMovementArrowsDirections();
+
+        foreach (KeyValuePair<GizmoDirection, GameObject> arrow in arrows)
+        {
+            Vector3 direction = arrowsDirections[arrow.Key];
+            if (direction == null) continue;
+            Vector3 offset = direction * (Vector3.Scale(bounds.extents, direction).magnitude + margin);
+            arrow.Value.transform.position = bounds.center + offset;
+        }
+    }
 
     public void DeactiveAllDirections()
     {
@@ -24,40 +59,42 @@ public class FurnitureGizmo : MonoBehaviour
         directionNegZ.SetActive(false);
     }
 
-    public void UseDirection(GizmoDirection gizmoDirection, Vector3 arrowDirection)
+    public void UseDirection(Vector3 direction)
     {
-        GameObject arrow = null;
-
-        switch (gizmoDirection)
-        {
-            case GizmoDirection.X: arrow = directionX; break;
-            case GizmoDirection.Y: arrow = directionY; break;
-            case GizmoDirection.Z: arrow = directionZ; break;
-            case GizmoDirection.NegX: arrow = directionNegX; break;
-            case GizmoDirection.NegY: arrow = directionNegY; break;
-            case GizmoDirection.NegZ: arrow = directionNegZ; break;
-        }
-
+        GizmoDirection gizmoDirection = GetGizmoDirection(direction);
+        GameObject arrow = arrows[gizmoDirection];
         if (arrow == null) return;
-
         arrow.SetActive(true);
-        PositionArrow(arrow, arrowDirection);
     }
 
-    private void PositionArrow(GameObject arrow, Vector3 arrowDirection)
+    private GizmoDirection GetGizmoDirection(Vector3 direction)
     {
-        if (furniture == null) return;
+        if (Vector3.Dot(direction.normalized, Vector3.right) >= threshold) return GizmoDirection.X;
+        else if (Vector3.Dot(direction.normalized, Vector3.left) >= threshold) return GizmoDirection.NegX;
+        else if (Vector3.Dot(direction.normalized, Vector3.up) >= threshold) return GizmoDirection.Y;
+        else if (Vector3.Dot(direction.normalized, Vector3.down) >= threshold) return GizmoDirection.NegY;
+        else if (Vector3.Dot(direction.normalized, Vector3.forward) >= threshold) return GizmoDirection.Z;
+        else if (Vector3.Dot(direction.normalized, Vector3.back) >= threshold) return GizmoDirection.NegZ;
+        else return GizmoDirection.X;
+    }
 
-        FurnitureModel furnitureModel = furniture.GetFurnitureModel();
-        BoxCollider collider = furnitureModel.GetCollider();
-        if (collider == null) return;
+    private void SetMovementArrowsDirections()
+    {
+        arrowsDirections.Add(GizmoDirection.X, furniture.transform.TransformDirection(Vector3.right).normalized);
+        arrowsDirections.Add(GizmoDirection.Y, furniture.transform.TransformDirection(Vector3.up).normalized);
+        arrowsDirections.Add(GizmoDirection.Z, furniture.transform.TransformDirection(Vector3.forward).normalized);
+        arrowsDirections.Add(GizmoDirection.NegX, furniture.transform.TransformDirection(Vector3.left).normalized);
+        arrowsDirections.Add(GizmoDirection.NegY, furniture.transform.TransformDirection(Vector3.down).normalized);
+        arrowsDirections.Add(GizmoDirection.NegZ, furniture.transform.TransformDirection(Vector3.back).normalized);
+    }
 
-        Bounds bounds = collider.bounds;
-        Vector3 worldDirection = furniture.transform.TransformDirection(arrowDirection).normalized;
-
-        float extent = Vector3.Scale(bounds.extents, worldDirection).magnitude;
-
-        Vector3 offset = worldDirection * (extent + 0.05f);
-        arrow.transform.position = bounds.center + offset;
+    private void SetRotationArrowsDirections()
+    {
+        arrowsDirections.Add(GizmoDirection.X, furniture.transform.TransformDirection(Vector3.down).normalized);
+        arrowsDirections.Add(GizmoDirection.Y, furniture.transform.TransformDirection(Vector3.back).normalized);
+        arrowsDirections.Add(GizmoDirection.Z, furniture.transform.TransformDirection(Vector3.down).normalized);
+        arrowsDirections.Add(GizmoDirection.NegX, furniture.transform.TransformDirection(Vector3.up).normalized);
+        arrowsDirections.Add(GizmoDirection.NegY, furniture.transform.TransformDirection(Vector3.forward).normalized);
+        arrowsDirections.Add(GizmoDirection.NegZ, furniture.transform.TransformDirection(Vector3.up).normalized);
     }
 }
