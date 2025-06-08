@@ -18,6 +18,8 @@ public class ControllerManager : MonoBehaviour
     [Header("Controller Input Configuration")]
     [SerializeField] private OVRInput.RawButton confirmButton = OVRInput.RawButton.A;
     [SerializeField] private OVRInput.RawButton cancelButton = OVRInput.RawButton.B;
+    [SerializeField] private OVRInput.RawButton primaryInteractionButton = OVRInput.RawButton.RIndexTrigger;
+    [SerializeField] private OVRInput.RawButton secondaryInteractionButton = OVRInput.RawButton.LIndexTrigger;
 
     private Coroutine vibrationCoroutine;
 
@@ -27,25 +29,17 @@ public class ControllerManager : MonoBehaviour
         else Instance = this;
     }
 
-    public Vector3 GetRayControllerLocalPosition()
-    {
-        return OVRInput.GetLocalControllerPosition((OVRInput.Controller)primaryController);
-    }
+    public bool OnConfirm() => OVRInput.GetDown(confirmButton);
+    public bool OnCancel() => OVRInput.GetDown(cancelButton);
 
-    public Quaternion GetRayControllerLocalRotation()
-    {
-        return OVRInput.GetLocalControllerRotation((OVRInput.Controller)primaryController);
-    }
+    public bool OnPrimaryIndexTrigger() => OVRInput.GetDown(primaryInteractionButton);
+    public bool OnSecondaryIndexTrigger() => OVRInput.GetDown(secondaryInteractionButton);
 
-    public bool OnConfirm()
-    {
-        return OVRInput.GetDown(confirmButton);
-    }
+    public Vector3 GetRayControllerLocalPosition() => OVRInput.GetLocalControllerPosition((OVRInput.Controller)primaryController);
+    public Quaternion GetRayControllerLocalRotation() => OVRInput.GetLocalControllerRotation((OVRInput.Controller)primaryController);
 
-    public bool OnCancel()
-    {
-        return OVRInput.GetDown(cancelButton);
-    }
+    public Vector2 GetPrimaryControllerJoystickInput() => OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, (OVRInput.Controller)primaryController);
+    public Vector2 GetSecondaryControllerJoystickInput() => OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, (OVRInput.Controller)secondaryController);
 
     public void OnPrimaryControllerVibration(float duration = 0.1f, float frequency = 1f, float amplitude = 0.5f)
     {
@@ -59,16 +53,6 @@ public class ControllerManager : MonoBehaviour
         if (vibrationCoroutine != null) StopCoroutine(vibrationCoroutine);
         OVRInput.SetControllerVibration(frequency, amplitude, (OVRInput.Controller)secondaryController);
         vibrationCoroutine = StartCoroutine(StopHapticsAfterDelay(duration));
-    }
-
-    public Vector2 GetPrimaryControllerJoystickInput()
-    {
-        return OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, (OVRInput.Controller)primaryController);
-    }
-
-    public Vector2 GetSecondaryControllerJoystickInput()
-    {
-        return OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, (OVRInput.Controller)secondaryController);
     }
 
     private IEnumerator StopHapticsAfterDelay(float delay)

@@ -28,12 +28,7 @@ public class FurnitureOptionsHandler : MonoBehaviour
 
     public void ToggleOptionsCanvas()
     {
-        if (FurnitureManager.Instance.IsUsingFurniture())
-        {
-            SoundManager.Instance.PlayErrorClip();
-            ControllerManager.Instance.OnPrimaryControllerVibration();
-            return;
-        }
+        if (FurnitureManager.Instance.IsUsingFurniture()) return;
         
         int id = furniture.GetID();
 

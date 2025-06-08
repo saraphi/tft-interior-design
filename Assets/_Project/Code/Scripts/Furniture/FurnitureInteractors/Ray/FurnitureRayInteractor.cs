@@ -57,12 +57,12 @@ public class FurnitureRayInteractor : MonoBehaviour
         rb.MovePosition(Vector3.SmoothDamp(rb.position, targetPosition, ref velocity, smoothTime));
         rb.rotation = targetRotation;
 
-        wouldCollide = WouldCollideAtPosition(targetPosition);
+        wouldCollide = WouldCollideAtPosition(targetPosition, targetRotation);
 
         return hasValidPosition && !wouldCollide;
     }
 
-    private bool WouldCollideAtPosition(Vector3 targetPosition)
+    private bool WouldCollideAtPosition(Vector3 targetPosition, Quaternion targetRotation)
     {
         if (furnitureCollider == null) return false;
         Bounds bounds = furnitureCollider.bounds;
@@ -72,7 +72,7 @@ public class FurnitureRayInteractor : MonoBehaviour
 
         int collisionMask = ~LayerMask.GetMask("UI", "Gizmo");
 
-        Collider[] overlaps = Physics.OverlapBox(center, halfExtents, furniture.transform.rotation, collisionMask);
+        Collider[] overlaps = Physics.OverlapBox(center, halfExtents, targetRotation, collisionMask);
 
         foreach (var hit in overlaps)
         {
@@ -86,5 +86,4 @@ public class FurnitureRayInteractor : MonoBehaviour
 
         return false;
     }
-
 }

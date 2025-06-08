@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3055218276635196921}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.094, y: -0.072, z: 0.118}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -65,7 +65,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &2971251738300615302
 MonoBehaviour:
@@ -118,6 +118,7 @@ MonoBehaviour:
   sceneLabel: 1
   rayInteractor: {fileID: 479240787944210812}
   joystickInteractor: {fileID: 3564296855130911532}
+  triggerInteractor: {fileID: 4970777704805686278}
 --- !u!114 &8109521616718173973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +456,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3856412075205115780, guid: eeaee65ac3a5f8e4cb17d8c165c21590,
+        type: 3}
+      propertyPath: furniture
+      value: 
+      objectReference: {fileID: 6756463358927407396}
     - target: {fileID: 3948962092562795142, guid: eeaee65ac3a5f8e4cb17d8c165c21590,
         type: 3}
       propertyPath: m_Name
@@ -507,6 +513,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db4d65a24522646429ecaa0c0a487e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4970777704805686278 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3856412075205115780, guid: eeaee65ac3a5f8e4cb17d8c165c21590,
+    type: 3}
+  m_PrefabInstance: {fileID: 8178261658087416706}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efef5c9795acf16419312de6699f1ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &7833650808074845591 stripped

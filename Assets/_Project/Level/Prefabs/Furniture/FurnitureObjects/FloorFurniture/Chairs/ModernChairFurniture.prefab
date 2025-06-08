@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4762967878558628178}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.186, y: 0.146, z: 0.64}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -65,7 +65,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &1709369888959763139
 MonoBehaviour:
@@ -118,6 +118,7 @@ MonoBehaviour:
   sceneLabel: 1
   rayInteractor: {fileID: 5510490559107010837}
   joystickInteractor: {fileID: 8910730408012948293}
+  triggerInteractor: {fileID: 1018962500582067311}
 --- !u!114 &428005641801900818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,6 +331,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3856412075205115780, guid: eeaee65ac3a5f8e4cb17d8c165c21590,
+        type: 3}
+      propertyPath: furniture
+      value: 
+      objectReference: {fileID: 6210372647972463083}
     - target: {fileID: 3948962092562795142, guid: eeaee65ac3a5f8e4cb17d8c165c21590,
         type: 3}
       propertyPath: m_Name
@@ -360,6 +366,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeaee65ac3a5f8e4cb17d8c165c21590, type: 3}
+--- !u!114 &1018962500582067311 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3856412075205115780, guid: eeaee65ac3a5f8e4cb17d8c165c21590,
+    type: 3}
+  m_PrefabInstance: {fileID: 4296626078749029355}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efef5c9795acf16419312de6699f1ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2767775217668075006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2146442694489005589, guid: eeaee65ac3a5f8e4cb17d8c165c21590,
