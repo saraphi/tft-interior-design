@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Meta.XR.MRUtilityKit;
 using UnityEngine;
 
@@ -25,10 +24,14 @@ public class Furniture : MonoBehaviour
     private Vector3 backupPosition;
     private Quaternion backupRotation;
     private bool hasValidSurface = false;
+    private int collisionMask;
+    private BoxCollider modelCollider;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        modelCollider = model.GetCollider();
+        collisionMask = ~LayerMask.GetMask("UI", "Gizmo");
     }
 
     void Start()
@@ -156,6 +159,29 @@ public class Furniture : MonoBehaviour
 
         foreach (Transform child in obj.transform)
             SetModelLayerRecursively(child.gameObject, newLayer);
+    }
+
+    public bool WouldCollide(Vector3 targetPosition, Quaternion targetRotation)
+    {
+        if (modelCollider == null) return false;
+        Bounds bounds = modelCollider.bounds;
+
+        Vector3 center = targetPosition + (bounds.center - transform.position);
+        Vector3 halfExtents = bounds.extents;
+
+        Collider[] overlaps = Physics.OverlapBox(center, halfExtents, targetRotation, collisionMask);
+
+        foreach (var hit in overlaps)
+        {
+            if (hit == null || hit.transform.IsChildOf(transform)) continue;
+
+            var anchor = hit.GetComponentInParent<MRUKAnchor>();
+            if (anchor != null && anchor.Label.HasFlag(sceneLabel)) continue;
+
+            return true;
+        }
+
+        return false;
     }
 
     public FurnitureModel GetFurnitureModel() => model;

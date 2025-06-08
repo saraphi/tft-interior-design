@@ -15,7 +15,6 @@ public class FurnitureJoystickInteractor : MonoBehaviour
     [SerializeField] private float rotationStep = 5f;
 
     private MRUKAnchor.SceneLabels sceneLabel;
-    private Collider furnitureModelCollider;
     private bool hasValidPosition = false;
     private float lastMoveTime = -Mathf.Infinity;
     private float threshold = 0.9f;
@@ -24,7 +23,6 @@ public class FurnitureJoystickInteractor : MonoBehaviour
     {
         sceneLabel = furniture.GetSceneLabel();
         FurnitureModel furnitureModel = furniture.GetFurnitureModel();
-        furnitureModelCollider = furnitureModel.GetCollider();
     }
 
     public bool Move()
@@ -59,7 +57,7 @@ public class FurnitureJoystickInteractor : MonoBehaviour
         Vector3 worldDirection = furniture.transform.TransformDirection(localDirection);
         Vector3 targetPosition = furniture.transform.position + worldDirection * movementStep;
 
-        if (WouldCollide(targetPosition, furniture.transform.rotation)) return false;
+        if (furniture.WouldCollide(targetPosition, furniture.transform.rotation)) return false;
 
         furniture.transform.position = targetPosition;
 
@@ -76,34 +74,11 @@ public class FurnitureJoystickInteractor : MonoBehaviour
 
         rotationGizmo.UseDirection(localAxis * Mathf.Sign(angle));
 
-        if (WouldCollide(furniture.transform.position, targetRotation)) return false;
+        if (furniture.WouldCollide(furniture.transform.position, targetRotation)) return false;
 
         furniture.transform.rotation = targetRotation;
 
         return true;
-    }
-
-    private bool WouldCollide(Vector3 targetPosition, Quaternion targetRotation)
-    {
-        if (furnitureModelCollider == null) return false;
-
-        Bounds bounds = furnitureModelCollider.bounds;
-        Vector3 center = targetPosition + (bounds.center - furniture.transform.position);
-        Vector3 halfExtents = bounds.extents;
-
-        Collider[] hits = Physics.OverlapBox(center, halfExtents, targetRotation, ~LayerMask.GetMask("UI", "Gizmo"));
-
-        foreach (var hit in hits)
-        {
-            if (hit.transform.IsChildOf(furniture.transform)) continue;
-
-            var anchor = hit.GetComponentInParent<MRUKAnchor>();
-            if (anchor != null && anchor.Label.HasFlag(sceneLabel)) continue;
-
-            return true;
-        }
-
-        return false;
     }
 
     private Vector2 GetDirection(Vector2 input)
