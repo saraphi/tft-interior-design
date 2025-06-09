@@ -1,7 +1,6 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Meta.XR.MRUtilityKit;
-using Oculus.Interaction.Body.Input;
 using UnityEngine;
 
 public class FurnitureManager : MonoBehaviour
@@ -13,21 +12,32 @@ public class FurnitureManager : MonoBehaviour
         if (Instance != null && Instance != this) Destroy(this);
         else Instance = this;
     }
+    [SerializeField] private List<GameObject> allFurniture;
 
-    [SerializeField] private List<GameObject> floorFurniture;
-    [SerializeField] private List<GameObject> wallFurniture;
-    [SerializeField] private List<GameObject> ceilingFurniture;
     private Furniture currentFurniture;
     private int selectedFurniture = -1;
-    private Dictionary<int, GameObject> allAddedFurnitures = new Dictionary<int, GameObject>();
+    private Dictionary<int, GameObject> allAddedFurniture = new Dictionary<int, GameObject>();
     private int lastId = -1;
 
-    private Dictionary<string, GameObject> allFurnitures = new Dictionary<string, GameObject>();
+    private Dictionary<string, GameObject> allFurnitureByName = new Dictionary<string, GameObject>();
+    private Dictionary<FurnitureCategory, List<GameObject>> allFurnitureByCategory = new Dictionary<FurnitureCategory, List<GameObject>>();
+
+    public enum FurnitureCategory { Chairs, Beds, Sofas, Tables }
 
     void Start()
     {
-        List<GameObject> allFurnitureList = floorFurniture.Concat(wallFurniture).Concat(ceilingFurniture).ToList();
-        allFurnitures = allFurnitureList.Distinct().ToDictionary(x => x.GetComponent<Furniture>().GetFurnitureName(), x => x);
+        foreach (var category in (FurnitureCategory[])Enum.GetValues(typeof(FurnitureCategory)))
+            allFurnitureByCategory.Add(category, new List<GameObject>());
+
+        foreach (var furniture in allFurniture)
+        {
+            Furniture furnitureComponent = furniture.GetComponent<Furniture>();
+            string furnitureName = furnitureComponent.GetFurnitureName();
+            FurnitureCategory furnitureCategory = furnitureComponent.GetFurnitureCategory();
+            allFurnitureByName[furnitureName] = furniture;
+            List<GameObject> list = allFurnitureByCategory[furnitureCategory];
+            list.Add(furniture);
+        }
     }
 
     public void RegisterFurniture(Furniture furniture)
@@ -59,7 +69,7 @@ public class FurnitureManager : MonoBehaviour
 
     private void DeselectPreviousFurniture()
     {
-        GameObject previous = allAddedFurnitures[selectedFurniture];
+        GameObject previous = allAddedFurniture[selectedFurniture];
         if (previous == null)
         {
             SoundManager.Instance.PlayErrorClip();
@@ -78,9 +88,9 @@ public class FurnitureManager : MonoBehaviour
     {
         if (!IsUsingFurniture())
         {
-            if (allFurnitures.ContainsKey(name))
+            if (allFurnitureByName.ContainsKey(name))
             {
-                GameObject furniture = allFurnitures[name];
+                GameObject furniture = allFurnitureByName[name];
                 if (furniture != null)
                 {
                     Furniture furnitureComponent = furniture.GetComponent<Furniture>();
@@ -105,21 +115,22 @@ public class FurnitureManager : MonoBehaviour
         int newId = lastId + 1;
         lastId = newId;
         newFurniture.SetID(newId);
-        if (!allAddedFurnitures.ContainsKey(newId)) allAddedFurnitures.Add(newId, newObject);
+        if (!allAddedFurniture.ContainsKey(newId)) allAddedFurniture.Add(newId, newObject);
     }
 
     public bool DeleteFurniture(int id)
     {
-        if (allAddedFurnitures.ContainsKey(id))
+        if (allAddedFurniture.ContainsKey(id))
         {
-            allAddedFurnitures.Remove(id);
+            allAddedFurniture.Remove(id);
             return true;
         }
         return false;
     }
 
-    public int GetCurrentFurnitureID()
-    {
-        return currentFurniture.GetID();
-    }
+    public int GetCurrentFurnitureID() => currentFurniture.GetID();
+
+    public List<string> GetCategories() => Enum.GetNames(typeof(FurnitureCategory)).ToList();
+    public List<GameObject> GetAllFurniture() => allFurnitureByName.OrderBy(pair => pair.Key).Select(pair => pair.Value).ToList();
+    public List<GameObject> GetAllFurnitureByCategory(FurnitureCategory category) => allFurnitureByCategory[category];
 }

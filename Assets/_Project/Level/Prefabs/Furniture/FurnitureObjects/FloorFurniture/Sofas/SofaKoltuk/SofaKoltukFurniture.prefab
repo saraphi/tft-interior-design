@@ -116,9 +116,9 @@ MonoBehaviour:
   furnitureName: sofa_koltuk
   model: {fileID: 6489385137666380206}
   sceneLabel: 1
+  category: 2
   rayInteractor: {fileID: 720890003850723143}
   joystickInteractor: {fileID: 4454458383024737559}
-  triggerInteractor: {fileID: 5214104775656874557}
 --- !u!114 &8270647444632308291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,18 +513,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db4d65a24522646429ecaa0c0a487e44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5214104775656874557 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3856412075205115780, guid: eeaee65ac3a5f8e4cb17d8c165c21590,
-    type: 3}
-  m_PrefabInstance: {fileID: 9068141831318052281}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efef5c9795acf16419312de6699f1ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &6922367640273765292 stripped

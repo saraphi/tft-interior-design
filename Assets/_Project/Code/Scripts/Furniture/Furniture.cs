@@ -9,6 +9,7 @@ public class Furniture : MonoBehaviour
     [SerializeField] private string furnitureName;
     [SerializeField] private FurnitureModel model;
     [SerializeField] private MRUKAnchor.SceneLabels sceneLabel;
+    [SerializeField] private FurnitureManager.FurnitureCategory category;
 
     [Header("Interactors")]
     [SerializeField] private FurnitureRayInteractor rayInteractor;
@@ -186,6 +187,7 @@ public class Furniture : MonoBehaviour
 
     public FurnitureModel GetFurnitureModel() => model;
     public string GetFurnitureName() => furnitureName;
+    public FurnitureManager.FurnitureCategory GetFurnitureCategory() => category;
     public MRUKAnchor.SceneLabels GetSceneLabel() => sceneLabel;
     public bool IsIdling() => currentState == State.Idle;
     public void SetID(int newId) => id = newId;
