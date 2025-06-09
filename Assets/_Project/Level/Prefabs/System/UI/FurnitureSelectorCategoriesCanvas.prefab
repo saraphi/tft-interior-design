@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 50035982541338013}
   - component: {fileID: 8292778538791968211}
   m_Layer: 0
-  m_Name: FurnitureSelectorCanvasUI
+  m_Name: FurnitureSelectorCategoriesCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

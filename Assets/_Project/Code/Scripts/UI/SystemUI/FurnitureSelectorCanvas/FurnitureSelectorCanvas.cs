@@ -33,15 +33,6 @@ public class FurnitureSelectorCanvas : MonoBehaviour
             });
             newToggle.gameObject.SetActive(true);
             categoryToggles.Add(current, newToggle);
-            
-            // string current = category;
-
-            // Toggle newButton = Instantiate(defaultCategoryButton, buttonCategories);
-            // TMP_Text buttonText = newButton.GetComponentInChildren<TMP_Text>();
-            // if (buttonText != null) buttonText.text = current;
-            // newButton.onClick.AddListener(() => SetCategoryFilter(current));
-            // newButton.gameObject.SetActive(true);
-            // categoryButtons.Add(current, newButton);
         }
 
         UpdateFurnitureListByCategory();
