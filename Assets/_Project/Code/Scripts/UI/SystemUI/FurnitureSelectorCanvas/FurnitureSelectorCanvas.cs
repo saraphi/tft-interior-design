@@ -6,13 +6,17 @@ using UnityEngine.UI;
 
 public class FurnitureSelectorCanvas : MonoBehaviour
 {
+    [Header("Category Toggle UI")]
     [SerializeField] private Transform toggleCategories;
     [SerializeField] private Toggle defaultCategoryToggle;
 
+    [Header("Furniture Option UI")]
     [SerializeField] private Transform scrollContent;
     [SerializeField] private GameObject defaultFurnitureOption;
+
     private Dictionary<string, Toggle> categoryToggles = new Dictionary<string, Toggle>();
     private string currentCategory = null;
+
     private List<GameObject> allCurrentFurniture = new List<GameObject>();
     private List<GameObject> allCurrentFurnitureButtons = new List<GameObject>();
 
@@ -26,11 +30,13 @@ public class FurnitureSelectorCanvas : MonoBehaviour
             Toggle newToggle = Instantiate(defaultCategoryToggle, toggleCategories);
             TMP_Text buttonText = newToggle.GetComponentInChildren<TMP_Text>();
             if (buttonText != null) buttonText.text = current;
+
             newToggle.onValueChanged.AddListener(isOn =>
             {
-                if (isOn) SetCategoryFilter(current);
-                else if (currentCategory == current) SetCategoryFilter(null);
+                if (isOn && currentCategory != current) SetCategoryFilter(current);
+                else if (!isOn && currentCategory == current ) SetCategoryFilter(null);
             });
+
             newToggle.gameObject.SetActive(true);
             categoryToggles.Add(current, newToggle);
         }
@@ -40,6 +46,8 @@ public class FurnitureSelectorCanvas : MonoBehaviour
 
     public void SetCategoryFilter(string category)
     {
+        if (currentCategory == category) return;
+        
         currentCategory = category;
         SoundManager.Instance.PlayPressClip();
         UpdateFurnitureListByCategory();
@@ -59,9 +67,13 @@ public class FurnitureSelectorCanvas : MonoBehaviour
             Furniture furnitureComponent = furniture.GetComponent<Furniture>();
             GameObject newFurnitureButton = Instantiate(defaultFurnitureOption, scrollContent);
             FurnitureOption furnitureOption = newFurnitureButton.GetComponent<FurnitureOption>();
+
             furnitureOption.SetButtonText("ADD " + furnitureComponent.GetFurnitureName().ToUpper());
+            furnitureOption.Init(furnitureComponent);
+
             Button button = furnitureOption.GetButton();
-            button.onClick.AddListener(() => FurnitureManager.Instance.AddFurniture(furnitureComponent.GetFurnitureName()));
+            button.onClick.AddListener(() => FurnitureManager.Instance.AddFurniture(furnitureComponent.GetFurnitureName(), furnitureOption.GetProfileColor()));
+
             allCurrentFurnitureButtons.Add(newFurnitureButton);
             newFurnitureButton.SetActive(true);
         }

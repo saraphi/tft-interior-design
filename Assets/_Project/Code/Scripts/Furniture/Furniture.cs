@@ -127,7 +127,8 @@ public class Furniture : MonoBehaviour
 
     public void Duplicate()
     {
-        FurnitureManager.Instance.InstantiateFurniture(gameObject, transform.position, transform.rotation);
+        FurnitureColorProfile profileColor = model.GetFurnitureColorProfile();
+        FurnitureManager.Instance.InstantiateFurniture(gameObject, transform.position, transform.rotation, profileColor.profileName);
     }
 
     public void Delete()

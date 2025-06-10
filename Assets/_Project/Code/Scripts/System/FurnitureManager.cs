@@ -84,7 +84,7 @@ public class FurnitureManager : MonoBehaviour
 
     public bool IsFurnitureSelected(int id) => selectedFurniture == id;
 
-    public void AddFurniture(string name)
+    public void AddFurniture(string name, string profileColor = null)
     {
         if (!IsUsingFurniture())
         {
@@ -96,7 +96,7 @@ public class FurnitureManager : MonoBehaviour
                     Furniture furnitureComponent = furniture.GetComponent<Furniture>();
                     if (furnitureComponent != null)
                     {
-                        InstantiateFurniture(furniture, Vector3.zero, Quaternion.identity);
+                        InstantiateFurniture(furniture, Vector3.zero, Quaternion.identity, profileColor);
                         SoundManager.Instance.PlayPressClip();
                         return;
                     }
@@ -108,7 +108,7 @@ public class FurnitureManager : MonoBehaviour
         ControllerManager.Instance.OnPrimaryControllerVibration();
     }
 
-    public void InstantiateFurniture(GameObject furniture, Vector3 position, Quaternion rotation)
+    public void InstantiateFurniture(GameObject furniture, Vector3 position, Quaternion rotation, string profileColor = null)
     {
         GameObject newObject = Instantiate(furniture, position, rotation);
         Furniture newFurniture = newObject.GetComponent<Furniture>();
@@ -116,6 +116,8 @@ public class FurnitureManager : MonoBehaviour
         lastId = newId;
         newFurniture.SetID(newId);
         if (!allAddedFurniture.ContainsKey(newId)) allAddedFurniture.Add(newId, newObject);
+        FurnitureModel newFurnitureModel = newFurniture.GetFurnitureModel();
+        newFurnitureModel.ApplyColorProfile(profileColor);
     }
 
     public bool DeleteFurniture(int id)

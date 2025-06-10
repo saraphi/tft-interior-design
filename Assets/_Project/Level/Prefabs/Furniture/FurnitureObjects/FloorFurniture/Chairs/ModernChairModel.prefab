@@ -26,17 +26,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 564dac74ca7a1534e9bd452f23718996,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.186
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 564dac74ca7a1534e9bd452f23718996,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.146
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 564dac74ca7a1534e9bd452f23718996,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 564dac74ca7a1534e9bd452f23718996,
         type: 3}
@@ -109,15 +109,39 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2972281005230874968}
+    - targetCorrespondingSourceObject: {fileID: -8391222552659086748, guid: 564dac74ca7a1534e9bd452f23718996,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8042464046684023672}
     - targetCorrespondingSourceObject: {fileID: 8416272007918961125, guid: 564dac74ca7a1534e9bd452f23718996,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2486420391042324127}
+    - targetCorrespondingSourceObject: {fileID: 8416272007918961125, guid: 564dac74ca7a1534e9bd452f23718996,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7314649318684496676}
     - targetCorrespondingSourceObject: {fileID: -7146521406498821007, guid: 564dac74ca7a1534e9bd452f23718996,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5210430919876154952}
+    - targetCorrespondingSourceObject: {fileID: -7146521406498821007, guid: 564dac74ca7a1534e9bd452f23718996,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9102416330407000090}
   m_SourcePrefab: {fileID: 100100000, guid: 564dac74ca7a1534e9bd452f23718996, type: 3}
+--- !u!23 &3513908030995880723 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -678588488315902003, guid: 564dac74ca7a1534e9bd452f23718996,
+    type: 3}
+  m_PrefabInstance: {fileID: 5068453805639875806}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3639971982474515872 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -804731622281664130, guid: 564dac74ca7a1534e9bd452f23718996,
+    type: 3}
+  m_PrefabInstance: {fileID: 5068453805639875806}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3646324898667101499 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8416272007918961125, guid: 564dac74ca7a1534e9bd452f23718996,
@@ -146,6 +170,21 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1550514412580984892, guid: 564dac74ca7a1534e9bd452f23718996, type: 3}
+--- !u!114 &7314649318684496676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3646324898667101499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf59612fff14d04e8a587f76054f836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elementID: legs
+  elementCollider: {fileID: 2486420391042324127}
+  meshRenderer: {fileID: 3513908030995880723}
 --- !u!1 &5374951803452981647 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 564dac74ca7a1534e9bd452f23718996,
@@ -193,6 +232,121 @@ MonoBehaviour:
   opaqueMaterial: {fileID: 2100000, guid: c3c838c6d3ae07d4e808b4840a1e6c3e, type: 2}
   transparentMaterial: {fileID: 2100000, guid: 9486a028bafe58f4eae75c21b82cea04, type: 2}
   fresnelMaterial: {fileID: 2100000, guid: 96869d6fff4d1e541852a58fdc65a7ba, type: 2}
+  colorProfiles:
+  - profileName: white
+    colorIdentifier:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 1
+      m_ColorSpace: -1
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    entries:
+    - elementID: frame
+      color: {r: 1, g: 1, b: 1, a: 1}
+    - elementID: legs
+      color: {r: 1, g: 1, b: 1, a: 1}
+    - elementID: seat
+      color: {r: 1, g: 1, b: 1, a: 1}
+  - profileName: red and mustard
+    colorIdentifier:
+      serializedVersion: 2
+      key0: {r: 0.6117647, g: 0.09411765, b: 0.09411765, a: 1}
+      key1: {r: 0.7176471, g: 0.53333336, b: 0.18431373, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 32768
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 1
+      m_ColorSpace: -1
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    entries:
+    - elementID: frame
+      color: {r: 0.6117647, g: 0.09411765, b: 0.09411765, a: 1}
+    - elementID: legs
+      color: {r: 0.14150941, g: 0.11681201, b: 0.11681201, a: 1}
+    - elementID: seat
+      color: {r: 0.7176471, g: 0.53333336, b: 0.18431373, a: 1}
+  - profileName: pink
+    colorIdentifier:
+      serializedVersion: 2
+      key0: {r: 0.90588236, g: 0.07450981, b: 0.42745098, a: 1}
+      key1: {r: 0.90588236, g: 0.07450981, b: 0.42745098, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 1
+      m_ColorSpace: -1
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    entries:
+    - elementID: frame
+      color: {r: 0.90588236, g: 0.07450981, b: 0.42745098, a: 1}
+    - elementID: legs
+      color: {r: 0.14150941, g: 0.11681201, b: 0.11681201, a: 1}
+    - elementID: seat
+      color: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 1}
 --- !u!1 &5609972679615844026 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 564dac74ca7a1534e9bd452f23718996,
@@ -221,6 +375,21 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5495902117074765545, guid: 564dac74ca7a1534e9bd452f23718996, type: 3}
+--- !u!114 &8042464046684023672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5609972679615844026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf59612fff14d04e8a587f76054f836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elementID: frame
+  elementCollider: {fileID: 2972281005230874968}
+  meshRenderer: {fileID: 8743316970258393617}
 --- !u!1 &6522539666989486255 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7146521406498821007, guid: 564dac74ca7a1534e9bd452f23718996,
@@ -248,3 +417,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.5703237, y: 2.4521043, z: 2.7975788}
   m_Center: {x: -0.000000655651, y: -0.047207423, z: -0.08421134}
+--- !u!114 &9102416330407000090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6522539666989486255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf59612fff14d04e8a587f76054f836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elementID: seat
+  elementCollider: {fileID: 5210430919876154952}
+  meshRenderer: {fileID: 3639971982474515872}
+--- !u!23 &8743316970258393617 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -4683669308469848369, guid: 564dac74ca7a1534e9bd452f23718996,
+    type: 3}
+  m_PrefabInstance: {fileID: 5068453805639875806}
+  m_PrefabAsset: {fileID: 0}
