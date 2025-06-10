@@ -7035,7 +7035,7 @@ PrefabInstance:
     - target: {fileID: 2792244311952351998, guid: 52408c76a3b1202429fdefb93d9dc1eb,
         type: 3}
       propertyPath: m_Name
-      value: FurnitureSelectorCategoriesCanvas
+      value: FurnitureSelectorCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 2869533765009776306, guid: 52408c76a3b1202429fdefb93d9dc1eb,
         type: 3}
@@ -8746,6 +8746,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7264022207693091403, guid: 52408c76a3b1202429fdefb93d9dc1eb,
+        type: 3}
+      propertyPath: m_Size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7456021146045094078, guid: 52408c76a3b1202429fdefb93d9dc1eb,
         type: 3}

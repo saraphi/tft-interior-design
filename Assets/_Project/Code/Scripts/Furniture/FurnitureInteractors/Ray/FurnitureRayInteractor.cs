@@ -15,14 +15,11 @@ public class FurnitureRayInteractor : MonoBehaviour
     private bool wouldCollide = false;
 
     private MRUKAnchor.SceneLabels sceneLabel;
-    private BoxCollider furnitureCollider;
 
     void Awake()
     {
         rb = furniture.GetComponent<Rigidbody>();
         sceneLabel = furniture.GetSceneLabel();
-        FurnitureModel furnitureModel = furniture.GetFurnitureModel();
-        furnitureCollider = furnitureModel.GetCollider();
     }
 
     public bool Move()
