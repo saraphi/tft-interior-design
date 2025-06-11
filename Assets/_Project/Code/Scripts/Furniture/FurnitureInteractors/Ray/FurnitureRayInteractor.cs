@@ -1,6 +1,5 @@
 using UnityEngine;
 using Meta.XR.MRUtilityKit;
-
 public class FurnitureRayInteractor : MonoBehaviour
 {
     [SerializeField] private Furniture furniture;
@@ -15,11 +14,13 @@ public class FurnitureRayInteractor : MonoBehaviour
     private bool wouldCollide = false;
 
     private MRUKAnchor.SceneLabels sceneLabel;
+    private FurnitureModel furnitureModel;
 
     void Awake()
     {
         rb = furniture.GetComponent<Rigidbody>();
         sceneLabel = furniture.GetSceneLabel();
+        furnitureModel = furniture.GetFurnitureModel();
     }
 
     public bool Move()
@@ -34,9 +35,13 @@ public class FurnitureRayInteractor : MonoBehaviour
         Ray ray = new Ray(controllerPosition, forwardDirection);
         MRUKRoom room = MRUK.Instance.GetCurrentRoom();
 
+        DebugCanvas.Instance.ClearText();
+
         if (room.Raycast(ray, Mathf.Infinity, new LabelFilter(sceneLabel), out RaycastHit hit))
         {
-            targetPosition = hit.point;
+            Vector3 closestPoint = furnitureModel.GetBottomPointInDirection(GetDominantAxisDirection(hit.normal));
+            Vector3 offset = hit.point - closestPoint;
+            targetPosition = rb.position + offset;
 
             if (sceneLabel == MRUKAnchor.SceneLabels.WALL_FACE)
                 targetRotation = Quaternion.LookRotation(-hit.normal);
@@ -57,5 +62,12 @@ public class FurnitureRayInteractor : MonoBehaviour
         wouldCollide = furniture.WouldCollide(targetPosition, targetRotation);
 
         return hasValidPosition && !wouldCollide;
+    }
+
+    private Vector3 GetDominantAxisDirection(Vector3 normal)
+    {
+        if (normal.x > normal.y && normal.x > normal.z) return new Vector3(Mathf.Sign(normal.x), 0f, 0f);
+        else if (normal.y > normal.z) return new Vector3(0f, Mathf.Sign(normal.y), 0f);
+        else return new Vector3(0f, 0f, Mathf.Sign(normal.z));
     }
 }

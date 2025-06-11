@@ -7,11 +7,6 @@ public class FurnitureManager : MonoBehaviour
 {
     public static FurnitureManager Instance { get; private set; }
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this) Destroy(this);
-        else Instance = this;
-    }
     [SerializeField] private List<GameObject> allFurniture;
 
     private Furniture currentFurniture;
@@ -22,10 +17,13 @@ public class FurnitureManager : MonoBehaviour
     private Dictionary<string, GameObject> allFurnitureByName = new Dictionary<string, GameObject>();
     private Dictionary<FurnitureCategory, List<GameObject>> allFurnitureByCategory = new Dictionary<FurnitureCategory, List<GameObject>>();
 
-    public enum FurnitureCategory { Chairs, Beds, Sofas, Tables }
+    public enum FurnitureCategory { Chairs, Beds, Sofas, Tables, CeilingLight }
 
-    void Start()
+    private void Awake()
     {
+        if (Instance != null && Instance != this) Destroy(this);
+        else Instance = this;
+
         foreach (var category in (FurnitureCategory[])Enum.GetValues(typeof(FurnitureCategory)))
             allFurnitureByCategory.Add(category, new List<GameObject>());
 
@@ -39,6 +37,22 @@ public class FurnitureManager : MonoBehaviour
             list.Add(furniture);
         }
     }
+    
+    // void Start()
+    // {
+    //     foreach (var category in (FurnitureCategory[])Enum.GetValues(typeof(FurnitureCategory)))
+    //         allFurnitureByCategory.Add(category, new List<GameObject>());
+
+    //     foreach (var furniture in allFurniture)
+    //     {
+    //         Furniture furnitureComponent = furniture.GetComponent<Furniture>();
+    //         string furnitureName = furnitureComponent.GetFurnitureName();
+    //         FurnitureCategory furnitureCategory = furnitureComponent.GetFurnitureCategory();
+    //         allFurnitureByName[furnitureName] = furniture;
+    //         List<GameObject> list = allFurnitureByCategory[furnitureCategory];
+    //         list.Add(furniture);
+    //     }
+    // }
 
     public void RegisterFurniture(Furniture furniture)
     {

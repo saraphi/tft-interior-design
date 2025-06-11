@@ -73,4 +73,29 @@ public class FurnitureModel : MonoBehaviour
     public BoxCollider GetCollider() => boxCollider;
     public FurnitureColorProfile GetFurnitureColorProfile() => colorProfilesByName[currentProfile];
     public List<FurnitureColorProfile> GetColorProfiles() => colorProfiles;
+
+    public Vector3 GetBottomPointInDirection(Vector3 direction)
+    {
+        Vector3 localDirection = boxCollider.transform.InverseTransformDirection(direction.normalized);
+
+        Vector3 localClosestPoint = boxCollider.center;
+        float minDot = float.MaxValue;
+
+        Vector3 extents = boxCollider.size * 0.5f;
+
+        for (int x = -1; x <= 1; x += 2)
+            for (int y = -1; y <= 1; y += 2)
+                for (int z = -1; z <= 1; z += 2)
+                {
+                    Vector3 corner = boxCollider.center + Vector3.Scale(extents, new Vector3(x, y, z));
+                    float dot = Vector3.Dot(corner, localDirection);
+                    if (dot < minDot)
+                    {
+                        minDot = dot;
+                        localClosestPoint = corner;
+                    }
+                }
+
+        return boxCollider.transform.TransformPoint(localClosestPoint);
+    }
 }
