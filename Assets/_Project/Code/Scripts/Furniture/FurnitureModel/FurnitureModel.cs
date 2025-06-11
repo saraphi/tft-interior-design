@@ -74,7 +74,7 @@ public class FurnitureModel : MonoBehaviour
     public FurnitureColorProfile GetFurnitureColorProfile() => colorProfilesByName[currentProfile];
     public List<FurnitureColorProfile> GetColorProfiles() => colorProfiles;
 
-    public Vector3 GetBottomPointInDirection(Vector3 direction)
+    public Vector3 GetClosestPointToDirection(Vector3 direction)
     {
         Vector3 localDirection = boxCollider.transform.InverseTransformDirection(direction.normalized);
 

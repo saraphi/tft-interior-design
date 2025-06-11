@@ -37,7 +37,7 @@ public class FurnitureRayInteractor : MonoBehaviour
 
         if (room.Raycast(ray, Mathf.Infinity, new LabelFilter(sceneLabel), out RaycastHit hit))
         {
-            Vector3 closestPoint = furnitureModel.GetBottomPointInDirection(GetDominantAxisDirection(hit.normal));
+            Vector3 closestPoint = furnitureModel.GetClosestPointToDirection(GetDominantAxisDirection(hit.normal));
             Vector3 offset = hit.point - closestPoint;
             targetPosition = rb.position + offset;
 
