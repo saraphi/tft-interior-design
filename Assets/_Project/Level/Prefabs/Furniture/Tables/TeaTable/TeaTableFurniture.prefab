@@ -113,7 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b6813e47a08cb4c879b0bc35b7fac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  furnitureName: tea_table
+  furnitureCodeName: tea_table
+  furnitureName: Square Tea Table
   model: {fileID: 7631912838268053290}
   sceneLabel: 1
   category: 3

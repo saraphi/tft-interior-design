@@ -6,10 +6,9 @@ using UnityEngine.UI;
 public class FurnitureOption : MonoBehaviour
 {
     [SerializeField] private Button button;
+    [SerializeField] private TMP_Text furnitureTitle;
     [SerializeField] private Transform colorToggleContainer;
     [SerializeField] private Toggle defaultColorToggle;
-
-    private TMP_Text buttonText;
     private FurnitureModel model;
     private string currentProfileColor;
 
@@ -52,7 +51,7 @@ public class FurnitureOption : MonoBehaviour
     public Button GetButton() => button;
     public void SetButtonText(string text)
     {
-        if (buttonText == null) buttonText = GetComponentInChildren<TMP_Text>();
-        buttonText.text = text;
+        if (furnitureTitle == null) furnitureTitle = GetComponentInChildren<TMP_Text>();
+        furnitureTitle.text = text;
     }
 }

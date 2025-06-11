@@ -68,11 +68,11 @@ public class FurnitureSelectorCanvas : MonoBehaviour
             GameObject newFurnitureButton = Instantiate(defaultFurnitureOption, scrollContent);
             FurnitureOption furnitureOption = newFurnitureButton.GetComponent<FurnitureOption>();
 
-            furnitureOption.SetButtonText("ADD " + furnitureComponent.GetFurnitureName().ToUpper());
+            furnitureOption.SetButtonText(furnitureComponent.GetFurnitureName());
             furnitureOption.Init(furnitureComponent);
 
             Button button = furnitureOption.GetButton();
-            button.onClick.AddListener(() => FurnitureManager.Instance.AddFurniture(furnitureComponent.GetFurnitureName(), furnitureOption.GetProfileColor()));
+            button.onClick.AddListener(() => FurnitureManager.Instance.AddFurniture(furnitureComponent.GetFurnitureCodeName(), furnitureOption.GetProfileColor()));
 
             allCurrentFurnitureButtons.Add(newFurnitureButton);
             newFurnitureButton.SetActive(true);

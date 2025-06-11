@@ -113,12 +113,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b6813e47a08cb4c879b0bc35b7fac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  furnitureName: modern_chair
+  furnitureCodeName: modern_chair
+  furnitureName: Modern Chair
   model: {fileID: 3882800847525870741}
   sceneLabel: 1
+  category: 0
   rayInteractor: {fileID: 5510490559107010837}
   joystickInteractor: {fileID: 8910730408012948293}
-  triggerInteractor: {fileID: 1018962500582067311}
 --- !u!114 &428005641801900818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,18 +367,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeaee65ac3a5f8e4cb17d8c165c21590, type: 3}
---- !u!114 &1018962500582067311 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3856412075205115780, guid: eeaee65ac3a5f8e4cb17d8c165c21590,
-    type: 3}
-  m_PrefabInstance: {fileID: 4296626078749029355}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efef5c9795acf16419312de6699f1ffb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2767775217668075006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2146442694489005589, guid: eeaee65ac3a5f8e4cb17d8c165c21590,

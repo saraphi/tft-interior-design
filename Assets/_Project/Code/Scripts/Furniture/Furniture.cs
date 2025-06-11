@@ -6,6 +6,7 @@ public class Furniture : MonoBehaviour
     private int id;
 
     [Header("Configuration")]
+    [SerializeField] private string furnitureCodeName;
     [SerializeField] private string furnitureName;
     [SerializeField] private FurnitureModel model;
     [SerializeField] private MRUKAnchor.SceneLabels sceneLabel;
@@ -187,6 +188,7 @@ public class Furniture : MonoBehaviour
     }
 
     public FurnitureModel GetFurnitureModel() => model;
+    public string GetFurnitureCodeName() => furnitureCodeName;
     public string GetFurnitureName() => furnitureName;
     public FurnitureManager.FurnitureCategory GetFurnitureCategory() => category;
     public MRUKAnchor.SceneLabels GetSceneLabel() => sceneLabel;

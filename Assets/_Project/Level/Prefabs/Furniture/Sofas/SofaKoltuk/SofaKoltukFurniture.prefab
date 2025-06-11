@@ -113,7 +113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18b6813e47a08cb4c879b0bc35b7fac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  furnitureName: sofa_koltuk
+  furnitureCodeName: sofa_koltuk
+  furnitureName: Sofa Koltuk
   model: {fileID: 6489385137666380206}
   sceneLabel: 1
   category: 2

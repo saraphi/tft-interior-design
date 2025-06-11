@@ -30,29 +30,13 @@ public class FurnitureManager : MonoBehaviour
         foreach (var furniture in allFurniture)
         {
             Furniture furnitureComponent = furniture.GetComponent<Furniture>();
-            string furnitureName = furnitureComponent.GetFurnitureName();
+            string furnitureCodeName = furnitureComponent.GetFurnitureCodeName();
             FurnitureCategory furnitureCategory = furnitureComponent.GetFurnitureCategory();
-            allFurnitureByName[furnitureName] = furniture;
+            allFurnitureByName[furnitureCodeName] = furniture;
             List<GameObject> list = allFurnitureByCategory[furnitureCategory];
             list.Add(furniture);
         }
     }
-    
-    // void Start()
-    // {
-    //     foreach (var category in (FurnitureCategory[])Enum.GetValues(typeof(FurnitureCategory)))
-    //         allFurnitureByCategory.Add(category, new List<GameObject>());
-
-    //     foreach (var furniture in allFurniture)
-    //     {
-    //         Furniture furnitureComponent = furniture.GetComponent<Furniture>();
-    //         string furnitureName = furnitureComponent.GetFurnitureName();
-    //         FurnitureCategory furnitureCategory = furnitureComponent.GetFurnitureCategory();
-    //         allFurnitureByName[furnitureName] = furniture;
-    //         List<GameObject> list = allFurnitureByCategory[furnitureCategory];
-    //         list.Add(furniture);
-    //     }
-    // }
 
     public void RegisterFurniture(Furniture furniture)
     {
