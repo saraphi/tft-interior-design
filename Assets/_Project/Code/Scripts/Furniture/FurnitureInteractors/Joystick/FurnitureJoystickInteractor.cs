@@ -22,7 +22,6 @@ public class FurnitureJoystickInteractor : MonoBehaviour
     void Start()
     {
         sceneLabel = furniture.GetSceneLabel();
-        FurnitureModel furnitureModel = furniture.GetFurnitureModel();
     }
 
     public bool Move()

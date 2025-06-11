@@ -5,6 +5,7 @@ public class FurnitureRayInteractor : MonoBehaviour
     [SerializeField] private Furniture furniture;
     [SerializeField] public float maxRayLength = 2f;
     [SerializeField] private float smoothTime = 0.1f;
+    [SerializeField] private float rotationDegrees = 0.9f;
 
     private Vector3 velocity = Vector3.zero;
     private Rigidbody rb;
@@ -12,6 +13,7 @@ public class FurnitureRayInteractor : MonoBehaviour
     private Quaternion lastValidRotation;
     private bool hasValidPosition = false;
     private bool wouldCollide = false;
+    private float currentRotation = 0f;
 
     private MRUKAnchor.SceneLabels sceneLabel;
     private FurnitureModel furnitureModel;
@@ -54,6 +56,9 @@ public class FurnitureRayInteractor : MonoBehaviour
             targetRotation = lastValidRotation;
         }
 
+        Quaternion additionalRotation = GetAddiotionalRotation();
+        targetRotation *= additionalRotation;
+
         rb.MovePosition(Vector3.SmoothDamp(rb.position, targetPosition, ref velocity, smoothTime));
         rb.rotation = targetRotation;
 
@@ -67,5 +72,17 @@ public class FurnitureRayInteractor : MonoBehaviour
         if (normal.x > normal.y && normal.x > normal.z) return new Vector3(Mathf.Sign(normal.x), 0f, 0f);
         else if (normal.y > normal.z) return new Vector3(0f, Mathf.Sign(normal.y), 0f);
         else return new Vector3(0f, 0f, Mathf.Sign(normal.z));
+    }
+
+    private Quaternion GetAddiotionalRotation()
+    {
+        Vector2 joystickInput = ControllerManager.Instance.GetSecondaryControllerJoystickInput();
+
+        if (Mathf.Abs(joystickInput.x) > 0.9f)
+            currentRotation += joystickInput.x * rotationDegrees;
+
+        Vector3 rotationAxis = sceneLabel == MRUKAnchor.SceneLabels.WALL_FACE ? furniture.transform.forward : Vector3.up;
+
+        return Quaternion.AngleAxis(currentRotation, rotationAxis);
     }
 }
