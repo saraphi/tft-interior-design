@@ -35,8 +35,6 @@ public class FurnitureRayInteractor : MonoBehaviour
         Ray ray = new Ray(controllerPosition, forwardDirection);
         MRUKRoom room = MRUK.Instance.GetCurrentRoom();
 
-        DebugCanvas.Instance.ClearText();
-
         if (room.Raycast(ray, Mathf.Infinity, new LabelFilter(sceneLabel), out RaycastHit hit))
         {
             Vector3 closestPoint = furnitureModel.GetBottomPointInDirection(GetDominantAxisDirection(hit.normal));
