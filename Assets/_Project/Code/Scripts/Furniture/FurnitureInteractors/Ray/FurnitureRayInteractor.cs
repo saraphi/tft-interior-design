@@ -39,8 +39,8 @@ public class FurnitureRayInteractor : MonoBehaviour
 
         if (room.Raycast(ray, Mathf.Infinity, new LabelFilter(sceneLabel), out RaycastHit hit))
         {
-            Vector3 closestPoint = furnitureModel.GetClosestPointToDirection(GetDominantAxisDirection(hit.normal));
-            Vector3 offset = hit.point - closestPoint;
+            Vector3 insertionPointWorld = furniture.GetInsertionPoint();
+            Vector3 offset = hit.point - insertionPointWorld;
             targetPosition = rb.position + offset;
 
             if (sceneLabel == MRUKAnchor.SceneLabels.WALL_FACE)

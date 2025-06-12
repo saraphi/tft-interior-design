@@ -28,6 +28,7 @@ public class Furniture : MonoBehaviour
     private bool hasValidSurface = false;
     private int collisionMask;
     private BoxCollider modelCollider;
+    private Vector3 insertionDirection;
 
     void Awake()
     {
@@ -38,6 +39,7 @@ public class Furniture : MonoBehaviour
 
     void Start()
     {
+        SetSceneLabelAndDirection();
         StartMovement(State.Placing);
     }
 
@@ -71,7 +73,7 @@ public class Furniture : MonoBehaviour
         model.SetChildrenCollidersEnabled(false);
 
         if (currentState != State.JoystickMoving) rb.isKinematic = false;
-        rb.useGravity = false;        
+        rb.useGravity = false;
 
         SoundManager.Instance.PlayPressClip();
         FurnitureManager.Instance.RegisterFurniture(this);
@@ -185,6 +187,33 @@ public class Furniture : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void SetSceneLabelAndDirection()
+    {
+        insertionDirection = sceneLabel switch
+        {
+            MRUKAnchor.SceneLabels.FLOOR => Vector3.down,
+            MRUKAnchor.SceneLabels.CEILING => Vector3.up,
+            MRUKAnchor.SceneLabels.WALL_FACE => transform.forward,
+            _ => Vector3.down
+        };
+    }
+
+    public Vector3 GetInsertionPoint()
+    {
+        Bounds bounds = modelCollider.bounds;
+
+        Vector3 direction = insertionDirection.normalized;
+
+        Vector3 extents = bounds.extents;
+        Vector3 offset = new Vector3(
+            direction.x * extents.x,
+            direction.y * extents.y,
+            direction.z * extents.z
+        );
+
+        return bounds.center + offset;
     }
 
     public FurnitureModel GetFurnitureModel() => model;
