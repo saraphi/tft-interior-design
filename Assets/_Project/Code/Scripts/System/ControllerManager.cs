@@ -18,6 +18,7 @@ public class ControllerManager : MonoBehaviour
     [Header("Controller Input Configuration")]
     [SerializeField] private OVRInput.RawButton confirmButton = OVRInput.RawButton.A;
     [SerializeField] private OVRInput.RawButton cancelButton = OVRInput.RawButton.B;
+    [SerializeField] private OVRInput.RawButton menuButton = OVRInput.RawButton.Y;
     [SerializeField] private OVRInput.RawButton primaryInteractionButton = OVRInput.RawButton.RIndexTrigger;
     [SerializeField] private OVRInput.RawButton secondaryInteractionButton = OVRInput.RawButton.LIndexTrigger;
 
@@ -31,6 +32,8 @@ public class ControllerManager : MonoBehaviour
 
     public bool OnConfirm() => OVRInput.GetDown(confirmButton);
     public bool OnCancel() => OVRInput.GetDown(cancelButton);
+
+    public bool OnMenu() => OVRInput.GetDown(menuButton);
 
     public bool OnPrimaryIndexTrigger() => OVRInput.GetDown(primaryInteractionButton);
     public bool OnSecondaryIndexTrigger() => OVRInput.GetDown(secondaryInteractionButton);
