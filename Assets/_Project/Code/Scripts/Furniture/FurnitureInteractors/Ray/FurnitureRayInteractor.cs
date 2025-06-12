@@ -67,13 +67,6 @@ public class FurnitureRayInteractor : MonoBehaviour
         return hasValidPosition && !wouldCollide;
     }
 
-    private Vector3 GetDominantAxisDirection(Vector3 normal)
-    {
-        if (normal.x > normal.y && normal.x > normal.z) return new Vector3(Mathf.Sign(normal.x), 0f, 0f);
-        else if (normal.y > normal.z) return new Vector3(0f, Mathf.Sign(normal.y), 0f);
-        else return new Vector3(0f, 0f, Mathf.Sign(normal.z));
-    }
-
     private Quaternion GetAddiotionalRotation()
     {
         Vector2 joystickInput = ControllerManager.Instance.GetSecondaryControllerJoystickInput();
