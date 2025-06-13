@@ -572,7 +572,7 @@ MonoBehaviour:
   - {fileID: 917332103365188287}
   - {fileID: 3260560458465906477}
   boxCollider: {fileID: 3563806342955955599}
-  opaqueMaterial: {fileID: 2100000, guid: c3c838c6d3ae07d4e808b4840a1e6c3e, type: 2}
+  opaqueMaterial: {fileID: 2100000, guid: d1048fd1e7b5ce94eb578f62f331f58e, type: 2}
   transparentMaterial: {fileID: 2100000, guid: 9486a028bafe58f4eae75c21b82cea04, type: 2}
   fresnelMaterial: {fileID: 2100000, guid: 96869d6fff4d1e541852a58fdc65a7ba, type: 2}
   colorProfiles:
