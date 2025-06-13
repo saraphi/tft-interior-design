@@ -1,3 +1,4 @@
+using Meta.XR.MRUtilityKit;
 using UnityEngine;
 
 public class MenuCanvas : MonoBehaviour
@@ -22,5 +23,10 @@ public class MenuCanvas : MonoBehaviour
     {
         SoundManager.Instance.PlayEnterClip();
         StartCoroutine(GameManager.Instance.OpenCanvasAfterDelay(furnitureSelectorCanvas, 0f, 2f));
+    }
+    
+    public bool IsRoomLoaded()
+    {
+        return MRUK.Instance != null && MRUK.Instance.GetCurrentRoom() != null;
     }
 }

@@ -1,8 +1,10 @@
 using System.Collections;
+using Meta.XR.MRUtilityKit;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private EffectMesh effectMesh;
     [SerializeField] private GameObject welcomeCanvasPrefab;
     [SerializeField] private GameObject menuCanvasPrefab;
     [SerializeField] private LayerMask collisionMask;
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        effectMesh.HideMesh = true;
         welcomeCanvas = Instantiate(welcomeCanvasPrefab, Vector3.one, Quaternion.identity);
         menuCanvas = Instantiate(menuCanvasPrefab, Vector3.one, Quaternion.identity);
         welcomeCanvas.SetActive(false);
@@ -30,6 +33,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (FurnitureManager.Instance.IsUsingFurniture()) effectMesh.HideMesh = false;
+        else effectMesh.HideMesh = true;
+
         if (!tutorialStarted)
         {
             tutorialStarted = true;
@@ -49,6 +55,11 @@ public class GameManager : MonoBehaviour
                 CloseCurrentCanvas();
             }
         }
+    }
+
+    public void SetEffectMeshHideMesh(bool hide)
+    {
+        effectMesh.HideMesh = hide;
     }
 
     public IEnumerator OpenCanvasAfterDelay(GameObject canvas, float delay = 0f, float distance = 1f, bool markAsCurrent = true)
