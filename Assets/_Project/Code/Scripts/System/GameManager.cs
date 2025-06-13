@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     private GameObject welcomeCanvas;
     private GameObject currentCanvas;
 
+    private WelcomeCanvas welcomeCanvasScript;
+
     private void Awake()
     {
         if (Instance != null && Instance != this) Destroy(this);
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
         menuCanvas = Instantiate(menuCanvasPrefab, Vector3.one, Quaternion.identity);
         welcomeCanvas.SetActive(false);
         menuCanvas.SetActive(false);
+        welcomeCanvasScript = welcomeCanvas.GetComponent<WelcomeCanvas>();
     }
 
     void Update()
@@ -42,12 +45,12 @@ public class GameManager : MonoBehaviour
             StartCoroutine(OpenCanvasAfterDelay(welcomeCanvas, 1f));
         }
 
-        if (ControllerManager.Instance.OnMenu())
+        if (ControllerManager.Instance.OnMenu() && welcomeCanvasScript != null && welcomeCanvasScript.HasEnded())
         {
             if (!menuCanvas.activeInHierarchy)
             {
                 SoundManager.Instance.PlayEnterClip();
-                StartCoroutine(OpenCanvasAfterDelay(menuCanvas));
+                StartCoroutine(OpenCanvasAfterDelay(menuCanvas, 0f, 1f));
             }
             else
             {
@@ -62,7 +65,7 @@ public class GameManager : MonoBehaviour
         effectMesh.HideMesh = hide;
     }
 
-    public IEnumerator OpenCanvasAfterDelay(GameObject canvas, float delay = 0f, float distance = 1f, bool markAsCurrent = true)
+    public IEnumerator OpenCanvasAfterDelay(GameObject canvas, float delay = 0f, float distance = 1.5f, bool markAsCurrent = true)
     {
         yield return new WaitForSeconds(delay);
         if (markAsCurrent)

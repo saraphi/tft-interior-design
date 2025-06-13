@@ -37,9 +37,11 @@ public class WelcomeCanvas : MonoBehaviour
 
     private void UpdateButtons()
     {
-        if (currentIndex > 0) backButton.gameObject.SetActive(true);
+        if (currentIndex > 0 && currentIndex != lines.Count -1) backButton.gameObject.SetActive(true);
         else backButton.gameObject.SetActive(false);
         if (currentIndex < lines.Count - 1) nextButton.gameObject.SetActive(true);
         else nextButton.gameObject.SetActive(false);
     }
+
+    public bool HasEnded() => currentIndex == lines.Count - 1;
 }

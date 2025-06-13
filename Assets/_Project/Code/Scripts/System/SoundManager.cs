@@ -7,7 +7,8 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance { get; private set; }
 
     [Header("Audio Sources")]
-    [SerializeField] private AudioSource soundSource;
+    [SerializeField] private AudioSource soundEffectsSource;
+    [SerializeField] private AudioSource ambientMusicSource;
 
     [Header("Sound Clips")]
     [SerializeField] private AudioClip pressClip;
@@ -16,6 +17,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip exitClip;
     [SerializeField] private AudioClip errorClip;
     [SerializeField] private AudioClip deleteClip;
+    [SerializeField] private AudioClip introClip;
 
     private void Awake()
     {
@@ -25,31 +27,31 @@ public class SoundManager : MonoBehaviour
 
     public void PlayPressClip()
     {
-        if (pressClip != null) soundSource.PlayOneShot(pressClip);
+        if (pressClip != null) soundEffectsSource.PlayOneShot(pressClip);
     }
 
     public void PlayReleaseClip()
     {
-        if (releaseClip != null) soundSource.PlayOneShot(releaseClip);
+        if (releaseClip != null) soundEffectsSource.PlayOneShot(releaseClip);
     }
 
     public void PlayEnterClip()
     {
-        if (enterClip != null) soundSource.PlayOneShot(enterClip);
+        if (enterClip != null) soundEffectsSource.PlayOneShot(enterClip);
     }
 
     public void PlayExitClip()
     {
-        if (exitClip != null) soundSource.PlayOneShot(exitClip);
+        if (exitClip != null) soundEffectsSource.PlayOneShot(exitClip);
     }
 
     public void PlayErrorClip()
     {
-        if (errorClip != null) soundSource.PlayOneShot(errorClip);
+        if (errorClip != null) soundEffectsSource.PlayOneShot(errorClip);
     }
 
     public void PlayDeleteClip()
     {
-        if (deleteClip != null) soundSource.PlayOneShot(deleteClip);
+        if (deleteClip != null) soundEffectsSource.PlayOneShot(deleteClip);
     }
 }
