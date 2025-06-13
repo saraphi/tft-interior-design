@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8317358649912036660}
   - component: {fileID: 8878638478618045991}
   - component: {fileID: 3775365973686292068}
+  - component: {fileID: 6152923684215713535}
   m_Layer: 0
   m_Name: SystemManager
   m_TagString: Untagged
@@ -47,7 +48,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -166,6 +167,7 @@ MonoBehaviour:
   secondaryController: 1
   confirmButton: 1
   cancelButton: 2
+  menuButton: 512
   primaryInteractionButton: 67108864
   secondaryInteractionButton: 268435456
 --- !u!114 &3775365973686292068
@@ -185,3 +187,25 @@ MonoBehaviour:
   - {fileID: 6937891662241529622, guid: 75a4840bc6e908a4eb550b48370cb269, type: 3}
   - {fileID: 3055218276635196921, guid: 31fe22804f13b67449e6370828e9a78b, type: 3}
   - {fileID: 4252836840311350627, guid: 6701dbff828fb1c4499e53f67fd2d3e4, type: 3}
+  - {fileID: 2617410382418005736, guid: b334de4aeceb4c04e8a0b82b26378ce1, type: 3}
+--- !u!114 &6152923684215713535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119229641997264082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a4bbbe551d020468aae02626aa29e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  welcomeCanvasPrefab: {fileID: 9085303805937159516, guid: 4f65c7943d550f4438e5e4b085489c84,
+    type: 3}
+  furnitureSelectorCanvasPrefab: {fileID: 2792244311952351998, guid: 52408c76a3b1202429fdefb93d9dc1eb,
+    type: 3}
+  menuCanvasPrefab: {fileID: 1862448462063857022, guid: 56b02fb740592e14ba5dab7289f25fae,
+    type: 3}
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 96

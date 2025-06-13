@@ -5,13 +5,10 @@ public class FurnitureOptionsHandler : MonoBehaviour
     [SerializeField] private GameObject optionsCanvas;
 
     private Furniture furniture;
-    private FurnitureOptionsFollower follower;
 
     void Awake()
     {
         furniture = GetComponent<Furniture>();
-        if (optionsCanvas != null)
-            follower = optionsCanvas.GetComponent<FurnitureOptionsFollower>();
     }
 
     public void HideOptionsCanvas()
@@ -22,7 +19,7 @@ public class FurnitureOptionsHandler : MonoBehaviour
     public void ShowOptionsCanvas()
     {
         SoundManager.Instance.PlayEnterClip();
-        follower.PositionCanvas();
+        GameManager.Instance.PositionCanvas(optionsCanvas, 1f);
         optionsCanvas.SetActive(true);
     }
 

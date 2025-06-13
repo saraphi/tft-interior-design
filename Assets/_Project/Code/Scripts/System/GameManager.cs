@@ -1,11 +1,18 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private FurnitureSelectorCanvas furnitureSelector;
+    [SerializeField] private GameObject welcomeCanvasPrefab;
+    [SerializeField] private GameObject menuCanvasPrefab;
     [SerializeField] private LayerMask collisionMask;
 
     public static GameManager Instance { get; private set; }
+
+    private bool tutorialStarted = false;
+    private GameObject menuCanvas;
+    private GameObject welcomeCanvas;
+    private GameObject currentCanvas;
 
     private void Awake()
     {
@@ -15,28 +22,55 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        furnitureSelector.gameObject.SetActive(false);
+        welcomeCanvas = Instantiate(welcomeCanvasPrefab, Vector3.one, Quaternion.identity);
+        menuCanvas = Instantiate(menuCanvasPrefab, Vector3.one, Quaternion.identity);
+        welcomeCanvas.SetActive(false);
+        menuCanvas.SetActive(false);
     }
 
     void Update()
     {
+        if (!tutorialStarted)
+        {
+            tutorialStarted = true;
+            StartCoroutine(OpenCanvasAfterDelay(welcomeCanvas, 1f));
+        }
+
         if (ControllerManager.Instance.OnMenu())
-            if (!furnitureSelector.gameObject.activeInHierarchy)
+        {
+            if (!menuCanvas.activeInHierarchy)
             {
-                PositionFurnitureSelectorCanvas();
-                furnitureSelector.gameObject.SetActive(true);
                 SoundManager.Instance.PlayEnterClip();
+                StartCoroutine(OpenCanvasAfterDelay(menuCanvas));
             }
             else
             {
-                furnitureSelector.gameObject.SetActive(false);
                 SoundManager.Instance.PlayExitClip();
+                CloseCurrentCanvas();
             }
+        }
     }
 
-    private void PositionFurnitureSelectorCanvas()
+    public IEnumerator OpenCanvasAfterDelay(GameObject canvas, float delay = 0f, float distance = 1f, bool markAsCurrent = true)
     {
-        Vector3 eyeLevelPos = Camera.main.transform.position + Camera.main.transform.forward * 2f;
+        yield return new WaitForSeconds(delay);
+        if (markAsCurrent)
+        {
+            CloseCurrentCanvas();
+            currentCanvas = canvas;
+        }
+        PositionCanvas(canvas, distance);
+        canvas.SetActive(true);
+    }
+
+    public void CloseCurrentCanvas()
+    {
+        if (currentCanvas != null) currentCanvas.SetActive(false);
+    }
+
+    public void PositionCanvas(GameObject canvas, float distance)
+    {
+        Vector3 eyeLevelPos = Camera.main.transform.position + Camera.main.transform.forward * distance;
         eyeLevelPos.y = Camera.main.transform.position.y;
 
         Quaternion rotation = Quaternion.LookRotation(eyeLevelPos - Camera.main.transform.position);
@@ -52,7 +86,6 @@ public class GameManager : MonoBehaviour
             attempts--;
         }
 
-        furnitureSelector.transform.position = finalPos;
-        furnitureSelector.transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+        canvas.transform.SetPositionAndRotation(finalPos, Quaternion.Euler(0, rotation.eulerAngles.y, 0));
     }
 }
