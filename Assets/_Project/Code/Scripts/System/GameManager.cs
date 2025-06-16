@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private EffectMesh effectMesh;
+    [SerializeField] private EffectMesh effectMeshPrefab;
     [SerializeField] private GameObject welcomeCanvasPrefab;
     [SerializeField] private GameObject menuCanvasPrefab;
     [SerializeField] private LayerMask collisionMask;
@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     private GameObject welcomeCanvas;
     private GameObject currentCanvas;
 
+    private EffectMesh effectMesh;
+
     private WelcomeCanvas welcomeCanvasScript;
 
     private void Awake()
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        effectMesh = Instantiate(effectMeshPrefab);
         effectMesh.HideMesh = true;
         welcomeCanvas = Instantiate(welcomeCanvasPrefab, Vector3.one, Quaternion.identity);
         menuCanvas = Instantiate(menuCanvasPrefab, Vector3.one, Quaternion.identity);
@@ -36,8 +39,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (FurnitureManager.Instance.IsUsingFurniture()) effectMesh.HideMesh = false;
-        else effectMesh.HideMesh = true;
+        if (effectMesh != null) SetEffectMeshHideMesh(!FurnitureManager.Instance.IsUsingFurniture());
 
         if (!tutorialStarted)
         {
@@ -58,11 +60,6 @@ public class GameManager : MonoBehaviour
                 CloseCurrentCanvas();
             }
         }
-    }
-
-    public void SetEffectMeshHideMesh(bool hide)
-    {
-        effectMesh.HideMesh = hide;
     }
 
     public IEnumerator OpenCanvasAfterDelay(GameObject canvas, float delay = 0f, float distance = 1.5f, bool markAsCurrent = true)
@@ -101,5 +98,28 @@ public class GameManager : MonoBehaviour
         }
 
         canvas.transform.SetPositionAndRotation(finalPos, Quaternion.Euler(0, rotation.eulerAngles.y, 0));
+    }
+
+    public void SetEffectMeshHideMesh(bool hide)
+    {
+        effectMesh.HideMesh = hide;
+    }
+
+    public void ScanScene()
+    {
+        OVRScene.RequestSpaceSetup().ContinueWith(_ =>
+        {
+            MRUK.Instance.ClearScene();
+            MRUK.Instance.LoadSceneFromDevice();
+
+            if (effectMesh != null) Destroy(effectMesh.gameObject);
+            effectMesh = Instantiate(effectMeshPrefab);
+            ControllerManager.Instance.OnPrimaryControllerVibration();
+        });
+    }
+
+    public bool IsRoomLoaded()
+    {
+        return MRUK.Instance != null && MRUK.Instance.GetCurrentRoom() != null;
     }
 }

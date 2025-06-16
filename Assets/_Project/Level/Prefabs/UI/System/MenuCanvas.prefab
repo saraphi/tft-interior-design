@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 5003970334824515926}
   - component: {fileID: 4445715574717084183}
   - component: {fileID: 807089222281377558}
-  - component: {fileID: 2541933511025842939}
+  - component: {fileID: 6165782962112870785}
   m_Layer: 0
   m_Name: MenuCanvas
   m_TagString: Untagged
@@ -148,7 +148,7 @@ MonoBehaviour:
   _selectSurface: {fileID: 0}
   _movementProvider: {fileID: 0}
   _tiebreakerScore: 0
---- !u!114 &2541933511025842939
+--- !u!114 &6165782962112870785
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2541933511025842939}
+      - m_Target: {fileID: 6165782962112870785}
         m_TargetAssemblyTypeName: MenuCanvas, Assembly-CSharp
         m_MethodName: OnOpenFurnitureSelector
         m_Mode: 1
@@ -416,7 +416,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2541933511025842939}
+      - m_Target: {fileID: 6165782962112870785}
         m_TargetAssemblyTypeName: MenuCanvas, Assembly-CSharp
         m_MethodName: OnStartScanner
         m_Mode: 1

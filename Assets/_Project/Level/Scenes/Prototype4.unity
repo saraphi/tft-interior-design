@@ -10186,81 +10186,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1108910084}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1986136211
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1986136214}
-  - component: {fileID: 1986136213}
-  - component: {fileID: 1986136212}
-  m_Layer: 0
-  m_Name: '[BuildingBlock] Effect Mesh'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1986136212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986136211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e76943ac7e7394f3e969f0c048b26639, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnOnStart: 2
-  MeshMaterial: {fileID: 2100000, guid: 599b01c5f1d17436c89b88cc04257314, type: 2}
-  Colliders: 1
-  CutHoles: 0
-  castShadows: 1
-  hideMesh: 0
-  Layer: 0
-  textureCoordinateModes:
-  - WallU: 5
-    WallV: 2
-    AnchorUV: 1
-  Labels: 49151
---- !u!114 &1986136213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986136211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b023183069df224080314a560e6e1ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blockId: 65c6e778-10b3-4490-89da-008a18aa116a
-  instanceId: 52acd20e-6c7d-453f-9221-45a24c31a55f
-  version: 1
-  installationRoutineCheckpoint:
-    _installationRoutineId: 
-    _installationVariants: []
---- !u!4 &1986136214
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1986136211}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2002474486
 GameObject:
   m_ObjectHideFlags: 0
@@ -11261,7 +11186,13 @@ PrefabInstance:
         type: 3}
       propertyPath: effectMesh
       value: 
-      objectReference: {fileID: 1986136212}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6152923684215713535, guid: beb866e4f824e074b85f21a4338d6a2e,
+        type: 3}
+      propertyPath: effectMeshPrefab
+      value: 
+      objectReference: {fileID: 562254821874757420, guid: 8b9ba6ab4b6d3a843b1dab3c333b18cb,
+        type: 3}
     - target: {fileID: 8317358649912036660, guid: beb866e4f824e074b85f21a4338d6a2e,
         type: 3}
       propertyPath: introClip
@@ -11282,6 +11213,16 @@ PrefabInstance:
       propertyPath: soundEffectsSource
       value: 
       objectReference: {fileID: 1693638158}
+    - target: {fileID: 8878638478618045991, guid: beb866e4f824e074b85f21a4338d6a2e,
+        type: 3}
+      propertyPath: leftControllerTransform
+      value: 
+      objectReference: {fileID: 428005786}
+    - target: {fileID: 8878638478618045991, guid: beb866e4f824e074b85f21a4338d6a2e,
+        type: 3}
+      propertyPath: rightControllerTransform
+      value: 
+      objectReference: {fileID: 428005785}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11304,7 +11245,6 @@ SceneRoots:
   - {fileID: 4742971}
   - {fileID: 2068876358}
   - {fileID: 1141373052}
-  - {fileID: 1986136214}
   - {fileID: 1168255004}
   - {fileID: 1627907678}
   - {fileID: 1700224562}

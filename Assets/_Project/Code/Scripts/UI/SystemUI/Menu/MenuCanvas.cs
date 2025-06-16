@@ -1,4 +1,3 @@
-using Meta.XR.MRUtilityKit;
 using UnityEngine;
 
 public class MenuCanvas : MonoBehaviour
@@ -15,7 +14,7 @@ public class MenuCanvas : MonoBehaviour
     public void OnStartScanner()
     {
         SoundManager.Instance.PlayEnterClip();
-        OVRScene.RequestSpaceSetup();
+        GameManager.Instance.ScanScene();
         GameManager.Instance.CloseCurrentCanvas();
     }
 
@@ -23,10 +22,5 @@ public class MenuCanvas : MonoBehaviour
     {
         SoundManager.Instance.PlayEnterClip();
         StartCoroutine(GameManager.Instance.OpenCanvasAfterDelay(furnitureSelectorCanvas, 0f, 1.8f));
-    }
-    
-    public bool IsRoomLoaded()
-    {
-        return MRUK.Instance != null && MRUK.Instance.GetCurrentRoom() != null;
     }
 }

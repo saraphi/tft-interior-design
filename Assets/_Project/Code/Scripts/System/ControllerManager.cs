@@ -12,6 +12,8 @@ public class ControllerManager : MonoBehaviour
     }
 
     [Header("Controller Ray Configuration")]
+    [SerializeField] private Transform rightControllerTransform;
+    [SerializeField] private Transform leftControllerTransform;
     [SerializeField] private ControllerType primaryController = ControllerType.RTouch;
     [SerializeField] private ControllerType secondaryController = ControllerType.LTouch;
 
@@ -38,8 +40,25 @@ public class ControllerManager : MonoBehaviour
     public bool OnPrimaryIndexTrigger() => OVRInput.GetDown(primaryInteractionButton);
     public bool OnSecondaryIndexTrigger() => OVRInput.GetDown(secondaryInteractionButton);
 
-    public Vector3 GetRayControllerLocalPosition() => OVRInput.GetLocalControllerPosition((OVRInput.Controller)primaryController);
-    public Quaternion GetRayControllerLocalRotation() => OVRInput.GetLocalControllerRotation((OVRInput.Controller)primaryController);
+    public Vector3 GetRayControllerLocalPosition()
+    {
+        return primaryController switch
+        {
+            ControllerType.RTouch => rightControllerTransform.position,
+            ControllerType.LTouch => leftControllerTransform.position,
+            _ => rightControllerTransform.position
+        };
+    }
+    
+    public Quaternion GetRayControllerLocalRotation()
+    {
+        return primaryController switch
+        {
+            ControllerType.RTouch => rightControllerTransform.rotation,
+            ControllerType.LTouch => leftControllerTransform.rotation,
+            _ => rightControllerTransform.rotation
+        };
+    }
 
     public Vector2 GetPrimaryControllerJoystickInput() => OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, (OVRInput.Controller)primaryController);
     public Vector2 GetSecondaryControllerJoystickInput() => OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, (OVRInput.Controller)secondaryController);
