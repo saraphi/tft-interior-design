@@ -17,7 +17,7 @@ public class FurnitureManager : MonoBehaviour
     private Dictionary<string, GameObject> allFurnitureByName = new Dictionary<string, GameObject>();
     private Dictionary<FurnitureCategory, List<GameObject>> allFurnitureByCategory = new Dictionary<FurnitureCategory, List<GameObject>>();
 
-    public enum FurnitureCategory { Chairs, Beds, Sofas, Tables, CeilingLight, Clocks }
+    public enum FurnitureCategory { Chairs, Beds, Sofas, Tables, CeilingLights, Clocks }
 
     private void Awake()
     {

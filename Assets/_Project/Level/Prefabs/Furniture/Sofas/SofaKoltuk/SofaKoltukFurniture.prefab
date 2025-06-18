@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   furnitureCodeName: sofa_koltuk
   furnitureName: Sofa Koltuk
+  furnitureImage: {fileID: 21300000, guid: 1ae539d3200a453408e83d4149c954f9, type: 3}
   model: {fileID: 6489385137666380206}
   sceneLabel: 1
   category: 2

@@ -37,6 +37,10 @@ public class FurnitureOption : MonoBehaviour
 
         if (profiles.Count != 0) currentProfileColor = profiles[0].profileName;
         defaultColorToggle.gameObject.SetActive(false);
+
+        Sprite sprite = furniture.GetFurnitureImage();
+        Image image = button.GetComponent<Image>();
+        image.sprite = sprite;
     }
 
     public void SetProfileColor(string profileColor)

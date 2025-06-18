@@ -1,5 +1,6 @@
 using Meta.XR.MRUtilityKit;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Furniture : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Furniture : MonoBehaviour
     [Header("Configuration")]
     [SerializeField] private string furnitureCodeName;
     [SerializeField] private string furnitureName;
+    [SerializeField] private Sprite furnitureImage;
     [SerializeField] private FurnitureModel model;
     [SerializeField] private MRUKAnchor.SceneLabels sceneLabel;
     [SerializeField] private FurnitureManager.FurnitureCategory category;
@@ -169,22 +171,22 @@ public class Furniture : MonoBehaviour
     public bool WouldCollide(Vector3 targetPosition, Quaternion targetRotation)
     {
         if (modelCollider == null) return false;
-            
+
         Vector3 worldCenter = targetPosition + targetRotation * Vector3.Scale(modelCollider.center, modelCollider.transform.lossyScale);
         Vector3 worldExtents = Vector3.Scale(modelCollider.size * 0.5f, modelCollider.transform.lossyScale);
-    
+
         Collider[] overlaps = Physics.OverlapBox(worldCenter, worldExtents, targetRotation, collisionMask);
-    
+
         foreach (var hit in overlaps)
         {
             if (hit == null || hit.transform.IsChildOf(transform)) continue;
-    
+
             var anchor = hit.GetComponentInParent<MRUKAnchor>();
             if (anchor != null && anchor.Label.HasFlag(sceneLabel)) continue;
-    
+
             return true;
         }
-    
+
         return false;
     }
 
@@ -223,4 +225,5 @@ public class Furniture : MonoBehaviour
     public bool IsIdling() => currentState == State.Idle;
     public void SetID(int newId) => id = newId;
     public int GetID() => id;
+    public Sprite GetFurnitureImage() => furnitureImage;
 }

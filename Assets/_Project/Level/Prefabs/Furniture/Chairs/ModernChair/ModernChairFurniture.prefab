@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   furnitureCodeName: modern_chair
   furnitureName: Modern Chair
+  furnitureImage: {fileID: 21300000, guid: 90d1fa72c32844a439eca9d64fedf077, type: 3}
   model: {fileID: 3882800847525870741}
   sceneLabel: 1
   category: 0

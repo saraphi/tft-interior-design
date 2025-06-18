@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   furnitureCodeName: bed10
   furnitureName: Individual Bed
+  furnitureImage: {fileID: 21300000, guid: 0fe1778f2d7bdf24ca386782bab8e920, type: 3}
   model: {fileID: 6242480773060421913}
   sceneLabel: 1
   category: 1

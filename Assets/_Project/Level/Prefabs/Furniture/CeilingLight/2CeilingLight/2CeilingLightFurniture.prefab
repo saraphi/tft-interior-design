@@ -115,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   furnitureCodeName: 2ceiling_light
   furnitureName: Simple Modern Lamp
+  furnitureImage: {fileID: 21300000, guid: 2d8f3fc3719f460418264ddf172f2230, type: 3}
   model: {fileID: 1400101585623828012}
   sceneLabel: 2
   category: 4
