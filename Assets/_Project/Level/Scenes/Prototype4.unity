@@ -11202,6 +11202,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3775365973686292068, guid: beb866e4f824e074b85f21a4338d6a2e,
+        type: 3}
+      propertyPath: allFurniture.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3775365973686292068, guid: beb866e4f824e074b85f21a4338d6a2e,
+        type: 3}
+      propertyPath: allFurniture.Array.data[5]
+      value: 
+      objectReference: {fileID: 4869251741245141836, guid: a045f284a2db34841b3ce965dce370eb,
+        type: 3}
     - target: {fileID: 6152923684215713535, guid: beb866e4f824e074b85f21a4338d6a2e,
         type: 3}
       propertyPath: effectMesh

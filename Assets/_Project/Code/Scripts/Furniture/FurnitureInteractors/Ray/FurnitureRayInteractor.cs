@@ -16,13 +16,11 @@ public class FurnitureRayInteractor : MonoBehaviour
     private float currentRotation = 0f;
 
     private MRUKAnchor.SceneLabels sceneLabel;
-    private FurnitureModel furnitureModel;
 
     void Awake()
     {
         rb = furniture.GetComponent<Rigidbody>();
         sceneLabel = furniture.GetSceneLabel();
-        furnitureModel = furniture.GetFurnitureModel();
     }
 
     public bool Move()
@@ -74,7 +72,7 @@ public class FurnitureRayInteractor : MonoBehaviour
         if (Mathf.Abs(joystickInput.x) > 0.9f)
             currentRotation += joystickInput.x * rotationDegrees;
 
-        Vector3 rotationAxis = sceneLabel == MRUKAnchor.SceneLabels.WALL_FACE ? furniture.transform.forward : Vector3.up;
+        Vector3 rotationAxis = sceneLabel == MRUKAnchor.SceneLabels.WALL_FACE ? Vector3.forward : Vector3.up;
 
         return Quaternion.AngleAxis(currentRotation, rotationAxis);
     }
