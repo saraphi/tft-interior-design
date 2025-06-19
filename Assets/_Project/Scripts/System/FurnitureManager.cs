@@ -103,7 +103,7 @@ public class FurnitureManager : MonoBehaviour
             SoundManager.Instance.PlayErrorClip();
         }
 
-        // SoundManager.Instance.PlayErrorClip();
+        SoundManager.Instance.PlayErrorClip();
         ControllerManager.Instance.OnPrimaryControllerVibration();
     }
 
