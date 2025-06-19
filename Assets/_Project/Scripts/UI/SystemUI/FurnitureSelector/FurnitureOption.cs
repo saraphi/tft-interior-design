@@ -9,14 +9,14 @@ public class FurnitureOption : MonoBehaviour
     [SerializeField] private TMP_Text furnitureTitle;
     [SerializeField] private Transform colorToggleContainer;
     [SerializeField] private Toggle defaultColorToggle;
-    private FurnitureModel model;
+    private Model model;
     private string currentProfileColor;
 
     public void Init(Furniture furniture)
     {
-        model = furniture.GetFurnitureModel();
+        model = furniture.GetModel();
 
-        List<FurnitureColorProfile> profiles = model.GetColorProfiles();
+        List<ColorProfile> profiles = model.GetColorProfiles();
 
         foreach (var profile in profiles)
         {
@@ -38,7 +38,7 @@ public class FurnitureOption : MonoBehaviour
         if (profiles.Count != 0) currentProfileColor = profiles[0].profileName;
         defaultColorToggle.gameObject.SetActive(false);
 
-        Sprite sprite = furniture.GetFurnitureImage();
+        Sprite sprite = furniture.GetImageSprite();
         Image image = button.GetComponent<Image>();
         image.sprite = sprite;
     }

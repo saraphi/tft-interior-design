@@ -30,8 +30,8 @@ public class FurnitureManager : MonoBehaviour
         foreach (var furniture in allFurniture)
         {
             Furniture furnitureComponent = furniture.GetComponent<Furniture>();
-            string furnitureCodeName = furnitureComponent.GetFurnitureCodeName();
-            FurnitureCategory furnitureCategory = furnitureComponent.GetFurnitureCategory();
+            string furnitureCodeName = furnitureComponent.GetCodeName();
+            FurnitureCategory furnitureCategory = furnitureComponent.GetCategory();
             allFurnitureByName[furnitureCodeName] = furniture;
             List<GameObject> list = allFurnitureByCategory[furnitureCategory];
             list.Add(furniture);
@@ -100,9 +100,10 @@ public class FurnitureManager : MonoBehaviour
                     }
                 }
             }
+            SoundManager.Instance.PlayErrorClip();
         }
 
-        SoundManager.Instance.PlayErrorClip();
+        // SoundManager.Instance.PlayErrorClip();
         ControllerManager.Instance.OnPrimaryControllerVibration();
     }
 
@@ -114,7 +115,7 @@ public class FurnitureManager : MonoBehaviour
         lastId = newId;
         newFurniture.SetID(newId);
         if (!allAddedFurniture.ContainsKey(newId)) allAddedFurniture.Add(newId, newObject);
-        FurnitureModel newFurnitureModel = newFurniture.GetFurnitureModel();
+        Model newFurnitureModel = newFurniture.GetModel();
         newFurnitureModel.ApplyColorProfile(profileColor);
     }
 

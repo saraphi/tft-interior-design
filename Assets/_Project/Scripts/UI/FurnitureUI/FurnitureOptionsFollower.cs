@@ -10,7 +10,7 @@ public class FurnitureOptionsFollower : MonoBehaviour
     // {
     //     if (furniture == null) return;
 
-    //     FurnitureModel furnitureModel = furniture.GetFurnitureModel();
+    //     Model furnitureModel = furniture.GetModel();
     //     BoxCollider modelCollider = furnitureModel.GetCollider();
     //     if (modelCollider == null) return;
 
