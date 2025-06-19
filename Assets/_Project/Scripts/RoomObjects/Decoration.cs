@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Decoration : RoomObject
 {
+    [Header("Decoration Configuration")]
+    [SerializeField] private FurnitureManager.DecorationCategory category;
+
     public override void Duplicate()
     {
         throw new System.NotImplementedException();
@@ -21,4 +24,6 @@ public class Decoration : RoomObject
     {
         throw new System.NotImplementedException();
     }
+
+    public FurnitureManager.DecorationCategory GetCategory() => category;
 }

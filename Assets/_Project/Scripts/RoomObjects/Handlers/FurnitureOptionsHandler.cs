@@ -1,65 +1,26 @@
 using UnityEngine;
 
-public class FurnitureOptionsHandler : MonoBehaviour
+public class FurnitureOptionsHandler : OptionsHandler
 {
-    [SerializeField] private GameObject optionsCanvas;
-
-    private Furniture furniture;
-
-    void Awake()
+    public override void OnOptionSelected(string option)
     {
-        furniture = GetComponent<Furniture>();
-    }
-
-    public void HideOptionsCanvas()
-    {
-        optionsCanvas.SetActive(false);
-    }
-
-    public void ShowOptionsCanvas()
-    {
-        SoundManager.Instance.PlayEnterClip();
-        GameManager.Instance.PositionCanvas(optionsCanvas, 1f);
-        optionsCanvas.SetActive(true);
-    }
-
-    public void ToggleOptionsCanvas()
-    {
-        if (FurnitureManager.Instance.IsUsingFurniture()) return;
-        
-        int id = furniture.GetID();
-
-        if (FurnitureManager.Instance.IsFurnitureSelected(id))
-        {
-            FurnitureManager.Instance.DeselectFurniture();
-            SoundManager.Instance.PlayExitClip();
-        }
-        else
-        {
-            ShowOptionsCanvas();
-            FurnitureManager.Instance.SelectFurniture(id);
-        }
-    }
-
-    public void OnOptionSelected(string option)
-    {
-        if (!furniture.IsIdling()) return;
+        if (!roomObject.IsIdling()) return;
 
         ToggleOptionsCanvas();
 
         switch (option)
         {
             case "ray":
-                furniture.StartMovement(RoomObject.State.Moving);
+                roomObject.StartMovement(RoomObject.State.Moving);
                 break;
             case "joystick":
-                furniture.StartMovement(RoomObject.State.JoystickMoving);
+                roomObject.StartMovement(RoomObject.State.JoystickMoving);
                 break;
             case "duplicate":
-                furniture.Duplicate();
+                roomObject.Duplicate();
                 break;
             case "delete":
-                furniture.Delete();
+                roomObject.Delete();
                 break;
             default:
                 SoundManager.Instance.PlayErrorClip();

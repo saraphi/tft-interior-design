@@ -22,12 +22,6 @@ public class Furniture : RoomObject
         base.Start();
     }
 
-    public override void StartMovement(State state)
-    {
-        base.StartMovement(state);
-        FurnitureManager.Instance.RegisterFurniture(this);
-    }
-
     public override void Duplicate()
     {
         ColorProfile profileColor = model.GetFurnitureColorProfile();

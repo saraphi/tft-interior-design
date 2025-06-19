@@ -50,12 +50,12 @@ public abstract class RoomObject : MonoBehaviour
         }
         else
         {
-            if (FurnitureManager.Instance.IsFurnitureSelected(id)) model.SetFresnelHighlight();
+            if (FurnitureManager.Instance.IsObjectSelected(id)) model.SetFresnelHighlight();
             else model.SetModelMaterialsTransparency(false);
         }
     }
 
-    public virtual void StartMovement(State state)
+    public void StartMovement(State state)
     {
         SetLayer(GetGhostLayer());
         model.SetChildrenCollidersEnabled(false);
@@ -64,11 +64,12 @@ public abstract class RoomObject : MonoBehaviour
 
         backupPosition = transform.position;
         backupRotation = transform.rotation;
-        
+
         if (currentState != State.JoystickMoving) rb.isKinematic = false;
         rb.useGravity = false;
 
         SoundManager.Instance.PlayPressClip();
+        FurnitureManager.Instance.RegisterObject(this);
     }
 
     protected void ConfirmMovement()
@@ -84,7 +85,7 @@ public abstract class RoomObject : MonoBehaviour
             model.SetChildrenCollidersEnabled(true);
 
             SoundManager.Instance.PlayReleaseClip();
-            FurnitureManager.Instance.ClearFurniture();
+            FurnitureManager.Instance.ClearObject();
             return;
         }
 
@@ -114,7 +115,7 @@ public abstract class RoomObject : MonoBehaviour
             SetLayer(GetDefaultLayer());
             model.SetChildrenCollidersEnabled(true);
 
-            FurnitureManager.Instance.ClearFurniture();
+            FurnitureManager.Instance.ClearObject();
             SoundManager.Instance.PlayDeleteClip();
         }
         else if (currentState == State.Placing) Delete();
@@ -124,10 +125,10 @@ public abstract class RoomObject : MonoBehaviour
 
     public void Delete()
     {
-        if (FurnitureManager.Instance.DeleteFurniture(id))
+        if (FurnitureManager.Instance.DeleteObject(id))
         {
             SoundManager.Instance.PlayDeleteClip();
-            FurnitureManager.Instance.ClearFurniture();
+            FurnitureManager.Instance.ClearObject();
             Destroy(gameObject);
         }
         else

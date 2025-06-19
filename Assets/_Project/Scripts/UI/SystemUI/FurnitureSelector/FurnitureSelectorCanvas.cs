@@ -22,9 +22,9 @@ public class FurnitureSelectorCanvas : MonoBehaviour
 
     void Start()
     {
-        List<string> categories = FurnitureManager.Instance.GetCategories();
+        List<string> furnitureCategories = FurnitureManager.Instance.GetAllFurnitureCategories();
 
-        foreach (var category in categories)
+        foreach (var category in furnitureCategories)
         {
             string current = category;
             Toggle newToggle = Instantiate(defaultCategoryToggle, toggleCategories);

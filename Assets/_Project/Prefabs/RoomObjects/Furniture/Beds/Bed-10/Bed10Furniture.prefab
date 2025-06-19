@@ -117,12 +117,6 @@ MonoBehaviour:
   objectName: Individual Name
   image: {fileID: 21300000, guid: 0fe1778f2d7bdf24ca386782bab8e920, type: 3}
   model: {fileID: 6242480773060421913}
-  defaultLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  ghostLayer:
-    serializedVersion: 2
-    m_Bits: 128
   rayInteractor: {fileID: 8045582172321231968}
   joystickInteractor: {fileID: 6374794369315735088}
   sceneLabel: 1
@@ -140,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   optionsCanvas: {fileID: 6048426821995027287}
+  roomObject: {fileID: 645698877485853600}
 --- !u!114 &435171912569359151
 MonoBehaviour:
   m_ObjectHideFlags: 0

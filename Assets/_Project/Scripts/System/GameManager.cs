@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (effectMesh != null) SetEffectMeshHideMesh(!FurnitureManager.Instance.IsUsingFurniture());
+        if (effectMesh != null) SetEffectMeshHideMesh(!FurnitureManager.Instance.IsUsingObject());
 
         if (!tutorialStarted)
         {
