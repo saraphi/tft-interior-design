@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 151960594513635533}
   - component: {fileID: 4316391281165426615}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DecorationJoystickInteractor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 5826819646531736637}
   - component: {fileID: 7496874206799932852}
   - component: {fileID: 3773057808713658714}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Notebook2Decoration
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5612106877750558241}
   - component: {fileID: 1087935682644330227}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DecorationRayInteractor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,6 +214,7 @@ MonoBehaviour:
   maxRayLength: 2
   smoothTime: 0.1
   rotationDegrees: 0.9
+  decoration: {fileID: 3773057808713658714}
 --- !u!1 &8834663499227989637
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7141450532759865708}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DecorationInteractors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,12 +259,12 @@ PrefabInstance:
     - target: {fileID: 960501557667622682, guid: 546d33c25f7f7f3429ed012a26c763ee,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3296756734958801016, guid: 546d33c25f7f7f3429ed012a26c763ee,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3644209681404719049, guid: 546d33c25f7f7f3429ed012a26c763ee,
         type: 3}
@@ -323,7 +324,7 @@ PrefabInstance:
     - target: {fileID: 4168369291518457203, guid: 546d33c25f7f7f3429ed012a26c763ee,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4369934046438173680, guid: 546d33c25f7f7f3429ed012a26c763ee,
         type: 3}
@@ -333,7 +334,7 @@ PrefabInstance:
     - target: {fileID: 6106259209034560797, guid: 546d33c25f7f7f3429ed012a26c763ee,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6931656483612982385, guid: 546d33c25f7f7f3429ed012a26c763ee,
         type: 3}
@@ -348,12 +349,12 @@ PrefabInstance:
     - target: {fileID: 7696031156599539079, guid: 546d33c25f7f7f3429ed012a26c763ee,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7912678005663568818, guid: 546d33c25f7f7f3429ed012a26c763ee,
         type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -392,10 +393,85 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2771504670447471450}
     m_Modifications:
+    - target: {fileID: 145979646414403402, guid: 543225e1a4c6bd34a936f2004f3a401f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 358001532968790813, guid: 543225e1a4c6bd34a936f2004f3a401f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 535489426095078287, guid: 543225e1a4c6bd34a936f2004f3a401f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1286343028561514361, guid: 543225e1a4c6bd34a936f2004f3a401f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2374860372123441140, guid: 543225e1a4c6bd34a936f2004f3a401f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2390005745827361257, guid: 543225e1a4c6bd34a936f2004f3a401f,
         type: 3}
       propertyPath: m_Name
       value: DecorationOptionsCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2390005745827361257, guid: 543225e1a4c6bd34a936f2004f3a401f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3602706259379706782, guid: 543225e1a4c6bd34a936f2004f3a401f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339802679883475269, guid: 543225e1a4c6bd34a936f2004f3a401f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4839915458998692793, guid: 543225e1a4c6bd34a936f2004f3a401f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5065284079870906232, guid: 543225e1a4c6bd34a936f2004f3a401f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5951806913088707413, guid: 543225e1a4c6bd34a936f2004f3a401f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247351827739922646, guid: 543225e1a4c6bd34a936f2004f3a401f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8104839437486366567, guid: 543225e1a4c6bd34a936f2004f3a401f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8151834585920244299, guid: 543225e1a4c6bd34a936f2004f3a401f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8674823592539524248, guid: 543225e1a4c6bd34a936f2004f3a401f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8789143719557539289, guid: 543225e1a4c6bd34a936f2004f3a401f,
         type: 3}

@@ -23,4 +23,10 @@ public class MenuCanvas : MonoBehaviour
         SoundManager.Instance.PlayEnterClip();
         StartCoroutine(GameManager.Instance.OpenCanvasAfterDelay(furnitureSelectorCanvas, 0f, 1.8f));
     }
+
+    public void OnOpenDecorationSelector()
+    {
+        SoundManager.Instance.PlayEnterClip();
+        FurnitureManager.Instance.AddObject("notebook2", "white");
+    }
 }
