@@ -73,26 +73,26 @@ public abstract class RoomObject : MonoBehaviour
         FurnitureManager.Instance.RegisterObject(this);
     }
 
-    protected void ConfirmMovement()
+    protected virtual void ConfirmMovement()
     {
-        if (hasValidSurface)
+        if (!hasValidSurface)
         {
-            if (currentState == State.JoystickMoving) joystickInteractor.DeactivateAllGizmos();
-
-            rb.isKinematic = !hasGravity;
-            rb.useGravity = hasGravity;
-            currentState = State.Idle;
-
-            SetLayer(GetDefaultLayer());
-            model.SetChildrenCollidersEnabled(true);
-
-            SoundManager.Instance.PlayReleaseClip();
-            FurnitureManager.Instance.ClearObject();
+            SoundManager.Instance.PlayErrorClip();
+            ControllerManager.Instance.OnPrimaryControllerVibration();
             return;
         }
 
-        SoundManager.Instance.PlayErrorClip();
-        ControllerManager.Instance.OnPrimaryControllerVibration();
+        if (currentState == State.JoystickMoving) joystickInteractor.DeactivateAllGizmos();
+
+        rb.isKinematic = !hasGravity;
+        rb.useGravity = hasGravity;
+        currentState = State.Idle;
+
+        SetLayer(GetDefaultLayer());
+        model.SetChildrenCollidersEnabled(true);
+            
+        SoundManager.Instance.PlayReleaseClip();
+        FurnitureManager.Instance.ClearObject();
     }
 
     protected void CancelMovement()
