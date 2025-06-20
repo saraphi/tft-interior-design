@@ -1,24 +1,24 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
-public class Model : MonoBehaviour
+public abstract class Model : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> children;
-    [SerializeField] private BoxCollider boxCollider;
+    [SerializeField] protected List<GameObject> children;
+    [SerializeField] private BoxCollider objectCollider;
 
     [Header("Material Templates")]
-    [SerializeField] private Material opaqueMaterial;
-    [SerializeField] private Material transparentMaterial;
-    [SerializeField] private Material fresnelMaterial;
+    [SerializeField] protected Material opaqueMaterial;
+    [SerializeField] protected Material transparentMaterial;
+    [SerializeField] protected Material fresnelMaterial;
 
     [Header("Color Profiles")]
-    [SerializeField] private List<ColorProfile> colorProfiles;
+    [SerializeField] protected List<ColorProfile> colorProfiles;
 
-    private Dictionary<string, ModelElement> elementsByID = new();
-    private Dictionary<string, ColorProfile> colorProfilesByName = new();
-    private string currentProfile = null;
+    protected Dictionary<string, ModelElement> elementsByID = new();
+    protected Dictionary<string, ColorProfile> colorProfilesByName = new();
+    protected string currentProfile = null;
 
-    void Awake()
+    protected void Awake()
     {
         foreach (var child in children)
         {
@@ -34,7 +34,7 @@ public class Model : MonoBehaviour
 
         if (colorProfiles.Count != 0) currentProfile = colorProfiles[0].profileName;
 
-        if (boxCollider == null) boxCollider = GetComponent<BoxCollider>();
+        if (objectCollider == null) objectCollider = GetComponent<BoxCollider>();
     }
 
     public void ApplyColorProfile(string profileName)
@@ -70,7 +70,7 @@ public class Model : MonoBehaviour
         foreach (var element in elementsByID.Values) element.SetColliderEnabled(enabled);
     }
 
-    public BoxCollider GetCollider() => boxCollider;
+    public BoxCollider GetCollider() => objectCollider;
     public ColorProfile GetFurnitureColorProfile() => colorProfilesByName[currentProfile];
     public List<ColorProfile> GetColorProfiles() => colorProfiles;
 }

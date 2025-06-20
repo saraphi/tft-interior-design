@@ -104,13 +104,13 @@ public class FurnitureManager : MonoBehaviour
         {
             if (allRoomObjectsByName.ContainsKey(name))
             {
-                GameObject furniture = allRoomObjectsByName[name];
-                if (furniture != null)
+                GameObject roomObject = allRoomObjectsByName[name];
+                if (roomObject != null)
                 {
-                    Furniture furnitureComponent = furniture.GetComponent<Furniture>();
-                    if (furnitureComponent != null)
+                    RoomObject roomObjectComponent = roomObject.GetComponent<RoomObject>();
+                    if (roomObjectComponent != null)
                     {
-                        InstantiateFurniture(furniture, Vector3.zero, Quaternion.identity, profileColor);
+                        InstantiateObject(roomObject, Vector3.zero, Quaternion.identity, profileColor);
                         SoundManager.Instance.PlayPressClip();
                         return;
                     }
@@ -123,16 +123,16 @@ public class FurnitureManager : MonoBehaviour
         ControllerManager.Instance.OnPrimaryControllerVibration();
     }
 
-    public void InstantiateFurniture(GameObject furniture, Vector3 position, Quaternion rotation, string profileColor = null)
+    public void InstantiateObject(GameObject roomObject, Vector3 position, Quaternion rotation, string profileColor = null)
     {
-        GameObject newObject = Instantiate(furniture, position, rotation);
+        GameObject newObject = Instantiate(roomObject, position, rotation);
         RoomObject newRoomObject = newObject.GetComponent<RoomObject>();
         int newId = lastId + 1;
         lastId = newId;
         newRoomObject.SetID(newId);
         if (!allAddedRoomObjects.ContainsKey(newId)) allAddedRoomObjects.Add(newId, newObject);
-        Model newFurnitureModel = newRoomObject.GetModel();
-        newFurnitureModel.ApplyColorProfile(profileColor);
+        Model newModel = newRoomObject.GetModel();
+        newModel.ApplyColorProfile(profileColor);
     }
 
     public bool DeleteObject(int id)

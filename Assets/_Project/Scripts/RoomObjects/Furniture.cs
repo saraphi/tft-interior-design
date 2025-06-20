@@ -7,11 +7,10 @@ public class Furniture : RoomObject
 
     [SerializeField] private MRUKAnchor.SceneLabels sceneLabel;
     [SerializeField] private FurnitureManager.FurnitureCategory category;
-
     private Vector3 insertionDirection;
 
     private const string defaultLayer = "Furniture";
-    private const string ghostLayer = "FurnitureGhost";
+    private const string ghostLayer = "Ghost";
 
     protected override int GetDefaultLayer() => LayerMask.NameToLayer(defaultLayer);
     protected override int GetGhostLayer() => LayerMask.NameToLayer(ghostLayer);
@@ -22,13 +21,7 @@ public class Furniture : RoomObject
         base.Start();
     }
 
-    public override void Duplicate()
-    {
-        ColorProfile profileColor = model.GetFurnitureColorProfile();
-        FurnitureManager.Instance.InstantiateFurniture(gameObject, transform.position, transform.rotation, profileColor.profileName);
-    }
-
-    public override bool WouldCollide(Vector3 targetPosition, Quaternion targetRotation)
+    public bool WouldCollide(Vector3 targetPosition, Quaternion targetRotation)
     {
         if (modelCollider == null) return false;
 

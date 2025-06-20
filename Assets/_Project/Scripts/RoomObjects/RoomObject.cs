@@ -24,7 +24,7 @@ public abstract class RoomObject : MonoBehaviour
     protected int collisionMask;
     protected BoxCollider modelCollider;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
         collisionMask = ~LayerMask.GetMask("UI", "Gizmo", "FurnitureGhost");
@@ -121,7 +121,11 @@ public abstract class RoomObject : MonoBehaviour
         else if (currentState == State.Placing) Delete();
     }
 
-    public abstract void Duplicate();
+    public void Duplicate()
+    {
+        ColorProfile profileColor = model.GetFurnitureColorProfile();
+        FurnitureManager.Instance.InstantiateObject(gameObject, transform.position, transform.rotation, profileColor.profileName);
+    }
 
     public void Delete()
     {
@@ -138,7 +142,7 @@ public abstract class RoomObject : MonoBehaviour
         }
     }
 
-    public abstract bool WouldCollide(Vector3 targetPosition, Quaternion targetRotation);
+    // public abstract bool WouldCollide(Vector3 targetPosition, Quaternion targetRotation);
 
     protected void SetLayer(int newLayer)
     {

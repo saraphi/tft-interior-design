@@ -5,25 +5,11 @@ public class Decoration : RoomObject
     [Header("Decoration Configuration")]
     [SerializeField] private FurnitureManager.DecorationCategory category;
 
-    public override void Duplicate()
-    {
-        throw new System.NotImplementedException();
-    }
+    private const string defaultLayer = "Decoration";
+    private const string ghostLayer = "Ghost";
 
-    public override bool WouldCollide(Vector3 targetPosition, Quaternion targetRotation)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    protected override int GetDefaultLayer()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    protected override int GetGhostLayer()
-    {
-        throw new System.NotImplementedException();
-    }
+    protected override int GetDefaultLayer() => LayerMask.NameToLayer(defaultLayer);
+    protected override int GetGhostLayer() => LayerMask.NameToLayer(ghostLayer);
 
     public FurnitureManager.DecorationCategory GetCategory() => category;
 }

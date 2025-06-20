@@ -5,7 +5,7 @@ public class ModelElement : MonoBehaviour
     [SerializeField] private string elementID;
     [SerializeField] private Collider elementCollider;
 
-    [SerializeField] private MeshRenderer meshRenderer;
+    [SerializeField] private Renderer elementRenderer;
     [SerializeField] private int materialsNumber = 1;
     private Material opaque;
     private Material transparent;
@@ -41,34 +41,34 @@ public class ModelElement : MonoBehaviour
 
     public void SetOpaque()
     {
-        if (materialsNumber == 1) meshRenderer.material = opaque;
+        if (materialsNumber == 1) elementRenderer.material = opaque;
         else if (materialsNumber > 1)
         {
             Material[] materials = new Material[materialsNumber];
             for (int i = 0; i < materialsNumber; i++) materials[i] = opaque;
-            meshRenderer.materials = materials;
+            elementRenderer.materials = materials;
         }
     }
 
     public void SetTransparent()
     {
-        if (materialsNumber == 1) meshRenderer.material = transparent;
+        if (materialsNumber == 1) elementRenderer.material = transparent;
         else if (materialsNumber > 1)
         {
             Material[] materials = new Material[materialsNumber];
             for (int i = 0; i < materialsNumber; i++) materials[i] = transparent;
-            meshRenderer.materials = materials;
+            elementRenderer.materials = materials;
         }
     }
 
     public void SetFresnel()
     {
-        if (materialsNumber == 1) meshRenderer.material = fresnel;
+        if (materialsNumber == 1) elementRenderer.material = fresnel;
         else if (materialsNumber > 1)
         {
             Material[] materials = new Material[materialsNumber];
             for (int i = 0; i < materialsNumber; i++) materials[i] = fresnel;
-            meshRenderer.materials = materials;
+            elementRenderer.materials = materials;
         }
     }
 }
