@@ -12,7 +12,7 @@ public abstract class RoomObject : MonoBehaviour
 
     [Header("Interactors")]
     [SerializeField] protected RayInteractor rayInteractor;
-    [SerializeField] protected FurnitureJoystickInteractor joystickInteractor;
+    [SerializeField] protected JoystickInteractor joystickInteractor;
 
     public enum State { Placing, Moving, JoystickMoving, Idle };
     protected State currentState = State.Idle;

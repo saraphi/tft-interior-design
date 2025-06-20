@@ -16,6 +16,8 @@ public class FurnitureManager : MonoBehaviour
     private int lastId = -1;
 
     private Dictionary<string, GameObject> allRoomObjectsByName = new Dictionary<string, GameObject>();
+    private Dictionary<string, GameObject> allFurnitureByName = new Dictionary<string, GameObject>();
+    private Dictionary<string, GameObject> allDecorationsByName = new Dictionary<string, GameObject>();
     private Dictionary<FurnitureCategory, List<GameObject>> allFurnitureByCategory = new Dictionary<FurnitureCategory, List<GameObject>>();
     private Dictionary<DecorationCategory, List<GameObject>> allDecorationsByCategory = new Dictionary<DecorationCategory, List<GameObject>>();
 
@@ -39,6 +41,7 @@ public class FurnitureManager : MonoBehaviour
             string furnitureCodeName = furnitureComponent.GetCodeName();
             FurnitureCategory furnitureCategory = furnitureComponent.GetCategory();
             allRoomObjectsByName[furnitureCodeName] = furniture;
+            allFurnitureByName[furnitureCodeName] = furniture;
             List<GameObject> list = allFurnitureByCategory[furnitureCategory];
             list.Add(furniture);
         }
@@ -49,6 +52,7 @@ public class FurnitureManager : MonoBehaviour
             string decorationCodeName = decorationComponent.GetCodeName();
             DecorationCategory decorationCategory = decorationComponent.GetCategory();
             allRoomObjectsByName[decorationCodeName] = decoration;
+            allDecorationsByName[decorationCodeName] = decoration;
             List<GameObject> list = allDecorationsByCategory[decorationCategory];
             list.Add(decoration);
         }
@@ -150,6 +154,6 @@ public class FurnitureManager : MonoBehaviour
     public List<string> GetAllDecorationsCategories() => Enum.GetNames(typeof(DecorationCategory)).ToList();
     public List<string> GetAllFurnitureCategories() => Enum.GetNames(typeof(FurnitureCategory)).ToList();
 
-    public List<GameObject> GetAllFurniture() => allRoomObjectsByName.OrderBy(pair => pair.Key).Select(pair => pair.Value).ToList();
+    public List<GameObject> GetAllFurniture() => allFurnitureByName.OrderBy(pair => pair.Key).Select(pair => pair.Value).ToList();
     public List<GameObject> GetAllFurnitureByCategory(FurnitureCategory category) => allFurnitureByCategory[category];
 }

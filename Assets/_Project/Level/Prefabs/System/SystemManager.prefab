@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1453261703295274632}
   - component: {fileID: 2100766188859210863}
+  - component: {fileID: 3434262003512615315}
   - component: {fileID: 8317358649912036660}
   - component: {fileID: 8878638478618045991}
   - component: {fileID: 3775365973686292068}
@@ -132,6 +133,102 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!82 &3434262003512615315
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119229641997264082}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 4e23da5c5ecc45c48a9784d4f03bba15, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.715
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &8317358649912036660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,13 +241,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2279d76b3f397774dbadc225ba0a548d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundSource: {fileID: 2100766188859210863}
+  soundEffectsSource: {fileID: 2100766188859210863}
+  ambientMusicSource: {fileID: 3434262003512615315}
   pressClip: {fileID: 8300000, guid: 4f660b95a9c9f1e4bb4bab9db72060be, type: 3}
   releaseClip: {fileID: 8300000, guid: a99050c2a2caf8b45b13bdaa5799b638, type: 3}
   enterClip: {fileID: 8300000, guid: 0b9370941295fc34fb0e62f08a793635, type: 3}
   exitClip: {fileID: 8300000, guid: a5492cf075da4dc428d540daffa07273, type: 3}
   errorClip: {fileID: 8300000, guid: 3304dfe6875749e498b23b1d68ba298b, type: 3}
   deleteClip: {fileID: 8300000, guid: aa43849d8146b304caf10026e3c78ace, type: 3}
+  introClip: {fileID: 8300000, guid: 544fa5099278f484a9ff5f640ddca3f8, type: 3}
 --- !u!114 &8878638478618045991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17773563c767d6542857ac4c81b2f3f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rightControllerTransform: {fileID: 0}
+  leftControllerTransform: {fileID: 0}
   primaryController: 2
   secondaryController: 1
   confirmButton: 1
@@ -188,6 +289,9 @@ MonoBehaviour:
   - {fileID: 3055218276635196921, guid: 31fe22804f13b67449e6370828e9a78b, type: 3}
   - {fileID: 4252836840311350627, guid: 6701dbff828fb1c4499e53f67fd2d3e4, type: 3}
   - {fileID: 2617410382418005736, guid: b334de4aeceb4c04e8a0b82b26378ce1, type: 3}
+  - {fileID: 4869251741245141836, guid: a045f284a2db34841b3ce965dce370eb, type: 3}
+  allDecorations:
+  - {fileID: 5743440000961973004, guid: 239adc5543ae08047ab9834df872f7df, type: 3}
 --- !u!114 &6152923684215713535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,9 +304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a4bbbe551d020468aae02626aa29e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  welcomeCanvasPrefab: {fileID: 9085303805937159516, guid: 4f65c7943d550f4438e5e4b085489c84,
+  effectMeshPrefab: {fileID: 562254821874757420, guid: 8b9ba6ab4b6d3a843b1dab3c333b18cb,
     type: 3}
-  furnitureSelectorCanvasPrefab: {fileID: 2792244311952351998, guid: 52408c76a3b1202429fdefb93d9dc1eb,
+  welcomeCanvasPrefab: {fileID: 9085303805937159516, guid: 4f65c7943d550f4438e5e4b085489c84,
     type: 3}
   menuCanvasPrefab: {fileID: 1862448462063857022, guid: 56b02fb740592e14ba5dab7289f25fae,
     type: 3}
