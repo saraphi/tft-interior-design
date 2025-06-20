@@ -23,6 +23,7 @@ public abstract class RoomObject : MonoBehaviour
     protected bool hasValidSurface = false;
     protected int collisionMask;
     protected BoxCollider modelCollider;
+    protected bool hasGravity = false;
 
     protected virtual void Awake()
     {
@@ -78,7 +79,8 @@ public abstract class RoomObject : MonoBehaviour
         {
             if (currentState == State.JoystickMoving) joystickInteractor.DeactivateAllGizmos();
 
-            rb.isKinematic = true;
+            rb.isKinematic = !hasGravity;
+            rb.useGravity = hasGravity;
             currentState = State.Idle;
 
             SetLayer(GetDefaultLayer());
@@ -109,7 +111,8 @@ public abstract class RoomObject : MonoBehaviour
 
             if (currentState == State.JoystickMoving) joystickInteractor.DeactivateAllGizmos();
 
-            rb.isKinematic = true;
+            rb.isKinematic = !hasGravity;
+            rb.useGravity = hasGravity;
             currentState = State.Idle;
 
             SetLayer(GetDefaultLayer());
@@ -142,7 +145,7 @@ public abstract class RoomObject : MonoBehaviour
         }
     }
 
-    // public abstract bool WouldCollide(Vector3 targetPosition, Quaternion targetRotation);
+    public abstract bool WouldCollide(Vector3 targetPosition, Quaternion targetRotation);
 
     protected void SetLayer(int newLayer)
     {

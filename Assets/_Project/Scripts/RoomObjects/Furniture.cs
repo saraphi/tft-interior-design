@@ -21,7 +21,7 @@ public class Furniture : RoomObject
         base.Start();
     }
 
-    public bool WouldCollide(Vector3 targetPosition, Quaternion targetRotation)
+    public override bool WouldCollide(Vector3 targetPosition, Quaternion targetRotation)
     {
         if (modelCollider == null) return false;
 
