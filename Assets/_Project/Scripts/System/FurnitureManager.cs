@@ -102,7 +102,7 @@ public class FurnitureManager : MonoBehaviour
 
     public bool IsObjectSelected(int id) => selectedObject == id;
 
-    public void AddFurniture(string name, string profileColor = null)
+    public void AddObject(string name, string profileColor = null)
     {
         if (!IsUsingObject())
         {
@@ -151,9 +151,11 @@ public class FurnitureManager : MonoBehaviour
 
     public int GetCurrentObjectID() => currentObject.GetID();
 
-    public List<string> GetAllDecorationsCategories() => Enum.GetNames(typeof(DecorationCategory)).ToList();
     public List<string> GetAllFurnitureCategories() => Enum.GetNames(typeof(FurnitureCategory)).ToList();
-
     public List<GameObject> GetAllFurniture() => allFurnitureByName.OrderBy(pair => pair.Key).Select(pair => pair.Value).ToList();
     public List<GameObject> GetAllFurnitureByCategory(FurnitureCategory category) => allFurnitureByCategory[category];
+
+    public List<string> GetAllDecorationsCategories() => Enum.GetNames(typeof(DecorationCategory)).ToList();
+    public List<GameObject> GetAllDecorations() => allDecorationsByName.OrderBy(pair => pair.Key).Select(pair => pair.Value).ToList();
+    public List<GameObject> GetAllDecorationsByCategory(DecorationCategory category) => allDecorationsByCategory[category];
 }

@@ -72,7 +72,7 @@ public class FurnitureSelectorCanvas : MonoBehaviour
             furnitureOption.Init(furnitureComponent);
 
             Button button = furnitureOption.GetButton();
-            button.onClick.AddListener(() => FurnitureManager.Instance.AddFurniture(furnitureComponent.GetCodeName(), furnitureOption.GetProfileColor()));
+            button.onClick.AddListener(() => FurnitureManager.Instance.AddObject(furnitureComponent.GetCodeName(), furnitureOption.GetProfileColor()));
 
             allCurrentFurnitureButtons.Add(newFurnitureButton);
             newFurnitureButton.SetActive(true);
