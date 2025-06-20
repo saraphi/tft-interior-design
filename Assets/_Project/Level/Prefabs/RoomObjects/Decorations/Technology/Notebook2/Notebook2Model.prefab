@@ -73,6 +73,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3086552613037050797, guid: a669edc0088cf7645b985baece621629,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3086552613037050797, guid: a669edc0088cf7645b985baece621629,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 908b9154551ae3b45a8c95ab36b07302, type: 2}
+    - target: {fileID: -3086552613037050797, guid: a669edc0088cf7645b985baece621629,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d1048fd1e7b5ce94eb578f62f331f58e, type: 2}
+    - target: {fileID: -3086552613037050797, guid: a669edc0088cf7645b985baece621629,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 908b9154551ae3b45a8c95ab36b07302, type: 2}
     - target: {fileID: -2821761757288588400, guid: a669edc0088cf7645b985baece621629,
         type: 3}
       propertyPath: m_Layer
@@ -261,7 +281,7 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
     entries:
     - elementID: laptop
-      color: {r: 0, g: 0, b: 0, a: 0}
+      color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!137 &6931656483612982385 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -3086552613037050797, guid: a669edc0088cf7645b985baece621629,

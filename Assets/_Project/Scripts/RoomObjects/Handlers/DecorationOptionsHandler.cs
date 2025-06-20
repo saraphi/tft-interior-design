@@ -1,4 +1,4 @@
-public class FurnitureOptionsHandler : OptionsHandler
+public class DecorationOptionsHandler : OptionsHandler
 {
     public override void OnOptionSelected(string option)
     {
