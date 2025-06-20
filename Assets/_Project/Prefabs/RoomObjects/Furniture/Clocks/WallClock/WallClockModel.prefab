@@ -291,6 +291,7 @@ MonoBehaviour:
   elementID: cube
   elementCollider: {fileID: 0}
   meshRenderer: {fileID: 3759434789814430645}
+  materialsNumber: 1
 --- !u!1 &571139391849627691 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f1c000591d30c68489e5c996ac8e3cc5,
@@ -457,6 +458,7 @@ MonoBehaviour:
   elementID: sekunden
   elementCollider: {fileID: 0}
   meshRenderer: {fileID: 7591050838771002862}
+  materialsNumber: 1
 --- !u!1 &3535873048435187212 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4196651562060768118, guid: f1c000591d30c68489e5c996ac8e3cc5,
@@ -478,6 +480,7 @@ MonoBehaviour:
   elementID: stunden
   elementCollider: {fileID: 0}
   meshRenderer: {fileID: 7472322710783496900}
+  materialsNumber: 1
 --- !u!23 &3759434789814430645 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -4683669308469848369, guid: f1c000591d30c68489e5c996ac8e3cc5,
@@ -511,6 +514,7 @@ MonoBehaviour:
   elementID: interior
   elementCollider: {fileID: 0}
   meshRenderer: {fileID: 5016063883870613966}
+  materialsNumber: 1
 --- !u!1 &7325718900625552238 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7964157543444745748, guid: f1c000591d30c68489e5c996ac8e3cc5,
@@ -553,6 +557,7 @@ MonoBehaviour:
   elementID: frame
   elementCollider: {fileID: 766539042888125334}
   meshRenderer: {fileID: 1947064327555425671}
+  materialsNumber: 2
 --- !u!23 &7472322710783496900 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 7827102751358627774, guid: f1c000591d30c68489e5c996ac8e3cc5,
@@ -592,3 +597,4 @@ MonoBehaviour:
   elementID: minuten
   elementCollider: {fileID: 0}
   meshRenderer: {fileID: 7537127112120643849}
+  materialsNumber: 1

@@ -100,6 +100,7 @@ MonoBehaviour:
   elementID: lamp
   elementCollider: {fileID: 0}
   meshRenderer: {fileID: 8747237554091572631}
+  materialsNumber: 2
 --- !u!1 &1366959460069656161
 GameObject:
   m_ObjectHideFlags: 0
