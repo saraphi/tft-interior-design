@@ -12,7 +12,6 @@ public abstract class RayInteractor : MonoBehaviour
     protected Quaternion lastValidRotation;
     protected bool hasValidPosition = false;
     protected bool wouldCollide = false;
-    protected float currentRotation = 0f;
 
     public abstract bool Move();
     protected abstract Quaternion GetAddiotionalRotation();

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class RoomObject : MonoBehaviour
@@ -37,12 +38,14 @@ public abstract class RoomObject : MonoBehaviour
         StartMovement(State.Placing);
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         if (!IsIdling())
         {
-            if (currentState == State.Moving || currentState == State.Placing) hasValidSurface = rayInteractor.Move();
-            else if (currentState == State.JoystickMoving) hasValidSurface = joystickInteractor.Move();
+            if (rayInteractor != null && (currentState == State.Moving || currentState == State.Placing))
+                hasValidSurface = rayInteractor.Move();
+            else if (joystickInteractor != null && currentState == State.JoystickMoving)
+                hasValidSurface = joystickInteractor.Move();
 
             model.SetModelMaterialsTransparency(!hasValidSurface);
 
@@ -82,7 +85,8 @@ public abstract class RoomObject : MonoBehaviour
             return;
         }
 
-        if (currentState == State.JoystickMoving) joystickInteractor.DeactivateAllGizmos();
+        if (currentState == State.JoystickMoving && joystickInteractor != null)
+            joystickInteractor.DeactivateAllGizmos();
 
         rb.isKinematic = !hasGravity;
         rb.useGravity = hasGravity;
@@ -109,7 +113,8 @@ public abstract class RoomObject : MonoBehaviour
             transform.position = backupPosition;
             transform.rotation = backupRotation;
 
-            if (currentState == State.JoystickMoving) joystickInteractor.DeactivateAllGizmos();
+            if (currentState == State.JoystickMoving && joystickInteractor != null)
+                joystickInteractor.DeactivateAllGizmos();
 
             rb.isKinematic = !hasGravity;
             rb.useGravity = hasGravity;

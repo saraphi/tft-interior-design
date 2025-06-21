@@ -12,10 +12,36 @@ public class Decoration : RoomObject
     protected override int GetDefaultLayer() => LayerMask.NameToLayer(defaultLayer);
     protected override int GetGhostLayer() => LayerMask.NameToLayer(ghostLayer);
 
+    public enum DecorationRotationAxis { X, Y, Z }
+    private DecorationRotationAxis currentAxis = DecorationRotationAxis.Y;
+    private bool rotationTriggerDown = false;
+
     protected override void Awake()
     {
         base.Awake();
         hasGravity = true;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if (!IsIdling() && ControllerManager.Instance.OnSecondaryIndexTrigger())
+        {
+            if (!rotationTriggerDown)
+            {
+                currentAxis = currentAxis switch
+                {
+                    DecorationRotationAxis.X => DecorationRotationAxis.Y,
+                    DecorationRotationAxis.Y => DecorationRotationAxis.Z,
+                    DecorationRotationAxis.Z => DecorationRotationAxis.X,
+                    _ => DecorationRotationAxis.Y
+                };
+                SoundManager.Instance.PlayPressClip();
+                rotationTriggerDown = true;
+            }
+        }
+        else rotationTriggerDown = false;
     }
 
     public override bool WouldCollide(Vector3 targetPosition, Quaternion targetRotation)
@@ -24,17 +50,13 @@ public class Decoration : RoomObject
 
         Vector3 worldCenter = targetPosition + targetRotation * Vector3.Scale(modelCollider.center, modelCollider.transform.lossyScale);
         Vector3 worldExtents = Vector3.Scale(modelCollider.size * 0.5f, modelCollider.transform.lossyScale);
-        // Vector3 worldExtents = Vector3.Scale(modelCollider.bounds.extents, modelCollider.transform.lossyScale);
 
         Collider[] overlaps = Physics.OverlapBox(worldCenter, worldExtents, targetRotation, collisionMask);
 
         foreach (var hit in overlaps)
         {
             if (hit == null || hit.transform.IsChildOf(transform)) continue;
-
-            // Si ya se aceptó esta colisión en una colocación anterior, ignórala
             if (System.Array.Exists(acceptedOverlaps, c => c == hit)) continue;
-
             return true;
         }
 
@@ -53,4 +75,5 @@ public class Decoration : RoomObject
     }
 
     public FurnitureManager.DecorationCategory GetCategory() => category;
+    public DecorationRotationAxis GetRotationAxis() => currentAxis;
 }

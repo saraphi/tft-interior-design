@@ -312,4 +312,4 @@ MonoBehaviour:
     type: 3}
   collisionMask:
     serializedVersion: 2
-    m_Bits: 96
+    m_Bits: 352

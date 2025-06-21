@@ -11,9 +11,6 @@ public class DecorationOptionsHandler : OptionsHandler
             case "ray":
                 roomObject.StartMovement(RoomObject.State.Moving);
                 break;
-            case "joystick":
-                roomObject.StartMovement(RoomObject.State.JoystickMoving);
-                break;
             case "duplicate":
                 roomObject.Duplicate();
                 break;

@@ -5,6 +5,7 @@ public class FurnitureRayInteractor : RayInteractor
     [SerializeField] private Furniture furniture;
 
     private MRUKAnchor.SceneLabels sceneLabel;
+    private float currentRotation = 0f;
 
     void Awake()
     {
