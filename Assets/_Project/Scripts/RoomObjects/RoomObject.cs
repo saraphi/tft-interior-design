@@ -29,7 +29,7 @@ public abstract class RoomObject : MonoBehaviour
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        collisionMask = ~LayerMask.GetMask("UI", "Gizmo", "FurnitureGhost");
+        collisionMask = ~LayerMask.GetMask("UI", "Gizmo", "Ghost");
         modelCollider = model.GetCollider();
     }
 

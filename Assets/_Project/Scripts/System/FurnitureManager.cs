@@ -22,7 +22,7 @@ public class FurnitureManager : MonoBehaviour
     private Dictionary<DecorationCategory, List<GameObject>> allDecorationsByCategory = new Dictionary<DecorationCategory, List<GameObject>>();
 
     public enum FurnitureCategory { Chairs, Beds, Sofas, Tables, CeilingLights, Clocks }
-    public enum DecorationCategory { Technology, Crockery, Pillows, Misc }
+    public enum DecorationCategory { Technology, Desk }
 
     private void Awake()
     {

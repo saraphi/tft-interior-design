@@ -3,18 +3,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FurnitureOption : MonoBehaviour
+public class SelectorRoomObject : MonoBehaviour
 {
     [SerializeField] private Button button;
-    [SerializeField] private TMP_Text furnitureTitle;
+    [SerializeField] private TMP_Text roomObjectTitle;
     [SerializeField] private Transform colorToggleContainer;
     [SerializeField] private Toggle defaultColorToggle;
     private Model model;
     private string currentProfileColor;
 
-    public void Init(Furniture furniture)
+    public void Init(RoomObject roomObject)
     {
-        model = furniture.GetModel();
+        model = roomObject.GetModel();
 
         List<ColorProfile> profiles = model.GetColorProfiles();
 
@@ -38,7 +38,7 @@ public class FurnitureOption : MonoBehaviour
         if (profiles.Count != 0) currentProfileColor = profiles[0].profileName;
         defaultColorToggle.gameObject.SetActive(false);
 
-        Sprite sprite = furniture.GetImageSprite();
+        Sprite sprite = roomObject.GetImageSprite();
         Image image = button.GetComponent<Image>();
         image.sprite = sprite;
     }
@@ -55,7 +55,7 @@ public class FurnitureOption : MonoBehaviour
     public Button GetButton() => button;
     public void SetButtonText(string text)
     {
-        if (furnitureTitle == null) furnitureTitle = GetComponentInChildren<TMP_Text>();
-        furnitureTitle.text = text;
+        if (roomObjectTitle == null) roomObjectTitle = GetComponentInChildren<TMP_Text>();
+        roomObjectTitle.text = text;
     }
 }

@@ -11420,11 +11420,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6152923684215713535, guid: beb866e4f824e074b85f21a4338d6a2e,
-        type: 3}
-      propertyPath: collisionMask.m_Bits
-      value: 352
-      objectReference: {fileID: 0}
     - target: {fileID: 8878638478618045991, guid: beb866e4f824e074b85f21a4338d6a2e,
         type: 3}
       propertyPath: leftControllerTransform

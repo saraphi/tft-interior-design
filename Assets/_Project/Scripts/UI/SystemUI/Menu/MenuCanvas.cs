@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class MenuCanvas : MonoBehaviour
 {
-    [SerializeField] private GameObject furnitureSelectorCanvasPrefab;
-    private GameObject furnitureSelectorCanvas;
+    [SerializeField] private GameObject selectorCanvasPrefab;
+    private GameObject SelectorCanvas;
 
     void Start()
     {
-        furnitureSelectorCanvas = Instantiate(furnitureSelectorCanvasPrefab, Vector3.zero, Quaternion.identity);
-        furnitureSelectorCanvas.SetActive(false);
+        SelectorCanvas = Instantiate(selectorCanvasPrefab, Vector3.zero, Quaternion.identity);
+        SelectorCanvas.SetActive(false);
     }
 
     public void OnStartScanner()
@@ -18,15 +18,9 @@ public class MenuCanvas : MonoBehaviour
         GameManager.Instance.CloseCurrentCanvas();
     }
 
-    public void OnOpenFurnitureSelector()
+    public void OnOpenRoomObjectSelector()
     {
         SoundManager.Instance.PlayEnterClip();
-        StartCoroutine(GameManager.Instance.OpenCanvasAfterDelay(furnitureSelectorCanvas, 0f, 1.8f));
-    }
-
-    public void OnOpenDecorationSelector()
-    {
-        SoundManager.Instance.PlayEnterClip();
-        FurnitureManager.Instance.AddObject("notebook2", "white");
+        StartCoroutine(GameManager.Instance.OpenCanvasAfterDelay(SelectorCanvas, 0f, 1.8f));
     }
 }
