@@ -17,8 +17,8 @@ public class Furniture : RoomObject
 
     protected override void Start()
     {
-        SetSceneLabelAndDirection();
         base.Start();
+        SetSceneLabelAndDirection();
     }
 
     public override bool WouldCollide(Vector3 targetPosition, Quaternion targetRotation)

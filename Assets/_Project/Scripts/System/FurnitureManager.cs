@@ -102,32 +102,54 @@ public class FurnitureManager : MonoBehaviour
 
     public bool IsObjectSelected(int id) => selectedObject == id;
 
-    public void AddObject(string name, string profileColor = null)
+    public void AddObject(string codeName, string profileColor = null)
     {
         if (!IsUsingObject())
         {
-            if (allRoomObjectsByName.ContainsKey(name))
+            if (allRoomObjectsByName.ContainsKey(codeName))
             {
-                GameObject roomObject = allRoomObjectsByName[name];
+                GameObject roomObject = allRoomObjectsByName[codeName];
                 if (roomObject != null)
                 {
                     RoomObject roomObjectComponent = roomObject.GetComponent<RoomObject>();
                     if (roomObjectComponent != null)
                     {
-                        InstantiateObject(roomObject, Vector3.zero, Quaternion.identity, profileColor);
+                        InstantiateRoomObject(roomObject, Vector3.zero, Quaternion.identity, profileColor, true);
                         SoundManager.Instance.PlayPressClip();
                         return;
                     }
                 }
             }
-            SoundManager.Instance.PlayErrorClip();
         }
-
+        
         SoundManager.Instance.PlayErrorClip();
         ControllerManager.Instance.OnPrimaryControllerVibration();
     }
 
-    public void InstantiateObject(GameObject roomObject, Vector3 position, Quaternion rotation, string profileColor = null)
+    public void AddObject(string codeName, Vector3 position, Quaternion rotation, string profileColor, bool startMovement)
+    {
+        if (!IsUsingObject())
+        {
+            if (allRoomObjectsByName.ContainsKey(codeName))
+            {
+                GameObject roomObject = allRoomObjectsByName[codeName];
+                if (roomObject != null)
+                {
+                    RoomObject roomObjectComponent = roomObject.GetComponent<RoomObject>();
+                    if (roomObjectComponent != null)
+                    {
+                        InstantiateRoomObject(roomObject, position, rotation, profileColor, startMovement);
+                        return;
+                    }
+                }
+            }
+        }
+        
+        SoundManager.Instance.PlayErrorClip();
+        ControllerManager.Instance.OnPrimaryControllerVibration();
+    }
+
+    private void InstantiateRoomObject(GameObject roomObject, Vector3 position, Quaternion rotation, string profileColor, bool startMovement)
     {
         GameObject newObject = Instantiate(roomObject, position, rotation);
         RoomObject newRoomObject = newObject.GetComponent<RoomObject>();
@@ -137,6 +159,8 @@ public class FurnitureManager : MonoBehaviour
         if (!allAddedRoomObjects.ContainsKey(newId)) allAddedRoomObjects.Add(newId, newObject);
         Model newModel = newRoomObject.GetModel();
         newModel.ApplyColorProfile(profileColor);
+        if (startMovement) newRoomObject.StartMovement(RoomObject.State.Placing);
+        else newRoomObject.SaveSpatialAnchor();
     }
 
     public bool DeleteObject(int id)
@@ -150,6 +174,9 @@ public class FurnitureManager : MonoBehaviour
     }
 
     public int GetCurrentObjectID() => currentObject.GetID();
+
+    public Dictionary<int, GameObject> GetAllAddedRoomObjects() => allAddedRoomObjects;
+    public GameObject GetPrefabByCodeName(string codeName) => allRoomObjectsByName[codeName];
 
     public List<string> GetAllFurnitureCategories() => Enum.GetNames(typeof(FurnitureCategory)).ToList();
     public List<GameObject> GetAllFurniture() => allFurnitureByName.OrderBy(pair => pair.Key).Select(pair => pair.Value).ToList();

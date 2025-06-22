@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -25,6 +27,7 @@ public abstract class RoomObject : MonoBehaviour
     protected int collisionMask;
     protected BoxCollider modelCollider;
     protected bool hasGravity = false;
+    private OVRSpatialAnchor currentAnchor;
 
     protected virtual void Awake()
     {
@@ -35,7 +38,8 @@ public abstract class RoomObject : MonoBehaviour
 
     protected virtual void Start()
     {
-        StartMovement(State.Placing);
+        SetLayer(GetDefaultLayer());
+        model.SetChildrenCollidersEnabled(true);
     }
 
     protected virtual void Update()
@@ -61,6 +65,14 @@ public abstract class RoomObject : MonoBehaviour
 
     public void StartMovement(State state)
     {
+        if (state == State.Idle) return;
+
+        if (currentAnchor != null)
+        {
+            Destroy(currentAnchor.gameObject);
+            currentAnchor = null;
+        }
+
         SetLayer(GetGhostLayer());
         model.SetChildrenCollidersEnabled(false);
 
@@ -94,7 +106,9 @@ public abstract class RoomObject : MonoBehaviour
 
         SetLayer(GetDefaultLayer());
         model.SetChildrenCollidersEnabled(true);
-            
+
+        SaveSpatialAnchor();
+
         SoundManager.Instance.PlayReleaseClip();
         FurnitureManager.Instance.ClearObject();
     }
@@ -123,6 +137,8 @@ public abstract class RoomObject : MonoBehaviour
             SetLayer(GetDefaultLayer());
             model.SetChildrenCollidersEnabled(true);
 
+            SaveSpatialAnchor();
+
             FurnitureManager.Instance.ClearObject();
             SoundManager.Instance.PlayDeleteClip();
         }
@@ -132,7 +148,7 @@ public abstract class RoomObject : MonoBehaviour
     public void Duplicate()
     {
         ColorProfile profileColor = model.GetFurnitureColorProfile();
-        FurnitureManager.Instance.InstantiateObject(gameObject, transform.position, transform.rotation, profileColor.profileName);
+        FurnitureManager.Instance.AddObject(codeName, transform.position, transform.rotation, profileColor.profileName, true);
     }
 
     public void Delete()
@@ -171,6 +187,33 @@ public abstract class RoomObject : MonoBehaviour
     protected abstract int GetDefaultLayer();
     protected abstract int GetGhostLayer();
 
+    public async void SaveSpatialAnchor()
+    {
+        if (currentAnchor != null)
+        {
+            Destroy(currentAnchor.gameObject);
+            currentAnchor = null;
+        }
+
+        GameObject anchorObject = new GameObject($"Anchor_{id}");
+        anchorObject.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        anchorObject.transform.SetParent(transform);
+
+        currentAnchor = anchorObject.AddComponent<OVRSpatialAnchor>();
+
+        await currentAnchor.WhenLocalizedAsync();
+
+        try
+        {
+            bool success = await currentAnchor.SaveAnchorAsync();
+            DebugCanvas.Instance.AddNewLine($"\nid: {id} - anchor save success: {success}");
+        }
+        catch (Exception e)
+        {
+            DebugCanvas.Instance.AddNewLine($"\nid: {id} - anchor failed to localize: {e.Message}");
+        }
+    }
+
     public Model GetModel() => model;
     public string GetCodeName() => codeName;
     public string GetName() => objectName;
@@ -178,4 +221,5 @@ public abstract class RoomObject : MonoBehaviour
     public void SetID(int newId) => id = newId;
     public int GetID() => id;
     public Sprite GetImageSprite() => image;
+    public OVRSpatialAnchor GetSpatialAnchor() => currentAnchor;
 }

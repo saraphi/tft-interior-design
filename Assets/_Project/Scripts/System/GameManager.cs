@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Meta.XR.MRUtilityKit;
 using UnityEngine;
 
@@ -9,9 +11,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject menuCanvasPrefab;
     [SerializeField] private LayerMask collisionMask;
 
+    [Header("Game Data")]
+    [SerializeField] private DataLoader dataLoader;
+
     public static GameManager Instance { get; private set; }
 
     private bool tutorialStarted = false;
+    private bool startTutorial = false;
     private GameObject menuCanvas;
     private GameObject welcomeCanvas;
     private GameObject currentCanvas;
@@ -19,6 +25,7 @@ public class GameManager : MonoBehaviour
     private EffectMesh effectMesh;
 
     private WelcomeCanvas welcomeCanvasScript;
+    private MenuCanvas menuCanvasScript;
 
     private void Awake()
     {
@@ -28,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        DebugCanvas.Instance.AddNewLine("started");
+
         effectMesh = Instantiate(effectMeshPrefab);
         effectMesh.HideMesh = true;
         welcomeCanvas = Instantiate(welcomeCanvasPrefab, Vector3.one, Quaternion.identity);
@@ -35,20 +44,32 @@ public class GameManager : MonoBehaviour
         welcomeCanvas.SetActive(false);
         menuCanvas.SetActive(false);
         welcomeCanvasScript = welcomeCanvas.GetComponent<WelcomeCanvas>();
+        menuCanvasScript = menuCanvas.GetComponent<MenuCanvas>();
+
+        DebugCanvas.Instance.AddNewLine("\nobtained menu canvas script");
+        bool hasSavedData = dataLoader.HasSavedData();
+
+        DebugCanvas.Instance.AddNewLine("\nhas saved data: " + hasSavedData);
+        startTutorial = !hasSavedData;
+        menuCanvasScript.SetLoadButtonInteractable(hasSavedData);
+        menuCanvasScript.SetDeleteButtonInteractable(hasSavedData);
+        menuCanvasScript.SetSaveButtonInteractable(false);
     }
 
     void Update()
     {
         if (effectMesh != null) SetEffectMeshHideMesh(!FurnitureManager.Instance.IsUsingObject());
+        CheckIfAddedRoomObjects();
 
-        if (!tutorialStarted)
+        if (startTutorial && !tutorialStarted)
         {
             tutorialStarted = true;
             StartCoroutine(OpenCanvasAfterDelay(welcomeCanvas, 1f));
         }
 
-        if (ControllerManager.Instance.OnMenu() && welcomeCanvasScript != null && welcomeCanvasScript.HasEnded())
+        if (ControllerManager.Instance.OnMenu())
         {
+            if (startTutorial && tutorialStarted && !welcomeCanvasScript.HasEnded()) return;
             if (!menuCanvas.activeInHierarchy)
             {
                 SoundManager.Instance.PlayEnterClip();
@@ -60,6 +81,12 @@ public class GameManager : MonoBehaviour
                 CloseCurrentCanvas();
             }
         }
+    }
+
+    private void CheckIfAddedRoomObjects()
+    {
+        Dictionary<int, GameObject> allRoomObjects = FurnitureManager.Instance.GetAllAddedRoomObjects();
+        menuCanvasScript.SetSaveButtonInteractable(allRoomObjects.Count > 0);
     }
 
     public IEnumerator OpenCanvasAfterDelay(GameObject canvas, float delay = 0f, float distance = 1.5f, bool markAsCurrent = true)
@@ -116,6 +143,36 @@ public class GameManager : MonoBehaviour
             effectMesh = Instantiate(effectMeshPrefab);
             ControllerManager.Instance.OnPrimaryControllerVibration();
         });
+    }
+
+    public void SaveData()
+    {
+        bool saved = dataLoader.SaveData();
+        DebugCanvas.Instance.AddNewLine("\nSAVED: " + saved);
+        if (saved) menuCanvasScript.SetDeleteButtonInteractable(true);
+    }
+
+    public async void LoadData()
+    {
+        bool success = await dataLoader.LoadData();
+        if (!success)
+        {
+            SoundManager.Instance.PlayErrorClip();
+            ControllerManager.Instance.OnPrimaryControllerVibration();
+            ControllerManager.Instance.OnSecondaryControllerVibration();
+        }
+        DebugCanvas.Instance.AddNewLine("\nLOADED: " + success);
+        if (success) SoundManager.Instance.PlayReleaseClip();
+    }
+
+    public void DeleteData()
+    {
+        bool deleted = dataLoader.DeleteData();
+        if (deleted)
+        {
+            menuCanvasScript.SetLoadButtonInteractable(false);
+            menuCanvasScript.SetDeleteButtonInteractable(false);
+        }
     }
 
     public bool IsRoomLoaded()
