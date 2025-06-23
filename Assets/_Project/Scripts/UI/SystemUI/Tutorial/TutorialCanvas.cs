@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WelcomeCanvas : MonoBehaviour
+public class TutorialCanvas : MonoBehaviour
 {
     [SerializeField] private Button nextButton;
     [SerializeField] private Button backButton;

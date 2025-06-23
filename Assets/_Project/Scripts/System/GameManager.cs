@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     private EffectMesh effectMesh;
 
-    private WelcomeCanvas welcomeCanvasScript;
+    private TutorialCanvas welcomeCanvasScript;
     private MenuCanvas menuCanvasScript;
 
     private void Awake()
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         menuCanvas = Instantiate(menuCanvasPrefab, Vector3.one, Quaternion.identity);
         welcomeCanvas.SetActive(false);
         menuCanvas.SetActive(false);
-        welcomeCanvasScript = welcomeCanvas.GetComponent<WelcomeCanvas>();
+        welcomeCanvasScript = welcomeCanvas.GetComponent<TutorialCanvas>();
         menuCanvasScript = menuCanvas.GetComponent<MenuCanvas>();
 
         DebugCanvas.Instance.AddNewLine("\nobtained menu canvas script");
