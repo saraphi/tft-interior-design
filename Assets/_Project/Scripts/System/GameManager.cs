@@ -112,8 +112,8 @@ public class GameManager : MonoBehaviour
 
         Vector3 finalPos = eyeLevelPos;
         float radius = 0.5f;
-        int attempts = 10;
-        float step = 0.2f;
+        int attempts = 5;
+        float step = 0.1f;
 
         while (Physics.CheckSphere(finalPos, radius, collisionMask) && attempts > 0)
         {

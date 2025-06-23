@@ -37,8 +37,8 @@ public abstract class OptionsHandler : MonoBehaviour
         }
         else
         {
-            ShowOptionsCanvas();
             FurnitureManager.Instance.SelectObject(id);
+            ShowOptionsCanvas();
         }
     }
 
