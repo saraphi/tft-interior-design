@@ -1,14 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
 using Meta.XR.MRUtilityKit;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private EffectMesh effectMeshPrefab;
-    [SerializeField] private GameObject welcomeCanvasPrefab;
     [SerializeField] private GameObject menuCanvasPrefab;
     [SerializeField] private LayerMask collisionMask;
 
@@ -16,17 +13,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DataLoader dataLoader;
 
     public static GameManager Instance { get; private set; }
-
-    private bool tutorialStarted = false;
-    private bool startTutorial = false;
+    
     private GameObject menuCanvas;
-    private GameObject welcomeCanvas;
     private GameObject currentCanvas;
 
     private EffectMesh effectMesh;
 
-    private TutorialCanvas welcomeCanvasScript;
     private MenuCanvas menuCanvasScript;
+    private bool hasSavedData;
 
     private void Awake()
     {
@@ -38,19 +32,18 @@ public class GameManager : MonoBehaviour
     {
         effectMesh = Instantiate(effectMeshPrefab);
         effectMesh.HideMesh = true;
-        welcomeCanvas = Instantiate(welcomeCanvasPrefab, Vector3.one, Quaternion.identity);
+
+        hasSavedData = dataLoader.HasSavedData();
+
         menuCanvas = Instantiate(menuCanvasPrefab, Vector3.one, Quaternion.identity);
-        welcomeCanvas.SetActive(false);
         menuCanvas.SetActive(false);
-        welcomeCanvasScript = welcomeCanvas.GetComponent<TutorialCanvas>();
         menuCanvasScript = menuCanvas.GetComponent<MenuCanvas>();
-
-        bool hasSavedData = dataLoader.HasSavedData();
-
-        startTutorial = !hasSavedData;
         menuCanvasScript.SetLoadButtonInteractable(hasSavedData);
         menuCanvasScript.SetDeleteButtonInteractable(hasSavedData);
         menuCanvasScript.SetSaveButtonInteractable(false);
+
+        TutorialManager.Instance.SetStartTutorial(!hasSavedData);
+        if (!hasSavedData) TutorialManager.Instance.LaunchTutorial("welcome");
     }
 
     void Update()
@@ -58,18 +51,14 @@ public class GameManager : MonoBehaviour
         if (effectMesh != null) SetEffectMeshHideMesh(!FurnitureManager.Instance.IsUsingObject());
         CheckIfAddedRoomObjects();
 
-        if (startTutorial && !tutorialStarted)
-        {
-            tutorialStarted = true;
-            StartCoroutine(OpenCanvasAfterDelay(welcomeCanvas, 1f));
-        }
-
         if (ControllerManager.Instance.OnMenu())
         {
-            if (startTutorial && tutorialStarted && !welcomeCanvasScript.HasEnded()) return;
+            if (!hasSavedData && !TutorialManager.Instance.HasCurrentTutorialEnded()) return;
             if (!menuCanvas.activeInHierarchy)
             {
                 SoundManager.Instance.PlayEnterClip();
+                if (!hasSavedData && TutorialManager.Instance.IsCurrentTutorialActive())
+                    TutorialManager.Instance.CloseCurrentTutorialCanvas();
                 StartCoroutine(OpenCanvasAfterDelay(menuCanvas, 0f, 1f));
             }
             else

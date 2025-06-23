@@ -29,6 +29,7 @@ public class MenuCanvas : MonoBehaviour
     {
         SoundManager.Instance.PlayEnterClip();
         StartCoroutine(GameManager.Instance.OpenCanvasAfterDelay(SelectorCanvas, 0f, 1.8f));
+        TutorialManager.Instance.LaunchTutorial("ray_position");
     }
 
     public void OnSaveData()

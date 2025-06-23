@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3775365973686292068}
   - component: {fileID: 6152923684215713535}
   - component: {fileID: 4205821904684986758}
+  - component: {fileID: 1842598082700350116}
   m_Layer: 0
   m_Name: SystemManager
   m_TagString: Untagged
@@ -308,8 +309,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectMeshPrefab: {fileID: 562254821874757420, guid: 8b9ba6ab4b6d3a843b1dab3c333b18cb,
     type: 3}
-  welcomeCanvasPrefab: {fileID: 9085303805937159516, guid: 4f65c7943d550f4438e5e4b085489c84,
-    type: 3}
   menuCanvasPrefab: {fileID: 1862448462063857022, guid: 56b02fb740592e14ba5dab7289f25fae,
     type: 3}
   collisionMask:
@@ -328,3 +327,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28195d559953cef499f91f604e4d55aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1842598082700350116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119229641997264082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0204c79aad64a51448d46bd23d1fc177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorials:
+  - id: welcome
+    canvas: {fileID: 9085303805937159516, guid: 4f65c7943d550f4438e5e4b085489c84,
+      type: 3}
+    closeOtherCanvases: 1
+    delayBeforeStart: 1
+  - id: ray_position
+    canvas: {fileID: 9085303805937159516, guid: 403a01b4bf213bf41b12a52068a9e2e7,
+      type: 3}
+    closeOtherCanvases: 0
+    delayBeforeStart: 0
