@@ -33,8 +33,6 @@ public class DataLoader : MonoBehaviour
         MRUKRoom currentRoom = MRUK.Instance.GetCurrentRoom();
         string roomUUID = currentRoom.Anchor.Uuid.ToString();
 
-        DebugCanvas.Instance.AddNewLine("\nroomUUID: " + roomUUID);
-
         RoomSaveData data = new RoomSaveData() { roomUUID = roomUUID };
 
         foreach (var pair in FurnitureManager.Instance.GetAllAddedRoomObjects())
@@ -46,7 +44,6 @@ public class DataLoader : MonoBehaviour
             if (roomObjectComponent == null) continue;
 
             OVRSpatialAnchor anchor = roomObjectComponent.GetSpatialAnchor();
-            DebugCanvas.Instance.AddNewLine("\nsaving id: " + roomObjectComponent.GetID() + " - anchorUUID: " + anchor.Uuid + "...");
 
             if (anchor != null && anchor.Uuid != Guid.Empty)
             {
@@ -62,10 +59,7 @@ public class DataLoader : MonoBehaviour
 
         string json = JsonUtility.ToJson(data, true);
         string path = Path.Combine(Application.persistentDataPath, saveFilePath);
-        DebugCanvas.Instance.AddNewLine("\nsaving in path: " + path);
         File.WriteAllText(path, json);
-        DebugCanvas.Instance.AddNewLine("\nfile exists?: " + File.Exists(path));
-        DebugCanvas.Instance.AddNewLine("\nread all text: " + File.ReadAllText(path).ToString());
         return true;
     }
 
@@ -124,7 +118,6 @@ public class DataLoader : MonoBehaviour
         if (File.Exists(path))
         {
             File.Delete(path);
-            DebugCanvas.Instance.AddNewLine($"\nDatos borrados de: {path}");
             return true;
         }
         return false;

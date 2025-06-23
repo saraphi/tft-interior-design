@@ -160,7 +160,7 @@ public class FurnitureManager : MonoBehaviour
         Model newModel = newRoomObject.GetModel();
         newModel.ApplyColorProfile(profileColor);
         if (startMovement) newRoomObject.StartMovement(RoomObject.State.Placing);
-        else newRoomObject.SaveSpatialAnchor();
+        else newRoomObject.StartMovement(RoomObject.State.Idle);
     }
 
     public bool DeleteObject(int id)

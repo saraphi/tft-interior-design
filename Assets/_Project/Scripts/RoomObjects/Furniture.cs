@@ -15,9 +15,8 @@ public class Furniture : RoomObject
     protected override int GetDefaultLayer() => LayerMask.NameToLayer(defaultLayer);
     protected override int GetGhostLayer() => LayerMask.NameToLayer(ghostLayer);
 
-    protected override void Start()
+    void Start()
     {
-        base.Start();
         SetSceneLabelAndDirection();
     }
 

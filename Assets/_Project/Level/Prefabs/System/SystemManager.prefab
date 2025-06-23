@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8878638478618045991}
   - component: {fileID: 3775365973686292068}
   - component: {fileID: 6152923684215713535}
+  - component: {fileID: 4205821904684986758}
   m_Layer: 0
   m_Name: SystemManager
   m_TagString: Untagged
@@ -314,3 +315,16 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 352
+  dataLoader: {fileID: 4205821904684986758}
+--- !u!114 &4205821904684986758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119229641997264082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28195d559953cef499f91f604e4d55aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

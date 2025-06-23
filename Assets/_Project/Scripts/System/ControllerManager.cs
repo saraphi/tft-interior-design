@@ -24,7 +24,8 @@ public class ControllerManager : MonoBehaviour
     [SerializeField] private OVRInput.RawButton primaryInteractionButton = OVRInput.RawButton.RIndexTrigger;
     [SerializeField] private OVRInput.RawButton secondaryInteractionButton = OVRInput.RawButton.LIndexTrigger;
 
-    private Coroutine vibrationCoroutine;
+    private Coroutine primaryVibrationCoroutine;
+    private Coroutine secondaryVibrationCoroutine;
 
     private void Awake()
     {
@@ -49,7 +50,7 @@ public class ControllerManager : MonoBehaviour
             _ => rightControllerTransform.position
         };
     }
-    
+
     public Quaternion GetRayControllerLocalRotation()
     {
         return primaryController switch
@@ -65,22 +66,21 @@ public class ControllerManager : MonoBehaviour
 
     public void OnPrimaryControllerVibration(float duration = 0.1f, float frequency = 1f, float amplitude = 0.5f)
     {
-        if (vibrationCoroutine != null) StopCoroutine(vibrationCoroutine);
-        OVRInput.SetControllerVibration(frequency, amplitude, (OVRInput.Controller)primaryController);
-        vibrationCoroutine = StartCoroutine(StopHapticsAfterDelay(duration));
+        if (primaryVibrationCoroutine != null) StopCoroutine(primaryVibrationCoroutine);
+        OVRInput.SetControllerVibration(frequency, amplitude, OVRInput.Controller.RTouch);
+        primaryVibrationCoroutine = StartCoroutine(StopHapticsAfterDelay(duration, OVRInput.Controller.RTouch));
     }
 
     public void OnSecondaryControllerVibration(float duration = 0.1f, float frequency = 1f, float amplitude = 0.5f)
     {
-        if (vibrationCoroutine != null) StopCoroutine(vibrationCoroutine);
-        OVRInput.SetControllerVibration(frequency, amplitude, (OVRInput.Controller)secondaryController);
-        vibrationCoroutine = StartCoroutine(StopHapticsAfterDelay(duration));
+        if (secondaryVibrationCoroutine != null) StopCoroutine(secondaryVibrationCoroutine);
+        OVRInput.SetControllerVibration(frequency, amplitude, OVRInput.Controller.LTouch);
+        secondaryVibrationCoroutine = StartCoroutine(StopHapticsAfterDelay(duration, OVRInput.Controller.LTouch));
     }
 
-    private IEnumerator StopHapticsAfterDelay(float delay)
+    private IEnumerator StopHapticsAfterDelay(float delay, OVRInput.Controller controller)
     {
         yield return new WaitForSeconds(delay);
-        OVRInput.SetControllerVibration(0f, 0f, (OVRInput.Controller)primaryController);
-        vibrationCoroutine = null;
+        OVRInput.SetControllerVibration(0f, 0f, controller);
     }
 }

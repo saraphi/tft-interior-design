@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Meta.XR.MRUtilityKit;
 using UnityEngine;
@@ -35,8 +36,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        DebugCanvas.Instance.AddNewLine("started");
-
         effectMesh = Instantiate(effectMeshPrefab);
         effectMesh.HideMesh = true;
         welcomeCanvas = Instantiate(welcomeCanvasPrefab, Vector3.one, Quaternion.identity);
@@ -46,10 +45,8 @@ public class GameManager : MonoBehaviour
         welcomeCanvasScript = welcomeCanvas.GetComponent<TutorialCanvas>();
         menuCanvasScript = menuCanvas.GetComponent<MenuCanvas>();
 
-        DebugCanvas.Instance.AddNewLine("\nobtained menu canvas script");
         bool hasSavedData = dataLoader.HasSavedData();
 
-        DebugCanvas.Instance.AddNewLine("\nhas saved data: " + hasSavedData);
         startTutorial = !hasSavedData;
         menuCanvasScript.SetLoadButtonInteractable(hasSavedData);
         menuCanvasScript.SetDeleteButtonInteractable(hasSavedData);
@@ -148,7 +145,6 @@ public class GameManager : MonoBehaviour
     public void SaveData()
     {
         bool saved = dataLoader.SaveData();
-        DebugCanvas.Instance.AddNewLine("\nSAVED: " + saved);
         if (saved) menuCanvasScript.SetDeleteButtonInteractable(true);
     }
 
@@ -161,7 +157,6 @@ public class GameManager : MonoBehaviour
             ControllerManager.Instance.OnPrimaryControllerVibration();
             ControllerManager.Instance.OnSecondaryControllerVibration();
         }
-        DebugCanvas.Instance.AddNewLine("\nLOADED: " + success);
         if (success) SoundManager.Instance.PlayReleaseClip();
     }
 

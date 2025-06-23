@@ -36,12 +36,6 @@ public abstract class RoomObject : MonoBehaviour
         modelCollider = model.GetCollider();
     }
 
-    protected virtual void Start()
-    {
-        SetLayer(GetDefaultLayer());
-        model.SetChildrenCollidersEnabled(true);
-    }
-
     protected virtual void Update()
     {
         if (!IsIdling())
@@ -65,7 +59,13 @@ public abstract class RoomObject : MonoBehaviour
 
     public void StartMovement(State state)
     {
-        if (state == State.Idle) return;
+        if (state == State.Idle)
+        {
+            SetLayer(GetDefaultLayer());
+            model.SetChildrenCollidersEnabled(true);
+            SaveSpatialAnchor();
+            return;
+        }
 
         if (currentAnchor != null)
         {
@@ -187,7 +187,7 @@ public abstract class RoomObject : MonoBehaviour
     protected abstract int GetDefaultLayer();
     protected abstract int GetGhostLayer();
 
-    public async void SaveSpatialAnchor()
+    private async void SaveSpatialAnchor()
     {
         if (currentAnchor != null)
         {
@@ -202,16 +202,7 @@ public abstract class RoomObject : MonoBehaviour
         currentAnchor = anchorObject.AddComponent<OVRSpatialAnchor>();
 
         await currentAnchor.WhenLocalizedAsync();
-
-        try
-        {
-            bool success = await currentAnchor.SaveAnchorAsync();
-            DebugCanvas.Instance.AddNewLine($"\nid: {id} - anchor save success: {success}");
-        }
-        catch (Exception e)
-        {
-            DebugCanvas.Instance.AddNewLine($"\nid: {id} - anchor failed to localize: {e.Message}");
-        }
+        await currentAnchor.SaveAnchorAsync();
     }
 
     public Model GetModel() => model;
