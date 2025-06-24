@@ -1664,8 +1664,8 @@ MonoBehaviour:
     trigger:
       m_PersistentCalls:
         m_Calls: []
-  - line: If you are moving a decoration with the ray, you can draw it closer or
-      further away with the right Joystick.
+  - line: While moving a Decoration, you can draw it closer or further away with
+      the right Joystick. Change the rotation axis with the left Index Trigger.
     sprite: {fileID: 21300000, guid: 025bedf1ff6e85b4ab3a3658dccc463a, type: 3}
     triggerDelay: 0
     trigger:
