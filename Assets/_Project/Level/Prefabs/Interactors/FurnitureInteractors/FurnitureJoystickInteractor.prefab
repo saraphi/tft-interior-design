@@ -48,9 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cooldown: 0.25
   movementGizmo: {fileID: 3756720661285509493}
-  movementStep: 0.05
+  movementStep: 0.025
   rotationGizmo: {fileID: 3212887409723934791}
-  rotationStep: 2
+  rotationStep: 2.5
   furniture: {fileID: 0}
 --- !u!1001 &684113507501381466
 PrefabInstance:
