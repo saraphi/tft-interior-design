@@ -11554,6 +11554,11 @@ PrefabInstance:
       propertyPath: decorationAxisCanvas
       value: 
       objectReference: {fileID: 1365119561}
+    - target: {fileID: 8317358649912036660, guid: beb866e4f824e074b85f21a4338d6a2e,
+        type: 3}
+      propertyPath: tutorialClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 21866a3b2b22d6b48adce133fa639d23, type: 3}
     - target: {fileID: 8878638478618045991, guid: beb866e4f824e074b85f21a4338d6a2e,
         type: 3}
       propertyPath: leftControllerTransform

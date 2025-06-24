@@ -17,7 +17,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip exitClip;
     [SerializeField] private AudioClip errorClip;
     [SerializeField] private AudioClip deleteClip;
-    [SerializeField] private AudioClip introClip;
 
     private void Awake()
     {

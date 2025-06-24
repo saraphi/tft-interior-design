@@ -251,7 +251,7 @@ MonoBehaviour:
   exitClip: {fileID: 8300000, guid: a5492cf075da4dc428d540daffa07273, type: 3}
   errorClip: {fileID: 8300000, guid: 3304dfe6875749e498b23b1d68ba298b, type: 3}
   deleteClip: {fileID: 8300000, guid: aa43849d8146b304caf10026e3c78ace, type: 3}
-  introClip: {fileID: 8300000, guid: 544fa5099278f484a9ff5f640ddca3f8, type: 3}
+  tutorialClip: {fileID: 8300000, guid: 830e420b8393ed64f847cea2480d93a9, type: 3}
 --- !u!114 &8878638478618045991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,6 +314,7 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 352
+  decorationAxisCanvas: {fileID: 0}
   dataLoader: {fileID: 4205821904684986758}
 --- !u!114 &4205821904684986758
 MonoBehaviour:
