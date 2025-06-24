@@ -11420,6 +11420,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1842598082700350116, guid: beb866e4f824e074b85f21a4338d6a2e,
+        type: 3}
+      propertyPath: tutorials.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1842598082700350116, guid: beb866e4f824e074b85f21a4338d6a2e,
+        type: 3}
+      propertyPath: tutorials.Array.data[1].id
+      value: ray_movement
+      objectReference: {fileID: 0}
+    - target: {fileID: 1842598082700350116, guid: beb866e4f824e074b85f21a4338d6a2e,
+        type: 3}
+      propertyPath: tutorials.Array.data[3].id
+      value: joystick_movement
+      objectReference: {fileID: 0}
+    - target: {fileID: 1842598082700350116, guid: beb866e4f824e074b85f21a4338d6a2e,
+        type: 3}
+      propertyPath: tutorials.Array.data[3].canvas
+      value: 
+      objectReference: {fileID: 9085303805937159516, guid: b07f62909dc894144b588656e4d7f56b,
+        type: 3}
     - target: {fileID: 8878638478618045991, guid: beb866e4f824e074b85f21a4338d6a2e,
         type: 3}
       propertyPath: leftControllerTransform

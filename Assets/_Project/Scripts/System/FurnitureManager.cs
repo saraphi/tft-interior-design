@@ -24,6 +24,8 @@ public class FurnitureManager : MonoBehaviour
     public enum FurnitureCategory { Chairs, Beds, Sofas, Tables, CeilingLights, Clocks }
     public enum DecorationCategory { Technology, Desk }
 
+    private int firstAddedObject = -1;
+
     private void Awake()
     {
         if (Instance != null && Instance != this) Destroy(this);
@@ -156,7 +158,11 @@ public class FurnitureManager : MonoBehaviour
         int newId = lastId + 1;
         lastId = newId;
         newRoomObject.SetID(newId);
-        if (!allAddedRoomObjects.ContainsKey(newId)) allAddedRoomObjects.Add(newId, newObject);
+        if (!allAddedRoomObjects.ContainsKey(newId))
+        {
+            allAddedRoomObjects.Add(newId, newObject);
+            if (allAddedRoomObjects.Count == 1 && firstAddedObject < 0) firstAddedObject = newId;
+        }
         Model newModel = newRoomObject.GetModel();
         newModel.ApplyColorProfile(profileColor);
         if (startMovement) newRoomObject.StartMovement(RoomObject.State.Placing);
@@ -173,6 +179,7 @@ public class FurnitureManager : MonoBehaviour
         return false;
     }
 
+    public int GetFirstAddedObjectID() => firstAddedObject;
     public int GetCurrentObjectID() => currentObject.GetID();
 
     public Dictionary<int, GameObject> GetAllAddedRoomObjects() => allAddedRoomObjects;

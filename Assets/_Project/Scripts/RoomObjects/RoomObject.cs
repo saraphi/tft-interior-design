@@ -28,6 +28,7 @@ public abstract class RoomObject : MonoBehaviour
     protected BoxCollider modelCollider;
     protected bool hasGravity = false;
     private OVRSpatialAnchor currentAnchor;
+    private bool firstPlacementDone = false;
 
     protected virtual void Awake()
     {
@@ -111,6 +112,12 @@ public abstract class RoomObject : MonoBehaviour
 
         SoundManager.Instance.PlayReleaseClip();
         FurnitureManager.Instance.ClearObject();
+
+        if (!firstPlacementDone && FurnitureManager.Instance.GetFirstAddedObjectID() == id)
+        {
+            TutorialManager.Instance.LaunchTutorial("select_object");
+            firstPlacementDone = true;
+        }
     }
 
     protected void CancelMovement()

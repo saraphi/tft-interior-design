@@ -41,11 +41,8 @@ public class TutorialCanvas : MonoBehaviour
 
     void Start()
     {
-        if (lines.Count > 0) textPro.text = lines[0].line;
-        backButton.gameObject.SetActive(false);
-        oKButton.gameObject.SetActive(false);
-        nextButton.gameObject.SetActive(true);
-        ChangeCanvasSize(canvasDefaultSize);
+        if (lines.Count <= 0) return;
+        UpdateButtons();
         dots = new Image[lines.Count];
         for (int i = 0; i < dots.Length; i++)
         {
@@ -54,8 +51,7 @@ public class TutorialCanvas : MonoBehaviour
             newDot.gameObject.SetActive(true);
             dots[i] = newDot;
         }
-        Image dot = dots[0];
-        dot.color = indexColor;
+        UpdateLine();
     }
 
     public void OnOK()
@@ -122,11 +118,7 @@ public class TutorialCanvas : MonoBehaviour
         else
         {
             nextButton.gameObject.SetActive(false);
-            if (showOKButton)
-            {
-                backButton.gameObject.SetActive(false);
-                oKButton.gameObject.SetActive(true);
-            }
+            if (showOKButton) oKButton.gameObject.SetActive(true);
         }
     }
 
