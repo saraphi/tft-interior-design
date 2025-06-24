@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EffectMesh effectMeshPrefab;
     [SerializeField] private GameObject menuCanvasPrefab;
     [SerializeField] private LayerMask collisionMask;
+    [SerializeField] private GameObject decorationAxisCanvas;
 
     [Header("Game Data")]
     [SerializeField] private DataLoader dataLoader;
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     {
         effectMesh = Instantiate(effectMeshPrefab);
         effectMesh.HideMesh = true;
+        OnHideDecorationAxisCanvas();
 
         hasSavedData = dataLoader.HasSavedData();
 
@@ -164,6 +166,25 @@ public class GameManager : MonoBehaviour
     public bool IsRoomLoaded()
     {
         return MRUK.Instance != null && MRUK.Instance.GetCurrentRoom() != null;
+    }
+
+    public void OnShowDecorationAxisCanvas()
+    {
+        if (!decorationAxisCanvas.activeInHierarchy) decorationAxisCanvas.SetActive(true);
+    }
+
+    public void OnHideDecorationAxisCanvas()
+    {
+        if (decorationAxisCanvas.activeInHierarchy) decorationAxisCanvas.SetActive(false);
+    }
+
+    public void SetDecorationRotationAxisToCanvas(Decoration.DecorationRotationAxis rotationAxis)
+    {
+        if (decorationAxisCanvas.activeInHierarchy)
+        {
+            DecorationAxisCanvas canvas = decorationAxisCanvas.GetComponent<DecorationAxisCanvas>();
+            canvas.SetAxis(rotationAxis);
+        }
     }
 
     public void SetPlacementDone()

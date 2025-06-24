@@ -4,6 +4,7 @@ public class Decoration : RoomObject
 {
     [Header("Decoration Configuration")]
     [SerializeField] private FurnitureManager.DecorationCategory category;
+
     private Collider[] acceptedOverlaps = new Collider[0];
 
     private const string defaultLayer = "Decoration";
@@ -14,6 +15,7 @@ public class Decoration : RoomObject
 
     public enum DecorationRotationAxis { X, Y, Z }
     private DecorationRotationAxis currentAxis = DecorationRotationAxis.Y;
+
     private bool rotationTriggerDown = false;
 
     protected override void Awake()
@@ -25,6 +27,9 @@ public class Decoration : RoomObject
     protected override void Update()
     {
         base.Update();
+
+        if (IsIdling()) GameManager.Instance.OnHideDecorationAxisCanvas();
+        else GameManager.Instance.OnShowDecorationAxisCanvas();
 
         if (!IsIdling() && ControllerManager.Instance.OnSecondaryIndexTrigger())
         {
@@ -39,6 +44,7 @@ public class Decoration : RoomObject
                 };
                 SoundManager.Instance.PlayPressClip();
                 rotationTriggerDown = true;
+                GameManager.Instance.SetDecorationRotationAxisToCanvas(currentAxis);
             }
         }
         else rotationTriggerDown = false;

@@ -120,6 +120,8 @@ MonoBehaviour:
   rayInteractor: {fileID: 1087935682644330227}
   joystickInteractor: {fileID: 0}
   category: 0
+  decorationAxisCanvas: {fileID: 3829873575152468117, guid: e6422bfe29c10d84a933474eaa78dcff,
+    type: 3}
 --- !u!114 &7723195583116444664
 MonoBehaviour:
   m_ObjectHideFlags: 0
