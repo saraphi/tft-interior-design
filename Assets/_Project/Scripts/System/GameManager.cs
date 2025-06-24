@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     private bool hasSavedData;
     private bool firstPlacementDone = false;
     private bool firstJoystickMovementDone = false;
+    private bool firstChangeColorDone = false;
 
     private void Awake()
     {
@@ -56,7 +57,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (effectMesh != null) SetEffectMeshHideMesh(!FurnitureManager.Instance.IsUsingObject());
+        if (effectMesh != null) SetEffectMeshHideMesh(!FurnitureManager.Instance.IsUsingObject() || FurnitureManager.Instance.IsChangingColor());
         CheckIfAddedRoomObjects();
 
         if (ControllerManager.Instance.OnMenu())
@@ -134,6 +135,7 @@ public class GameManager : MonoBehaviour
     {
         OVRScene.RequestSpaceSetup().ContinueWith(_ =>
         {
+            FurnitureManager.Instance.DeleteAllObjects();
             MRUK.Instance.ClearScene();
             MRUK.Instance.LoadSceneFromDevice();
 
@@ -141,12 +143,6 @@ public class GameManager : MonoBehaviour
             effectMesh = Instantiate(effectMeshPrefab);
             ControllerManager.Instance.OnPrimaryControllerVibration();
         });   
-    }
-
-    public void ClearScene()
-    {
-        FurnitureManager.Instance.DeleteAllObjects();
-        MRUK.Instance.ClearScene();
     }
 
     public void SaveData()
@@ -219,6 +215,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SetChangeColorDone()
+    {
+        if (!firstChangeColorDone)
+        {
+            firstChangeColorDone = true;
+            TutorialManager.Instance.LaunchTutorial("change_color");
+        }
+    }
+
     public bool IsFirstPlacementDone() => firstPlacementDone;
     public bool IsFirstJoystickMovementDone() => firstJoystickMovementDone;
+    public bool IsFirstChangeColorDone() => firstChangeColorDone;
 }

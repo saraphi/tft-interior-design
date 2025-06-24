@@ -49,7 +49,7 @@ public class DecorationRayInteractor : RayInteractor
         Decoration.DecorationRotationAxis rotationAxis = decoration.GetRotationAxis();
 
         float delta = 0f;
-        if (Mathf.Abs(joystickInput.x) > 0.9f)
+        if (Mathf.Abs(joystickInput.x) > rotationThreshold)
             delta = joystickInput.x * rotationDegrees;
 
         switch (rotationAxis)

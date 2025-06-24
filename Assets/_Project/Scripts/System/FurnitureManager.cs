@@ -24,6 +24,8 @@ public class FurnitureManager : MonoBehaviour
     public enum FurnitureCategory { Chairs, Beds, Sofas, Tables, CeilingLights, Clocks }
     public enum DecorationCategory { Technology, Desk }
 
+    private bool isChangingColor = false;
+
     private void Awake()
     {
         if (Instance != null && Instance != this) Destroy(this);
@@ -68,9 +70,16 @@ public class FurnitureManager : MonoBehaviour
         currentObject = null;
     }
 
+    public void SetChangingColor(bool changing)
+    {
+        isChangingColor = changing;
+    }
+
+    public bool IsChangingColor() => isChangingColor;
+
     public bool IsUsingObject()
     {
-        return currentObject != null && !currentObject.IsIdling();
+        return isChangingColor || (currentObject != null && !currentObject.IsIdling());
     }
 
     public void DeselectObject()

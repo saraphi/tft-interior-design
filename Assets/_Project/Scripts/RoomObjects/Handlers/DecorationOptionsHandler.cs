@@ -8,6 +8,9 @@ public class DecorationOptionsHandler : OptionsHandler
 
         switch (option)
         {
+            case "color":
+                roomObject.SetChangingColor();
+                break;
             case "ray":
                 roomObject.StartMovement(RoomObject.State.Moving);
                 break;

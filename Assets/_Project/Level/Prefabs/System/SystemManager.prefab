@@ -251,7 +251,6 @@ MonoBehaviour:
   exitClip: {fileID: 8300000, guid: a5492cf075da4dc428d540daffa07273, type: 3}
   errorClip: {fileID: 8300000, guid: 3304dfe6875749e498b23b1d68ba298b, type: 3}
   deleteClip: {fileID: 8300000, guid: aa43849d8146b304caf10026e3c78ace, type: 3}
-  tutorialClip: {fileID: 8300000, guid: 830e420b8393ed64f847cea2480d93a9, type: 3}
 --- !u!114 &8878638478618045991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,20 +343,30 @@ MonoBehaviour:
   - id: welcome
     canvas: {fileID: 9085303805937159516, guid: 4f65c7943d550f4438e5e4b085489c84,
       type: 3}
+    distance: 1.2
     closeOtherCanvases: 1
-    delayBeforeStart: 1
+    delayBeforeStart: 0
   - id: ray_movement
     canvas: {fileID: 9085303805937159516, guid: 403a01b4bf213bf41b12a52068a9e2e7,
       type: 3}
+    distance: 1.2
     closeOtherCanvases: 0
     delayBeforeStart: 0
   - id: select_object
     canvas: {fileID: 9085303805937159516, guid: ae030525721ed79469f41f1cbfe0ac43,
       type: 3}
+    distance: 1.2
     closeOtherCanvases: 0
     delayBeforeStart: 0
   - id: joystick_movement
     canvas: {fileID: 9085303805937159516, guid: b07f62909dc894144b588656e4d7f56b,
       type: 3}
+    distance: 1.2
+    closeOtherCanvases: 0
+    delayBeforeStart: 0
+  - id: change_color
+    canvas: {fileID: 9085303805937159516, guid: 8fb6b960298fdec429de17097311ed64,
+      type: 3}
+    distance: 1
     closeOtherCanvases: 0
     delayBeforeStart: 0

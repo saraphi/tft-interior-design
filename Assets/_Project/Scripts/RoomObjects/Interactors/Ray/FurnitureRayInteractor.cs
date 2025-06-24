@@ -59,7 +59,7 @@ public class FurnitureRayInteractor : RayInteractor
     {
         Vector2 joystickInput = ControllerManager.Instance.GetSecondaryControllerJoystickInput();
 
-        if (Mathf.Abs(joystickInput.x) > 0.9f)
+        if (Mathf.Abs(joystickInput.x) > rotationThreshold)
             currentRotation += joystickInput.x * rotationDegrees;
 
         Vector3 rotationAxis = sceneLabel == MRUKAnchor.SceneLabels.WALL_FACE ? Vector3.forward : Vector3.up;

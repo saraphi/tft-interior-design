@@ -7,6 +7,7 @@ public class Tutorial
 {
     public string id;
     public GameObject canvas;
+    public float distance = 1.2f;
     public bool closeOtherCanvases = true;
     public float delayBeforeStart = 0f;
     private bool started = false;
@@ -54,7 +55,7 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(tutorial.delayBeforeStart);
 
         if (tutorial.closeOtherCanvases) GameManager.Instance.CloseCurrentCanvas();
-        GameManager.Instance.PositionCanvas(tutorial.canvas, 1.2f);
+        GameManager.Instance.PositionCanvas(tutorial.canvas, tutorial.distance);
         tutorial.canvas.SetActive(true);
         tutorial.SetAsStarted();
         currentTutorial = tutorial;

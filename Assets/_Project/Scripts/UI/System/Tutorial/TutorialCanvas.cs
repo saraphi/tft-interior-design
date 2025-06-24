@@ -12,7 +12,6 @@ public class Line
     public string line;
     public Sprite sprite; 
     public float triggerDelay = 0f;
-    public UnityEvent trigger;
 }
 
 public class TutorialCanvas : MonoBehaviour
@@ -92,18 +91,11 @@ public class TutorialCanvas : MonoBehaviour
             ChangeCanvasSize(canvasDefaultSize);
             image.gameObject.SetActive(false);
         }
-        StartCoroutine(DelayTrigger(lines[currentIndex].triggerDelay, lines[currentIndex].trigger));
     }
 
     private void UpdateDots()
     {
         foreach (var dot in dots) dot.color = defaultColor;
-    }
-
-    private IEnumerator DelayTrigger(float delay, UnityEvent trigger)
-    {
-        yield return new WaitForSeconds(delay);
-        trigger.Invoke();
     }
 
     private void UpdateButtons()
