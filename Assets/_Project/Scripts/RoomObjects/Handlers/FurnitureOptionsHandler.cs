@@ -13,6 +13,8 @@ public class FurnitureOptionsHandler : OptionsHandler
                 break;
             case "joystick":
                 roomObject.StartMovement(RoomObject.State.JoystickMoving);
+                if (!GameManager.Instance.IsFirstJoystickMovementDone())
+                    GameManager.Instance.SetJoystickMovementDone();
                 break;
             case "duplicate":
                 roomObject.Duplicate();

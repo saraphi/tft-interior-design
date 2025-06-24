@@ -776,11 +776,11 @@ MonoBehaviour:
     m_Bottom: 0
   m_ChildAlignment: 4
   m_Spacing: 5
-  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
+  m_ChildScaleWidth: 1
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!1 &4386720804555830860
@@ -1557,7 +1557,7 @@ GameObject:
   - component: {fileID: 1958931776826398508}
   - component: {fileID: 2317227478419254627}
   m_Layer: 9
-  m_Name: SelectObjectTutorialCanvas
+  m_Name: JoystickMovementTutorialCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1643,9 +1643,16 @@ MonoBehaviour:
   defaultColor: {r: 0.8980392, g: 0.8980392, b: 0.8980392, a: 1}
   indexColor: {r: 0.40392157, g: 0.40392157, b: 0.40392157, a: 1}
   lines:
-  - line: After positioning an object, you can select them with the ray using your
-      controller's Index Trigger.
-    sprite: {fileID: 0}
+  - line: While Joystick Movement is enabled, you will be able to move and rotate
+      objects with your Joysticks!
+    sprite: {fileID: 21300000, guid: d964239f08a431647b5271baa85dfb93, type: 3}
+    triggerDelay: 0
+    trigger:
+      m_PersistentCalls:
+        m_Calls: []
+  - line: To confirm your new position and exit Joystick Movement mode, press your
+      A Button.
+    sprite: {fileID: 21300000, guid: 306ee7128f0e3804ca4c09b13d55eb72, type: 3}
     triggerDelay: 0
     trigger:
       m_PersistentCalls:

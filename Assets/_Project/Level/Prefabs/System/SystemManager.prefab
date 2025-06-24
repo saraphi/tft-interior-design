@@ -345,13 +345,18 @@ MonoBehaviour:
       type: 3}
     closeOtherCanvases: 1
     delayBeforeStart: 1
-  - id: ray_position
+  - id: ray_movement
     canvas: {fileID: 9085303805937159516, guid: 403a01b4bf213bf41b12a52068a9e2e7,
       type: 3}
     closeOtherCanvases: 0
     delayBeforeStart: 0
   - id: select_object
     canvas: {fileID: 9085303805937159516, guid: ae030525721ed79469f41f1cbfe0ac43,
+      type: 3}
+    closeOtherCanvases: 0
+    delayBeforeStart: 0
+  - id: joystick_movement
+    canvas: {fileID: 9085303805937159516, guid: b07f62909dc894144b588656e4d7f56b,
       type: 3}
     closeOtherCanvases: 0
     delayBeforeStart: 0

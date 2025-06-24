@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DataLoader dataLoader;
 
     public static GameManager Instance { get; private set; }
-    
+
     private GameObject menuCanvas;
     private GameObject currentCanvas;
 
@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     private MenuCanvas menuCanvasScript;
     private bool hasSavedData;
+    private bool firstPlacementDone = false;
+    private bool firstJoystickMovementDone = false;
 
     private void Awake()
     {
@@ -163,4 +165,25 @@ public class GameManager : MonoBehaviour
     {
         return MRUK.Instance != null && MRUK.Instance.GetCurrentRoom() != null;
     }
+
+    public void SetPlacementDone()
+    {
+        if (!firstPlacementDone)
+        {
+            firstPlacementDone = true;
+            TutorialManager.Instance.LaunchTutorial("select_object");
+        }
+    }
+
+    public void SetJoystickMovementDone()
+    {
+        if (!firstJoystickMovementDone)
+        {
+            firstJoystickMovementDone = true;
+            TutorialManager.Instance.LaunchTutorial("joystick_movement");
+        }
+    }
+
+    public bool IsFirstPlacementDone() => firstPlacementDone;
+    public bool IsFirstJoystickMovementDone() => firstJoystickMovementDone;
 }

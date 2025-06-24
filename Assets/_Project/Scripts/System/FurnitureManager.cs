@@ -24,8 +24,6 @@ public class FurnitureManager : MonoBehaviour
     public enum FurnitureCategory { Chairs, Beds, Sofas, Tables, CeilingLights, Clocks }
     public enum DecorationCategory { Technology, Desk }
 
-    private bool firstPlacementDone = false;
-
     private void Awake()
     {
         if (Instance != null && Instance != this) Destroy(this);
@@ -175,17 +173,6 @@ public class FurnitureManager : MonoBehaviour
         return false;
     }
 
-
-    public void SetPlacementDone()
-    {
-        if (!firstPlacementDone)
-        {
-            firstPlacementDone = true;
-            TutorialManager.Instance.LaunchTutorial("select_object");
-        }
-    }
-
-    public bool IsFirstPlacementDone() => firstPlacementDone;
     public int GetCurrentObjectID() => currentObject.GetID();
 
     public Dictionary<int, GameObject> GetAllAddedRoomObjects() => allAddedRoomObjects;

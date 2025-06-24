@@ -109,8 +109,8 @@ public abstract class RoomObject : MonoBehaviour
         SoundManager.Instance.PlayReleaseClip();
         FurnitureManager.Instance.ClearObject();
 
-        if (!FurnitureManager.Instance.IsFirstPlacementDone())
-            FurnitureManager.Instance.SetPlacementDone();
+        if (!GameManager.Instance.IsFirstPlacementDone())
+            GameManager.Instance.SetPlacementDone();
     }
 
     protected void CancelMovement()
