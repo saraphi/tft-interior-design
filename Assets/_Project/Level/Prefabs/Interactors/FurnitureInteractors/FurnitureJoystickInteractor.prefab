@@ -46,12 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db4d65a24522646429ecaa0c0a487e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  furniture: {fileID: 0}
   cooldown: 0.25
   movementGizmo: {fileID: 3756720661285509493}
   movementStep: 0.05
   rotationGizmo: {fileID: 3212887409723934791}
-  rotationStep: 5
+  rotationStep: 2
+  furniture: {fileID: 0}
 --- !u!1001 &684113507501381466
 PrefabInstance:
   m_ObjectHideFlags: 0

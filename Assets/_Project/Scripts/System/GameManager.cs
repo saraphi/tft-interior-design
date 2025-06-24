@@ -36,18 +36,22 @@ public class GameManager : MonoBehaviour
         effectMesh = Instantiate(effectMeshPrefab);
         effectMesh.HideMesh = true;
         OnHideDecorationAxisCanvas();
-
-        hasSavedData = dataLoader.HasSavedData();
-
         menuCanvas = Instantiate(menuCanvasPrefab, Vector3.one, Quaternion.identity);
         menuCanvas.SetActive(false);
         menuCanvasScript = menuCanvas.GetComponent<MenuCanvas>();
+    }
+
+    public void SetUp()
+    {
+        hasSavedData = dataLoader.HasSavedData();
+
         menuCanvasScript.SetLoadButtonInteractable(hasSavedData);
         menuCanvasScript.SetDeleteButtonInteractable(hasSavedData);
         menuCanvasScript.SetSaveButtonInteractable(false);
 
         TutorialManager.Instance.SetStartTutorial(!hasSavedData);
         if (!hasSavedData) TutorialManager.Instance.LaunchTutorial("welcome");
+        else StartCoroutine(OpenCanvasAfterDelay(menuCanvas, 0f, 1f));
     }
 
     void Update()
@@ -58,7 +62,7 @@ public class GameManager : MonoBehaviour
         if (ControllerManager.Instance.OnMenu())
         {
             if (!hasSavedData && !TutorialManager.Instance.HasCurrentTutorialEnded()) return;
-            if (!menuCanvas.activeInHierarchy)
+            if (currentCanvas == null && !menuCanvas.activeInHierarchy)
             {
                 SoundManager.Instance.PlayEnterClip();
                 if (!hasSavedData && TutorialManager.Instance.IsCurrentTutorialActive())
@@ -93,7 +97,11 @@ public class GameManager : MonoBehaviour
 
     public void CloseCurrentCanvas()
     {
-        if (currentCanvas != null) currentCanvas.SetActive(false);
+        if (currentCanvas != null)
+        {
+            currentCanvas.SetActive(false);
+            currentCanvas = null;
+        }
     }
 
     public void PositionCanvas(GameObject canvas, float distance)
@@ -132,7 +140,13 @@ public class GameManager : MonoBehaviour
             if (effectMesh != null) Destroy(effectMesh.gameObject);
             effectMesh = Instantiate(effectMeshPrefab);
             ControllerManager.Instance.OnPrimaryControllerVibration();
-        });
+        });   
+    }
+
+    public void ClearScene()
+    {
+        FurnitureManager.Instance.DeleteAllObjects();
+        MRUK.Instance.ClearScene();
     }
 
     public void SaveData()
