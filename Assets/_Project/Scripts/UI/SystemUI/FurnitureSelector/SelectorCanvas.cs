@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +11,10 @@ public class SelectorCanvas : MonoBehaviour
     [SerializeField] private SelectorDecorationsOptions decorationsOptions;
     [SerializeField] private Toggle decorationsToggle;
 
+    [Header("Confirmation Dialog")]
+    [SerializeField] private Button removeAllButton;
+    [SerializeField] private GameObject removeAllCanvas;
+
     void Start()
     {
         furnitureToggle.onValueChanged.AddListener(isOn =>
@@ -25,6 +26,16 @@ public class SelectorCanvas : MonoBehaviour
         {
             if (isOn && !decorationsOptions.gameObject.activeInHierarchy) OnCurrentOptionsChange("decorations");
         });
+    }
+
+    void Update()
+    {
+        if (gameObject.activeInHierarchy)
+        {
+            int addedRoomObjectsCount = FurnitureManager.Instance.GetAllAddedRoomObjects().Count;
+            if (addedRoomObjectsCount != 0 && !removeAllButton.interactable) removeAllButton.interactable = true;
+            else if (addedRoomObjectsCount == 0 && removeAllButton.interactable) removeAllButton.interactable = false;
+        }
     }
 
     private void OnCurrentOptionsChange(string option)
@@ -40,6 +51,34 @@ public class SelectorCanvas : MonoBehaviour
                 furnitureOptions.gameObject.SetActive(false);
                 decorationsOptions.gameObject.SetActive(true);
                 break;
+        }
+    }
+
+    public void OnRemoveAll()
+    {
+        if (!removeAllCanvas.activeInHierarchy)
+        {
+            SoundManager.Instance.PlayPressClip();
+            removeAllCanvas.SetActive(true);
+        }
+    }
+
+    public void OnRemoveAllCancel()
+    {
+        if (removeAllCanvas.activeInHierarchy)
+        {
+            SoundManager.Instance.PlayExitClip();
+            removeAllCanvas.SetActive(false);
+        }
+    }
+
+    public void OnRemoveAllConfirmation()
+    {
+        if (removeAllCanvas.activeInHierarchy)
+        {
+            SoundManager.Instance.PlayPressClip();
+            FurnitureManager.Instance.DeleteAllObjects();
+            removeAllCanvas.SetActive(false);
         }
     }
 }

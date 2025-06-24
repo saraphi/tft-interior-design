@@ -163,6 +163,14 @@ public class FurnitureManager : MonoBehaviour
         else newRoomObject.StartMovement(RoomObject.State.Idle);
     }
 
+    public void DeleteAllObjects()
+    {
+        if (allAddedRoomObjects.Count == 0) return;
+        foreach (GameObject roomObject in allAddedRoomObjects.Values)
+            Destroy(roomObject);
+        allAddedRoomObjects.Clear();
+    }
+
     public bool DeleteObject(int id)
     {
         if (allAddedRoomObjects.ContainsKey(id))
