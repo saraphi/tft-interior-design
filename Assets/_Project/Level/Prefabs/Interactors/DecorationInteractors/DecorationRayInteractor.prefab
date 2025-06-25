@@ -47,5 +47,7 @@ MonoBehaviour:
   maxRayLength: 2
   smoothTime: 0.1
   rotationDegrees: 0.9
+  rotationThreshold: 0.1
+  movementStep: 0.02
+  maxMovementDistance: 5
   decoration: {fileID: 0}
-  movementStep: 0.05

@@ -45,8 +45,11 @@ public class GameManager : MonoBehaviour
     public void SetUp()
     {
         hasSavedData = dataLoader.HasSavedData();
+        bool isRoomLoaded = IsRoomLoaded();
+        bool isSameRoom = dataLoader.IsSameRoom();
 
-        menuCanvasScript.SetLoadButtonInteractable(hasSavedData);
+        menuCanvasScript.SetFurnitureButtonInteractable(isRoomLoaded);
+        menuCanvasScript.SetLoadButtonInteractable(isSameRoom);
         menuCanvasScript.SetDeleteButtonInteractable(hasSavedData);
         menuCanvasScript.SetSaveButtonInteractable(false);
 
@@ -130,7 +133,7 @@ public class GameManager : MonoBehaviour
     {
         effectMesh.HideMesh = hide;
     }
-
+    
     public void ScanScene()
     {
         OVRScene.RequestSpaceSetup().ContinueWith(_ =>
@@ -142,7 +145,7 @@ public class GameManager : MonoBehaviour
             if (effectMesh != null) Destroy(effectMesh.gameObject);
             effectMesh = Instantiate(effectMeshPrefab);
             ControllerManager.Instance.OnPrimaryControllerVibration();
-        });   
+        });
     }
 
     public void SaveData()

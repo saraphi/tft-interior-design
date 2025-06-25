@@ -293,10 +293,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b6e2d5c18883e42802f2fa4640aaa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  furnitureButton: {fileID: 4173441562891666299}
   saveButton: {fileID: 2484032314021117834}
   loadButton: {fileID: 3952976610709042787}
   deleteButton: {fileID: 3744869532256093150}
   selectorCanvasPrefab: {fileID: 2792244311952351998, guid: 52408c76a3b1202429fdefb93d9dc1eb,
+    type: 3}
+  rescanRoomCanvasPrefab: {fileID: 9085303805937159516, guid: ddbcd6e824532624c9ed1265420a3820,
     type: 3}
 --- !u!1 &2603447831402042144
 GameObject:
@@ -687,7 +690,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6165782962112870785}
         m_TargetAssemblyTypeName: MenuCanvas, Assembly-CSharp
-        m_MethodName: OnStartScanner
+        m_MethodName: OnScanRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1553,7 +1556,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Scan Room
+  m_text: Rescan Room
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

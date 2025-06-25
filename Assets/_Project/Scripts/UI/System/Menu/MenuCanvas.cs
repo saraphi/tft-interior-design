@@ -1,34 +1,39 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuCanvas : MonoBehaviour
 {
     [Header("Buttons")]
+    [SerializeField] private Button furnitureButton;
     [SerializeField] private Button saveButton;
     [SerializeField] private Button loadButton;
     [SerializeField] private Button deleteButton;
 
     [Header("Prefabs")]
     [SerializeField] private GameObject selectorCanvasPrefab;
-    private GameObject SelectorCanvas;
+    [SerializeField] private GameObject rescanRoomCanvasPrefab;
+    private GameObject selectorCanvas;
+    private GameObject rescanRoomCanvas;
 
     void Start()
     {
-        SelectorCanvas = Instantiate(selectorCanvasPrefab, Vector3.zero, Quaternion.identity);
-        SelectorCanvas.SetActive(false);
+        selectorCanvas = Instantiate(selectorCanvasPrefab, Vector3.zero, Quaternion.identity);
+        rescanRoomCanvas = Instantiate(rescanRoomCanvasPrefab, Vector3.zero, Quaternion.identity);
+        selectorCanvas.SetActive(false);
+        rescanRoomCanvas.SetActive(false);
     }
 
-    public void OnStartScanner()
+    public void OnScanRoom()
     {
         SoundManager.Instance.PlayEnterClip();
-        GameManager.Instance.ScanScene();
-        GameManager.Instance.CloseCurrentCanvas();
+        StartCoroutine(GameManager.Instance.OpenCanvasAfterDelay(rescanRoomCanvas, 0f, 1.2f));
     }
 
     public void OnOpenRoomObjectSelector()
     {
         SoundManager.Instance.PlayEnterClip();
-        StartCoroutine(GameManager.Instance.OpenCanvasAfterDelay(SelectorCanvas, 0f, 1.8f));
+        StartCoroutine(GameManager.Instance.OpenCanvasAfterDelay(selectorCanvas, 0f, 1.8f));
         TutorialManager.Instance.LaunchTutorial("ray_movement");
     }
 
@@ -63,5 +68,10 @@ public class MenuCanvas : MonoBehaviour
     public void SetDeleteButtonInteractable(bool interactable)
     {
         deleteButton.interactable = interactable;
+    }
+
+    public void SetFurnitureButtonInteractable(bool interactable)
+    {
+        furnitureButton.interactable = interactable;
     }
 }

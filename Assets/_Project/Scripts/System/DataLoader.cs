@@ -130,14 +130,19 @@ public class DataLoader : MonoBehaviour
         if (!File.Exists(path)) return false;
 
         string json = File.ReadAllText(path);
-        bool notEmpty = !string.IsNullOrEmpty(json) && json.Length > 10;
-        if (!notEmpty) return false;
+        return !string.IsNullOrEmpty(json) && json.Length > 10;
+    }
 
+    public bool IsSameRoom()
+    {
+        if (!HasSavedData()) return false;
+        string path = Path.Combine(Application.persistentDataPath, saveFilePath);
+        string json = File.ReadAllText(path);
         RoomSaveData data = JsonUtility.FromJson<RoomSaveData>(json);
         if (!GameManager.Instance.IsRoomLoaded()) return false;
 
         string currentUUID = MRUK.Instance.GetCurrentRoom().Anchor.Uuid.ToString();
         if (data.roomUUID != currentUUID) return false;
         else return true;
-    } 
+    }
 }
